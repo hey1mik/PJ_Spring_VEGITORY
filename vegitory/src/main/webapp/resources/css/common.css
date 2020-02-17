@@ -1,7 +1,9 @@
 /*구글 웹폰트*/
 @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap');
 /*공통사항*/
-* { box-sizing: border-box; }
+* { box-sizing: border-box; 
+	font-family: font-family: 'Nanum Gothic', sans-serif; 
+	z-index: 999;}
 body {
 	background-color: #E2D6C1;
 	margin: 0;

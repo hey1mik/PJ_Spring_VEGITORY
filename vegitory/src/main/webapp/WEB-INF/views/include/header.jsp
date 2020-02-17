@@ -9,11 +9,14 @@
 <title> VEGITORY :: 산뜻한 식단 </title>
 <link rel="stylesheet" type="text/css" href="${path}/resources/css/common.css">
 	<style type="text/css">
+		*{
+			z-index:900;
+		}
 		div.header_wrap {
 			width: 100%;
 			background-color: white;
 			box-shadow: 0 0 10px 10px rgba(20,23,28,0.03), 0 3px 1px 0 rgba(20,23,28,0.03);
-			z-index: 999;
+			z-index: 990;
 		}
 		div.header_content {
 			width: 1400px;
@@ -81,6 +84,7 @@
 		.header_content_dropdown_group > a:hover {
 			background-color: transparent;
 			border-color: #506763;
+			z-index: 999;
 		}
 		.header_content_member_cart > a {
 			display: inline-block;
@@ -408,7 +412,7 @@
 			<div class="header_content">
 				<div class="header_content_logo">
 					<a href="#">
-					<img class="header_logo_img" src="${path}/resources/image/avocado-removebg-preview.png" width="40px" height="40px">	
+					<img class="header_logo_img" src="${path}/resources/img/avocado-removebg-preview.png" width="40px" height="40px">	
 					<span class="header_content_logo_img">VEGI-TORY</span>
 					</a>
 				</div>

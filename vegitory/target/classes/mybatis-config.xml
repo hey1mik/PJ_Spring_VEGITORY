@@ -5,6 +5,7 @@
   <configuration>
 
 	 <typeAliases>
+	 	<typeAlias type="com.vegitory.domain.ProductDTO" alias="ProductDTO"></typeAlias>
 	 </typeAliases> 	
 	  	
 
