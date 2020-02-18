@@ -17,4 +17,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			      )
 			WHERE rnum between 1 and 5
  </select>	
+ <select id="newPdtList" resultType="ProductDTO">
+ 			SELECT *
+			FROM (
+			SELECT rownum rnum, best.*
+			FROM ( SELECT * FROM tbl_pdt
+			        WHERE avail_cnt > 0
+			       ORDER BY regdate DESC
+			            ) best
+			      )
+			WHERE rnum between 1 and 5
+ </select>
 </mapper>

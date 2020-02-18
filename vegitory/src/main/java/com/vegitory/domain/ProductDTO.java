@@ -22,5 +22,6 @@ public class ProductDTO {
 	private int price;
 	private int avail_cnt;
 	private int sale_cnt;
-	private Date regdate;
+	private String p_img;
+	private Date regdate;	
 }

@@ -7,12 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <title> VEGITORY :: 산뜻한 식단 </title>
-<link rel="stylesheet" type="text/css" href="${path}/resources/css/common.css">
+<link rel="stylesheet" type="text/css" href=${path}/resources/css/common.css>
 	<style type="text/css">
 		*{
-			z-index:900;
+			font-family: 'Nanum Gothic', sans-serif;
+			z-index: 990;
 		}
 		div.header_wrap {
+			position: fixed;
+			top: 0;
 			width: 100%;
 			background-color: white;
 			box-shadow: 0 0 10px 10px rgba(20,23,28,0.03), 0 3px 1px 0 rgba(20,23,28,0.03);
@@ -27,15 +30,18 @@
 			display:flex;/*가로여백 맞추기*/
 			align-items: center;
 			justify-content: space-around;
+			z-index: 990;
 		}
 
 		.header_content_logo > a {
 			display: flex;
 			align-items: center;
+			z-index: 990;
 
 		}
 		.header_content_search {
 			height: 45px;
+			z-index: 990;
 		}
 		.header_content_search_group {
 			width: 100%;
@@ -44,6 +50,7 @@
 			justify-content: space-between;
 			background-color: #f2f3f5;
 			border-radius: 2px;
+			z-index: 990;
 		}
 	
 		.header_content_nav { 
@@ -52,23 +59,28 @@
 			align-items: center;
 			justify-content: space-between;
 			width:267px;
+			z-index: 990;
 
 		}
 		.header_content_nav > div {
 			font-size: 20pt;
+			z-index: 990;
 		}
 		.header_content_member{
 			/*width: 160px;*/
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			flex-direction: row; /*default(생략가능)*/
+			flex-direction: row;
+			z-index: 990; /*default(생략가능)*/
 		}
 		.header_content_member > div {
 			padding: 10px 0px 10px 3px;
+			z-index: 990;
 		}
 		.header_content_dropdown_group {
 			position: relative;
+			z-index: 990;
 		}
 		.header_content_dropdown_group > a {
 			display: inline-block;
@@ -79,12 +91,14 @@
 			color: #506763;
 			line-height: 19px;
 			font-size: 14px;
+			z-index: 990;
 
 		}
 		.header_content_dropdown_group > a:hover {
 			background-color: transparent;
 			border-color: #506763;
-			z-index: 999;
+			z-index: 990;
+			
 		}
 		.header_content_member_cart > a {
 			display: inline-block;
@@ -96,15 +110,18 @@
 			text-align: center;
 			padding-top: 16px;
 			line-height: 19px; 
+			z-index: 990;
 		}
 		.header_content_dropdown_wrap:hover .header_dropdown{
 			display:block;
+			z-index: 990;
 		}
 
 		.header_content_dropdown_wrap:hover > a,
 		.header_content_member_cart:hover > a {
 			background-color: rgba(20,23,28,.05);
 			border-color: rgba(20,23,28,.05);
+			z-index: 990;
 		}
 		.header_content_logo_img {
 			width: 180px;
@@ -115,9 +132,11 @@
 			color: #3f6e58;
 			line-height: 65px;
 			text-align: center;
+			z-index: 990;
 		}
 		.header_logo_img {
 			margin-right: -15px; 
+			z-index: 990;
 		}
 		.header_content_search_btn {
 			color:white;
@@ -131,6 +150,7 @@
 			outline:none;
 			border-top-right-radius:2px;
 			border-bottom-right-radius: 2px;
+			z-index: 990;
 		}
 
 		.header_content_search_input {
@@ -143,10 +163,12 @@
 			height: 40px;
 			color: #686f7a;
 			outline:none; /*input태그 focus시 파란테두리*/
+			z-index: 990;
 		}
 		.header_content_search_btn:hover {
 			background-color: #3f6e58;
 			color:white;
+			z-index: 990;
 		}
 		.header_dropdown_menu {
 			border-bottom-left-radius: 2px;
@@ -155,6 +177,7 @@
 			background-color:white;
 			padding: 10px 0;
 			position: relative;
+			z-index: 990;
 			
 		}
 		.header_dropdown_menu a {
@@ -167,17 +190,20 @@
 			font-weight: 400;
 			position: relative;
 			z-index: 100;
+			z-index: 990;
 		}
 		.header_dropdown_menu a:hover {
 			color: #007791;
 			background-color: #f2f3f5;
 			position: relative;
+			z-index: 990;
 		}
 		.header_dropdown {
 			position: absolute;
 			top:45px;
 			left:0; 
 			display: none;
+			z-index: 990;
 
 		}
 		.arrow {
@@ -190,12 +216,13 @@
 			border-color: transparent transparent #fff transparent;
 			background-color: white;
 			transform: rotate(45deg);
-			z-index:99;	
+			z-index:999;	
 		}
 	
 		/*모달 로그인 창*/
 		.modal_wrap {
 			position: fixed;
+			top: 0;
 			z-index: 1000;
 			background-color: rgba(0,0,0,0.3);
 			overflow: auto;
@@ -429,13 +456,15 @@
 
 					<div class="header_content_dropdown_wrap">
 						<div class="header_content_dropdown_group">
-						<a href="#" class="magicline">소개</a>
+						<a href="#" class="magicline">식료품</a>
 							<div class="header_dropdown">
 								<div class="arrow"></div>
 									<ul class="header_dropdown_menu">
-										<li><a href="#">회사소개</a></li>
-										<li><a href="#">회사연혁</a></li>
-										<li><a href="#">협력업체</a></li>
+										<li><a href="#">콩고기</a></li>
+										<li><a href="#">베이커리</a></li>
+										<li><a href="#">소스</a></li>
+										<li><a href="#">액체류</a></li>
+										<li><a href="#">조미료</a></li>
 									</ul>	
 							</div>
 						</div>

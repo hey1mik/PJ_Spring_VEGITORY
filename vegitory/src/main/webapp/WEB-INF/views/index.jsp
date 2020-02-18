@@ -11,9 +11,12 @@
 	@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap');
 	* {	
 		box-sizing:border-box;
-		font-family: 'Nanum Myeongjo', serif;
+		font-family: 'Noto Serif KR', serif;
+		z-index:5;
 	}
-
+	.content_margin {
+	margin-top:100px;
+	}
 	.content_wrap{
 	width: 1400px;
 	overflow: hidden;
@@ -22,12 +25,15 @@
 	flex-direction: column;
 	align-items: center;
 	
+	
 	}
 	/* Slideshow container */
 	.slideshow-container {
 	  max-width: 1400px;
 	  position: relative;
 	  margin: 0 0 30px 0;
+	  z-index: 5;
+	  margin-top : 30px;
 	}
 
 	/* Hide the imgs by default */
@@ -110,18 +116,23 @@
 		flex-direction: column;
 		align-items: center;
 		margin: 20px auto; 
+		z-index: 2;
 	}
 	.grocery_wrap {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		margin: 20px auto; 
+		z-index: 2;
+
 	}
 	.community_wrap {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		margin: 20px auto; 
+		z-index: 2;
+
 	}
 
 	.title {
@@ -129,6 +140,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		padding-bottom: 30px;
 	}
 	.dashline {
 		    position: absolute;
@@ -158,22 +170,23 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		margin: 40px 0px 30px 0px;
 	}
 	.recipe_unit{
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		margin: 40px 0px 30px 0px;
 	}
 	#recipe_name{
 		font-size: 18px;
 	}
-	.table_unit{
-		padding: 0px 40px 10px 40px;
+	.pdt_sort {
+		padding: 0 0 15px 0;
+		font-size: 18px;
 	}
-	.grocery_table{
-		margin: 40px 0px 30px 0px;
+	.grocery_group{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
 	}
 	.community_list{
 		display: flex;
@@ -191,21 +204,53 @@
 		font-size: 20px;
 		font-weight: 600;
 		cursor: pointer;
+		position: relative;
 	}
-	.news{
-		background-image: url('${path}/resources/img/뉴스.jpg');
-		background-size: cover;
+	
+	.community_unit:hover .unique_img2{
+		transform: scale(1.3);
 	}
-	.madeit{
-		background-image: url('${path}/resources/img/imadeit.jpg');
-		background-size: cover;
+
+	.unique_img2 {
+		display: block;
+		width: 500px;
+		height: 300px;
+		transition: transform .5s;
+	}
+
+	.cover_img2{
+		position: absolute;
+		top: 0;
+		left: 0; 
+	}
+	
+
+	.community_unit:hover .unique_img{
+		transform: scale(1.3);
+	}
+	.unique_img {
+		display: block;
+		width: 500px;
+		height: 300px;
+		transition: transform .5s;
+	}
+	.cover_img{
+		position: absolute;
+		top: 0;
+		left: 0;
 	}
 
 	
 	</style>	
 </head>
 <body>
+<div class="content_margin">
 <div class="content_wrap">	
+<div class="title">
+<div class="title_main">VEGI-TORY</div> 
+<div class="dashline"></div>
+<div class="title_sub"> 베지토리와 함께하는 산뜻한 식단 </div> 
+</div>
 <!-- Slideshow container -->
 <div class="slideshow-container">
 
@@ -215,11 +260,11 @@
   </div>
 
   <div class="mySlides fade">
-    <img src="${path}/resources/img/슬라이드3.PNG" style="width:100%">
+    <img src="${path}/resources/img/병아리콩.PNG" style="width:100%">
   </div>
 
   <div class="mySlides fade">
-    <img src="${path}/resources/img/슬라이드2.PNG" style="width:100%">
+    <img src="${path}/resources/img/슬라이드3.PNG" style="width:100%">
   </div>
   <div class="mySlides fade">
     <img src="${path}/resources/img/슬라이드4.PNG" style="width:100%">
@@ -268,62 +313,30 @@
 		<div class="dashline"></div>
 		<div class="title_sub">맛있는 재료, 즐거운 비건 라이프</div> 
 	</div>
-	<table class="grocery_table">
-	<tr>
-		<td>
+	
+	<div class="pdt_sort"> BEST </div>
+	<div class="grocery_group"> 
+		<c:forEach items="${BestPdt}" var="pdt" >
 			<div class="table_unit">
-				<img src="${path}/resources/img/grocery1.jpg" width="400px" height="400px">
-				<div>타이 그린 커리 소스</div>
-				<div>5900won</div>
-				<div>#커리 #그린커리 #태국음식 #그린페이스트</div>
+				<img src="${path}/resources/img/${pdt.p_img}" width="215px" height="215px">
+				<div>${pdt.pname}</div>
+				<div><fmt:formatNumber type="number" maxFractionDigits="3" value="${pdt.price}"></fmt:formatNumber>원</div>
+				<div>${pdt.pmemo}</div>
 			</div>
-		</td>
-		<td>
+		</c:forEach>
+	</div>
+	<br>
+	<div class="pdt_sort"> NEW </div>
+	<div class="grocery_group"> 
+		<c:forEach items="${NewPdt}" var="pdt" >
 			<div class="table_unit">
-				<img src="${path}/resources/img/grocery1.jpg" width="400px" height="400px">
-				<div>타이 그린 커리 소스</div>
-				<div>5900won</div>
-				<div>#커리 #그린커리 #태국음식 #그린페이스트</div>
+				<img src="${path}/resources/img/${pdt.p_img}" width="215px" height="215px">
+				<div>${pdt.pname}</div>
+				<div>${pdt.price}</div>
+				<div>${pdt.pmemo}</div>
 			</div>
-		</td>	
-	</tr>
-	<tr>
-		<td>
-			<div class="table_unit">
-				<img src="${path}/resources/img/grocery1.jpg" width="400px" height="400px">
-				<div>타이 그린 커리 소스</div>
-				<div>5900won</div>
-				<div>#커리 #그린커리 #태국음식 #그린페이스트</div>
-			</div>
-		</td>
-		<td>
-			<div class="table_unit">
-				<img src="${path}/resources/img/grocery1.jpg" width="400px" height="400px">
-				<div>타이 그린 커리 소스</div>
-				<div>5900won</div>
-				<div>#커리 #그린커리 #태국음식 #그린페이스트</div>
-			</div>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<div class="table_unit">
-				<img src="${path}/resources/img/grocery1.jpg" width="400px" height="400px">
-				<div>타이 그린 커리 소스</div>
-				<div>5900won</div>
-				<div>#커리 #그린커리 #태국음식 #그린페이스트</div>
-			</div>
-		</td>
-		<td>
-			<div class="table_unit">
-				<img src="${path}/resources/img/grocery1.jpg" width="400px" height="400px">
-				<div>타이 그린 커리 소스</div>
-				<div>5900won</div>
-				<div>#커리 #그린커리 #태국음식 #그린페이스트</div>
-			</div>
-		</td>
-	</tr>
-	</table>
+		</c:forEach>
+	</div>
 </div>
 
 <div class="community_wrap">
@@ -333,10 +346,17 @@
 		<div class="title_sub">같이 정보를 나눠요</div> 
 	</div>
 	<div class="community_list">
-			<div class="community_unit news modal_button"><img src="${path}/resources/img/VEGANNEWS2.png"></div>
-			<div class="community_unit madeit modal_button"><img src="${path}/resources/img/MADEIT2.png"></div>
+			<div class="community_unit news modal_button">
+				<img class="unique_img" src="${path}/resources/img/뉴스.jpg">
+				<img class="cover_img" src="${path}/resources/img/VEGANNEWS2.png">
+			</div>
+			<div class="community_unit madeit modal_button">
+				<img class="unique_img2" src="${path}/resources/img/imadeit.jpg">
+				<img class="cover_img2" src="${path}/resources/img/MADEIT2.png">
+			</div>
 	</div>
 </div>	
+</div>
 </div>
 </body>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
