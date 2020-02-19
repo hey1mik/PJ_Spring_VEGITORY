@@ -165,6 +165,7 @@
 	.title_sub{
 		padding:1px;
 		font-size: 18px;
+		
 	}
 	.community_list{
 		display: flex;
@@ -174,10 +175,13 @@
 	.recipe_unit{
 		display: flex;
 		flex-direction: column;
-		align-items: center;
+		align-items: center;	
 	}
 	#recipe_name{
-		font-size: 18px;
+		display: flex;
+		align-items: center;
+		padding: 10px;
+		font-size: 16px;
 	}
 	.pdt_sort {
 		padding: 0 0 15px 0;
@@ -186,7 +190,13 @@
 	.grocery_group{
 		display: flex;
 		flex-direction: row;
-		justify-content: space-between;
+		justify-content: space-around;
+	}
+	.table_unit {
+		box-sizing: border-box;
+		width: 220px;
+		height: 300px;
+		text-align: center;
 	}
 	.community_list{
 		display: flex;
@@ -303,7 +313,7 @@
 	</div>
 	  	<div class="recipe_unit">
 	  		<div><img src="${path}/resources/img/레시피1.jpg" width="800px" height="550px"></div>
-	  		<span id="recipe_name">볶음채소 파스타</span>
+	  		<span id="recipe_name"> <img src="https://img.icons8.com/emoji/50/000000/woman-cook.png" width="30px" height="30px">&nbsp; 볶음채소 파스타</span>
 	  	</div>
 </div>
 
@@ -318,7 +328,7 @@
 	<div class="grocery_group"> 
 		<c:forEach items="${BestPdt}" var="pdt" >
 			<div class="table_unit">
-				<img src="${path}/resources/img/${pdt.p_img}" width="215px" height="215px">
+				<img src="${path}/resources/img/${pdt.p_img}" width="200px" height="200px">
 				<div>${pdt.pname}</div>
 				<div><fmt:formatNumber type="number" maxFractionDigits="3" value="${pdt.price}"></fmt:formatNumber>원</div>
 				<div>${pdt.pmemo}</div>
@@ -330,9 +340,9 @@
 	<div class="grocery_group"> 
 		<c:forEach items="${NewPdt}" var="pdt" >
 			<div class="table_unit">
-				<img src="${path}/resources/img/${pdt.p_img}" width="215px" height="215px">
+				<img src="${path}/resources/img/${pdt.p_img}" width="200px" height="200px">
 				<div>${pdt.pname}</div>
-				<div>${pdt.price}</div>
+				<div><fmt:formatNumber type="number" maxFractionDigits="3" value="${pdt.price}"></fmt:formatNumber>원</div>
 				<div>${pdt.pmemo}</div>
 			</div>
 		</c:forEach>

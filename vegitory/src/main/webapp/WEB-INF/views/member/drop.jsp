@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>VEGITORY :: 회원탈퇴</title>
-<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="${path}/resources/css/common.css">
 	<style type="text/css">
 		*{
 			box-sizing: border-box;
@@ -184,7 +184,7 @@
 	<header>
 		<div class="header">
 			<h1 class="vegitory_logo"><a href="#" class="n_logo">
-				<img src="../../img/avocado-removebg-preview.png" width="60px" height="60px">LEAVE VEGI-TORY
+				<img src="${path}/resources/img/avocado-removebg-preview.png" width="60px" height="60px">LEAVE VEGI-TORY
 			</a></h1>
 		</div>
 	</header>

@@ -524,7 +524,7 @@
 					</div>
 				</div>
 					<div><button type="button" class="btn btn_basic login_open">로그인</button></div>
-					<div><a href="../../html/term/constract.html"><button type="button" class="btn btn_primary">회원가입</button></a></div>
+					<div><button type="button" id="header_btn_join" class="btn btn_primary">회원가입</button></a></div>
 				</div>
 				</div>
 		</div>
@@ -608,6 +608,10 @@
 					   .css('color','#aaa'); //이것처럼 계속해서 .html, .css 등등 옵션주는걸 체이닝 기법이라고 한다.
 			}
 		});	
-
+	
+		/* Header 가입하기 버튼 클릭시 동의 페이지로 이동*/
+		$(document).on('click','#header_btn_join',function(){
+				location.href="${path}/member/constract";
+		});
 	</script>
 </html>

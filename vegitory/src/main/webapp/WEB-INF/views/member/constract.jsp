@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>VEGITORY 회원가입 :: 동의 </title>
-	<link rel="stylesheet" type="text/css" href="../../css/common.css">
+	<link rel="stylesheet" type="text/css" href="${path}/resources/css/common.css">
 	<style type="text/css">
 	@import url('https://fonts.googleapis.com/css?family=Noto+Serif+JP&display=swap');
 		/*기본적으로 태그에 margin 또는 padding이 들어가 있는 것들이 있음*/
@@ -68,26 +68,7 @@
 			line-height: 50px;
 			margin: 0 auto;
 		}
-		.lang {
-			position: absolute;
-			top:14px;
-			right: 0px;
-		}
-		.langselect {
-			font-size: 12px;
-			font-weight: 400;
-			height: 30px;
-			padding: 6px 8px 5px 7px;
-			min-width: 98px;
-			color: #333;
-			border: 1px solid #ccc;
-			-webkit-appearance: none;
-		}
-		.lang > select {
-			background: url('../../../img/naver/sel_arr.gif') 100% 50% no-repeat;
-			-webkit-appearance: none;
-			background-color: white;
-		}
+		
 		/*Container*/
 		.join_content {
 			width: 460px;
@@ -116,7 +97,7 @@
 			position: relative;
 		}
 		.terms_span > label {
-			background: url('../../img/output-onlinepngtools (1).png') 100% 50% no-repeat;
+			background: url('${path}/resources/img/output-onlinepngtools (1).png') 100% 50% no-repeat;
 			width: 445px;
 			display: block;
 			line-height: 15px;
@@ -132,7 +113,7 @@
 			height: 58px;
 		}
 		.terms_span > input:checked + label {
-			background-image: url('../../img/output-onlinepngtools.png');
+			background-image: url('${path}/resources/img/output-onlinepngtools.png');
 		}
 		.terms_ul {
 			padding-bottom: 7px;
@@ -166,6 +147,7 @@
 			font-size: 12px;
 			font-weight: 400;
 		}
+	
 		.ul_li_span > input {
 			visibility: hidden;
 			position: absolute;
@@ -176,12 +158,13 @@
 			top: 50%;
 		}
 		.ul_li_span > label {
-			background: url('../../img/output-onlinepngtools (1).png') 100% 50% no-repeat;
+			background: url('${path}/resources/img/output-onlinepngtools (1).png') 100% 50% no-repeat;
 			display: block;
 		}
 		.ul_li_span > input:checked +label {
-			background-image: url('../../img/output-onlinepngtools.png');
+			background-image: url('${path}/resources/img/output-onlinepngtools.png');
 		}
+		
 		.terms_box {
 
 			position: relative;
@@ -223,12 +206,14 @@
 		.btn_double_area {
 			margin: 30px -5px 0px;
 			overflow: hidden;
+			
 		}
 		.btn_double_area > span {
 			display: block;
 			float: left;
 			width: 50%;
 		}
+		
 		.btn_type {
 			width: auto;
 			margin: 0 5px;
@@ -240,15 +225,18 @@
 			height: 61px;
 			padding-top: 1px;
 			text-align: center;
+			cursor:pointer;
 		}
 		.btn_default {
+			width: 220px;
 			color: #fff;
-			border: 1px solid #e7e7e7;
+			border: transparent;
 			background-color: #333;
 		}
 		.btn_agree {
+			width: 220px;
 			color: #fff;
-			border: 1px solid #498268;
+			border: transparent;
 			background-color: #498268;
 		}
 		.btn_agree:hover {
@@ -267,6 +255,7 @@
 		/*footer*/
 		#footer {
 			padding: 15px 0;
+			height: 10px;
 		}
 		#footer > ul {
 			margin-top: 0 auto 9px;
@@ -316,23 +305,15 @@
 		<header>
 			<div id="header">
 				<div class="naver_logo">
-					<a href="#" class="n_logo"><img src="../../img/avocado-removebg-preview.png" width="60px" height="60px">VEGI-TORY</a>
+					<a href="#" class="n_logo"><img src="${path}/resources/img/avocado-removebg-preview.png" width="60px" height="60px">VEGI-TORY</a>
 				</div>	
-				<div class="lang">
-					<select class="langselect">
-						<option>한국어</option>
-						<option>English</option>
-						<option>中文(简体)</option>
-						<option>中文(台灣)</option>
-					</select>
-				</div>
 			</div>
 		</header>
 		<section>
 			<div id="container">
 				<form class="join_content"
 					  name=""
-					  method="">
+					  method="GET">
 					<div class="terms">
 						<p class="temrs_p">
 							<span class="terms_span">
@@ -340,14 +321,14 @@
 								<label for="cbox">
 									이용약관, 개인정보 수집 및 이용,위치정보 이용약관(선택),<br>
 									 프로모션 안내 및 메일 수신(선택)에 모두 동의합니다.
-								</label>
+								</label>	
 							</span>	
 						</p>
 						<ul class="terms_ul">
 							<li class="terms_ul_li1">
 								<span class="ul_li_span">
-									<input type="checkbox" id="li1box" class="ckboxs">
-									<label for="li1box" class="label1">
+									<input type="checkbox" id="cons_box1" class="ckboxs">
+									<label for="cons_box1" class="label1">
 										네이버 이용약관 동의<span class="span_only">(필수)</span>
 									</label>
 								</span>	
@@ -362,8 +343,8 @@
 							</li>
 							<li class="terms_ul_li2">
 								<span class="ul_li_span">
-									<input type="checkbox" id="li2box" class="ckboxs">
-									<label for="li2box" class="label1">
+									<input type="checkbox" id="cons_box2" class="ckboxs">
+									<label for="cons_box2" class="label1">
 										개인정보 수집 및 이용에 대한 안내<span class="span_only">(필수)</span>
 									</label>
 								</span>	
@@ -376,8 +357,8 @@
 							</li>
 							<li class="terms_ul_li3">
 								<span class="ul_li_span">
-									<input type="checkbox" id="li3box" class="ckboxs">
-									<label for="li3box" class="label1">
+									<input type="checkbox" id="cons_box3" class="ckboxs">
+									<label for="cons_box3" class="label1">
 										위치정보 이용약관 동의<span class="span_select">(선택)</span>
 									</label>
 								</span>	
@@ -391,8 +372,8 @@
 							</li>
 							<li class="terms_ul_li4">
 							<span class="ul_li_span">
-								<input type="checkbox" id="li4box" class="ckboxs">
-								<label for="li4box" class="label1">
+								<input type="checkbox" id="cons_box4" class="ckboxs">
+								<label for="cons_box4" class="label1">
 									이벤트 등 프로모션 알림 메일 수신<span class="span_select">(선택)</span>
 								</label>
 							</span>	
@@ -400,12 +381,12 @@
 						</ul>
 					</div>
 					<div class="err_check">
-						<span class="err_check_msg">네이버 이용약관과 개인정보 수집 및 이용에 대한 안내 모두 동의해주세요.</span>
+						<span class="err_check_msg">베지토리 이용약관과 개인정보 수집 및 이용에 대한 안내 모두 동의해주세요.</span>
 					</div> 
 
 					<div class="btn_double_area">
-						<span><a href="#" class="btn_type btn_default">취소</a></span>
-						<span><a href="../../html/join/vegitory_join.html" class="btn_type btn_agree">확인</a></span>
+						<span><button id="cons_btn_cancel" type="button" class="btn_type btn_default">취소</button></span>
+						<span><button id="cons_btn_agree" type="button" class="btn_type btn_agree">확인</button></span>
 					</div>
 				</form>	
 				<div class="group_join">
@@ -424,13 +405,9 @@
 					<li><a href="#">책임의 한계와 법적고지</a></li>
 					<li><a href="#">회원정보 고객센터</a></li>
 				</ul>
+			</div>	
 
 				<div id="address">
-					<span>
-						<a href="https://www.naver.com">
-							<img id="addr_logo" src="../img/naver/naver_logo.png">
-						</a>
-					</span>
 					<span>Copyright</span>
 					<span>ⓒ</span>	
 					<span><strong><a href="#">VEGI Corp.</a></strong></span>
@@ -439,4 +416,63 @@
 		</footer>	
 	</div>	
 </body>
+<script type="text/javascript">
+	$(document).ready(function(){
+		/*전체선택 체크시 전체 체크 or 전체 체크 해제*/
+		$('#cbox').on('click',function(){
+			var flag = $(this).is(':checked'); // 체크여부(Bool값)
+			if(flag==true) {
+				$('.ckboxs').prop('checked', true);
+			}else {
+				$('.ckboxs').prop('checked', false);
+				} //체크 관련된건 prop 함수를 애용하자!
+		});
+		
+		/* 선택 체크가 모두 체크되면 전체체크버튼 true
+		   선택 체크가 하나라도 체크 해제이면 전체체크버튼 false*/
+		   
+		   $('.ckboxs').on('click',function(){
+			   var ckLen = $('.ckboxs:checkbox:checked').length;
+			   if(ckLen != 4) {
+				   		$('#cbox').prop('checked', false); 
+				   } else {
+					  	$('#cbox').prop('checked', true);
+				   }
+		   });
+			
+			/* 확인버튼 클릭시 필수체크(2개) 체크유무 유효성 체크*/
+			$('#cons_btn_agree').on('click', function(){
+				var agree_one = $('#cons_box1').is(':checked');
+				var agree_two = $('#cons_box2').is(':checked');
+				var agree_three = $('#cons_box3').is(':checked');
+				var agree_four = $('#cons_box4').is(':checked');
+				
+				//console.log('동의1: ' + agree_one);
+				//console.log('동의2: ' + agree_two);
+				//console.log('동의3: ' + agree_three);
+				//console.log('동의4: ' + agree_four);
+				
+				if(agree_one == false || agree_two == false) {
+					$('.err_check').css('display','block');
+					return false;
+				}
+				
+				//유효성 체크 통과시 회원가입 페이지로 이동!
+				location.href="${path}/member/join?useon="+agree_one
+														+"&primaryon="+agree_two
+														+"&locon="+agree_three
+														+"&eventon="+agree_four;
+					
+			
+				
+			});
+			/* 취소버튼 클릭시 INDEX 페이지로 이동 */
+			$('#cons_btn_cancel').on('click', function() {
+				location.href='${path}/';
+			});
+	});
+	
+
+		
+</script>
 </html>

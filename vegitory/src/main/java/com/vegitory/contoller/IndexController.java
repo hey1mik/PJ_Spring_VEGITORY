@@ -1,13 +1,10 @@
 package com.vegitory.contoller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.vegitory.domain.ProductDTO;
 import com.vegitory.service.index.IndexService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +22,7 @@ public class IndexController {
 	@Autowired
 	IndexService iService; //여기에 indexServiceImpl Beans가 들어간거나 마찬가지
 	
-	@GetMapping("/index")
+	@RequestMapping("/")
 	public String indexView(Model model) {
 		log.info(">>>>>> INDEX PAGE 출력");
 		
@@ -43,10 +40,4 @@ public class IndexController {
 		// 1,2를 가지고 dispatcher servlet으로 gogo!
 	}
 	
-	@GetMapping("/constract")
-		public String constractView(Model model) {
-		log.info(">>>>>> INDEX PAGE 출력");
-		
-		return "constract";
-	}
 }

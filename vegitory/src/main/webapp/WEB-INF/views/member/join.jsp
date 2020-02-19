@@ -6,14 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title> VEGITORY :: 회원가입 </title>
-<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="${path}/resources/css/common.css">
 	<style type="text/css">
 		*{
 			box-sizing: border-box;
 		}
 		.wrap{
 			width: 820px;
-			margin: 0 auto;
+			margin: 50px auto;
 		}
 		h1 > a {
 			display: flex;
@@ -244,7 +244,7 @@
 	<header>
 		<div class="header">
 			<h1 class="vegitory_logo"><a href="#" class="n_logo">
-				<img src="../../img/avocado-removebg-preview.png" width="60px" height="60px">SIGN UP
+				<img src="${path}/resources/img/avocado-removebg-preview.png" width="60px" height="60px">SIGN UP
 			</a></h1>
 		</div>
 	</header>
@@ -356,22 +356,356 @@
 		</section>
 	</div>
 	<footer>
-			<div id="footer">
+				<div id="address">
+					<span>Copyright</span>
+					<span>ⓒ</span>	
+					<span><strong><a href="#">VEGI Corp.</a></strong></span>
+					<span>All Rights Reserved.</span>	
+				<div id="footer">
 				<ul>
 					<li><a href="#">이용약관</a></li>
 					<li><strong><a href="#">개인정보처리방침</a></strong></li>
 					<li><a href="#">책임의 한계와 법적고지</a></li>
 					<li><a href="#">회원정보 고객센터</a></li>
 				</ul>
-
-				<div id="address">
-					<span>Copyright</span>
-					<span>ⓒ</span>	
-					<span><strong><a href="#">VEGI Corp.</a></strong></span>
-					<span>All Rights Reserved.</span>	
-				</div>
-			</div>			
-		</footer>	
-	</div>
+			</div>
+		</div>				
+		</footer>
+	</div>	
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="${path}/resources/js/validation.js"></script>
+<script type="text/javascript">
+		$(function(){
+			//비밀번호가 유효한 값인지 체크해주는 Flag값
+			var pwFlag = false;
+
+			// 유효성체크 여부를 알려주는 배열
+			var checkArr = new Array(6).fill(false);
+			//printCheckArr(checkArr);
+			var invalidAll = true;
+
+			//아이디 유효성 체크:
+			$('#uid').keyup(function(){
+				//사용자가 입력한 값의 좌우여백을 제거하고 id에 입력
+				var id = $(this).val().trim(); // 사용자가 입력한 값
+				// validation.js의 checkId로 유효성체크를 실행 후
+				// 결과를 result에 담음(code, desc) 
+				var result = joinValidate.checkId(id);	
+				
+				if(result.code == 0) {
+					checkArr[0] = 'true';
+				} else {
+					checkArr[0] = 'false';
+				}
+				printCheckArr(checkArr);
+
+				// 유효성체크 결과로 테두리색과 err메시지를 출력하는
+				// 함수 실행
+				ckDesign(result.code, result.desc, 0,0);
+				
+			});
+
+			//비밀번호 유효성 체크
+			$('#upw').keyup(function(){
+				//1. 사용자가 입력한 값 받기
+				var pw = $.trim($('#upw').val());
+				var rpw = $.trim($('#urpw').val());
+				//2. 유효성 체크하기
+				var result = joinValidate.checkPw(pw, rpw);
+				//3. 체크결과에 따라 디자인
+				if(result.code == 0) {
+					pwFlag = true;
+				} else {
+					pwFlag = false;
+				}
+				ckDesign(result.code, result.desc, 1,1);
+				if(result.code == 10) {
+					checkArr[1] = true;
+					$('.ps_box:eq(2)').css('border','1px solid #3f6e58');
+					$('.warning:eq(2)').css('visibility','visible')
+										   .text('사용가능한 비밀번호입니다.')
+					                       .css('color','#3f6e58');
+				} else if(result.code == 6) {
+					checkArr[1] = false;
+					$('.ps_box:eq(2)').css('border','1px solid #a48443');
+					$('.warning:eq(2)').css('visibility','visible')
+										     .text('입력하신 비밀번호가 일치하지 않습니다.')
+					                         .css('color','#a48443');
+				}
+				 printCheckArr(checkArr);
+			});	
+
+			//비밀번호 재확인 유효성 체크
+			$('#urpw').keyup(function(){
+				var pw = $.trim($('#upw').val());
+				var rpw = $.trim($('#urpw').val());
+				var result = joinValidate.checkRpw(pw, rpw, pwFlag);
+				if(result.code == 10) {
+					checkArr[1] = true;
+					$('.ps_box:eq(1)').css('border','1px solid #3f6e58');
+					$('.warning:eq(1)').css('visibility','visible')
+										   .text('사용가능한 비밀번호입니다.')
+					                       .css('color','#3f6e58');
+				} else if(result.code == 6) {
+					checkArr[1] = false;
+					$('.ps_box:eq(1)').css('border','1px solid #a48443');
+					$('.warning:eq(1)').css('visibility','visible')
+										     .text('입력하신 비밀번호가 일치하지 않습니다.')
+					                         .css('color','#a48443');
+				} else {
+					checkArr[1] = false;
+				}
+				  	printCheckArr(checkArr);
+				ckDesign(result.code, result.desc, 2,2);
+
+
+			});
+
+			// 이름 유효성 체크
+			$('#uname').keyup(function(){
+				var name = $.trim($(this).val());
+				var result = joinValidate.checkName(name);
+				ckDesign(result.code, result.desc, 3,3);
+				if(result.code == 0) {
+					checkArr[2] = true;
+				} else {
+					checkArr[2] = false;
+				}
+				printCheckArr(checkArr);
+				
+			});
+
+			// 전화번호 유효성 체크
+			$('#uphone').keyup(function(){
+				var phone = $.trim($(this).val());
+				var result = joinValidate.checkPhone(phone);
+				ckDesign(result.code, result.desc, 4,5);
+				if(result.code == 0) {
+					checkArr[3] = true;
+				} else {
+					checkArr[3] = false;
+				}
+				printCheckArr(checkArr);
+				
+				if(result.code == 0) {
+					$('.ps_box:eq(5)').css('border','1px solid #3f6e58');
+
+				} else {
+					$('.ps_box:eq(5)').css('border','1px solid #a48443');
+				}
+			});
+
+			// 이메일 유효성 체크
+			$('#uemail1').keyup(function(){
+				var email1 = $.trim($(this).val());
+				var result = joinValidate.checkEmail1(email1);
+
+
+				if(result.code == 0) {
+					checkArr[3] = true;
+				} else {
+					checkArr[3] = false;
+				}
+				printCheckArr(checkArr);
+
+				if(result.code == 0) {
+					$('.email_box').css('border','1px solid #3f6e58');
+					$('.warning:eq(4)').css('visibility','visible')
+										     .text(result.desc)
+					                         .css('color','#3f6e58');
+
+				} else {
+					$('.email_box').css('border','1px solid #a48443');
+					$('.warning:eq(4)').css('visibility','visible')
+										     .text(result.desc)
+					                         .css('color','#a48443');
+				}
+			});
+
+			$('#uemail2').keyup(function(){
+				var email2 = $.trim($(this).val());
+				var result = joinValidate.checkEmail2(email2);	
+
+				if(result.code == 0) {
+					checkArr[4] = true;
+				} else {
+					checkArr[4] = false;
+				}
+				printCheckArr(checkArr);
+
+				if(result.code == 0) {
+					$('.email_box2').css('border','1px solid #3f6e58');
+					$('.warning:eq(4)').css('visibility','visible')
+										     .text(result.desc)
+					                         .css('color','#3f6e58');
+				} else {
+					$('.email_box2').css('border','1px solid #a48443');
+					$('.warning:eq(4)').css('visibility','visible')
+										     .text(result.desc)
+					                         .css('color','#a48443');
+				}
+			});
+
+			$('.addr_only').click(function(){
+				$('#btn_post').click();
+				//사용자가 우편번호 또는 주소 input을 클릭했을때!
+			});
+			$('#sample6_detailAddress').click(function(){
+				var addrPost = $('#sample6_postcode').val();
+
+				//if(addrPost == '' || addrPost.length == 0) {
+					//$('#btn_post').click();
+
+				//}
+			});
+
+			//주소 유효성 체크
+			$('#sample6_detailAddress').keyup(function(){
+				var addrDetail = $.trim($(this).val());
+				var addrPost = $('#sample6_postcode').val();
+				//console.log('우편번호: '+addrPost+', 상세주소: '+addrDetail);
+
+				var result = joinValidate.checkAddr(addrDetail, addrPost);
+
+				if(result.code==3){// 우편번호 & 주소 x
+					ckDesign(result.code, result.desc, 5,6);
+					ckDesign(result.code, result.desc, 6,6);
+				} else if(result.code == 0) {
+					ckDesign(result.code, result.desc, 5, 6);
+					ckDesign(result.code, result.desc, 6, 6);
+					ckDesign(result.code, result.desc, 7, 6)
+				} else if(result.code==4) { // 상세주소 x
+					ckDesign(result.code, result.desc, 7,6);
+				} else if(result.code==5) {
+					ckDesign(result.code, result.desc, 7,6);
+				}
+
+				if(result.code == 0) {
+					checkArr[5] = true;
+				} else {
+					checkArr[5] = false;
+				}
+				printCheckArr(checkArr);
+			});
+
+			//회원가입 버튼 클릭!
+			$('#btn_join').click(function(){
+				var inavlidAll = true;
+				for(var i = 0; i < checkArr.length; i++) {
+					if(!checkArr[i]) {
+						invalidAll = false;
+					$('.warning:eq('+i+')').css('visibility','visible')
+										  .css('color','#a48443');	
+					} 
+				}
+				if(invalidAll) {
+					alert('회원가입 성공!');
+				} else {
+					alert('유효성 체크를 진행해주세요!')
+				}
+				//유효성체크가 전부 true이면
+				//하나라도 false이면
+			});
+			// 버튼 활성화
+			$('.join_info_box_input').blur(function(){
+				var checkAll = true;
+
+				for(var i=0; i < checkArr.length; i++){
+					if(!checkArr[i]) {
+						checkAll = false;
+					}
+				}
+				if(checkAll) {
+					$('#btn_join').addClass('btn_primary');
+					//$('#btn_join').prop('disabled',false);
+					$('#btn_join').css('cursor','pointer');
+				} else {
+					$('#btn_join').removeClass('btn_primary');
+					//$('#btn_join').prop('disabled',true);
+					$('#btn_join').css('cursor','no-drop');
+				}
+			});
+
+
+		});
+
+
+			function ckDesign(code, desc, line, msg) { // 유효성 체크 통과 못한애	
+					if(code ==0 || code == 10) {
+					$('.ps_box:eq('+line+')').css('border','1px solid #3f6e58');
+					$('.warning:eq('+msg+')').css('visibility','visible')
+										   .text(desc)
+					                       .css('color','#3f6e58');
+					        return false;
+					
+				} else { //유효성 체크 통과한애
+					$('.ps_box:eq('+line+')').css('border','1px solid #a48443');
+					$('.warning:eq('+msg+')').css('visibility','visible')
+										     .text(desc)
+					                         .css('color','#a48443');
+					       return true;                   
+				}
+			}
+
+			//개발시 사용: 유효성 체크 전체여부를 출력해주는 함수(true, false) 
+			function printCheckArr(checkArr) {
+				for(var i=0; i<checkArr.length; i++) {
+					console.log(i + '번지: '+checkArr[i]);
+				}
+			}
+
+		
+	</script>
+
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    document.getElementById("sample6_extraAddress").value = extraAddr;
+                
+                } else {
+                    document.getElementById("sample6_extraAddress").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample6_postcode').value = data.zonecode;
+                document.getElementById("sample6_address").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("sample6_detailAddress").focus();
+            }
+        }).open();
+    }
+</script>
 </html>
