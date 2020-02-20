@@ -1,10 +1,12 @@
 package com.vegitory.contoller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vegitory.domain.SampleDTO;
 
@@ -60,5 +62,24 @@ public class SampleController {
 			//log.info(user + "," + pass);
 			log.info(sDto.toString());
 			return "result";
+		}
+		
+		//동기방식
+		@GetMapping("/sync")
+		public String sync(String name, Model model) {
+			
+			log.info("동기방식: "+name);
+			model.addAttribute("name", name);
+			
+			return "sample";
+		}
+		
+		//비동기방식
+		//responsebody를 붙이면 더 이상 화면단으로 인식을 안한다.
+		@ResponseBody
+		@PostMapping(value="/ajax", produces="application/text;charset=utf-8")
+		public String async(String name) {
+			log.info("비동기방식: "+name);
+			return name;
 		}
 }

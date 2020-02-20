@@ -137,11 +137,12 @@ var joinValidate = {
 				 return this.resultCode.first_special_id;
 		} else if(id.length < 3 || id.length > 15){	 //6. 글자수 체크      
 			     return this.resultCode.length_id;                               
+		} else if(idCheck(id)){
+				return this.resultCode.overlap_id;
 		} else {
-			  return this.resultCode.success_id;           
+				return this.resultCode.success_id;
 		}
-
-		},
+	},
 
 		checkPw : function(pw, rpw) {
 			var regEmpty = /\s/g; //공백문자
@@ -257,11 +258,30 @@ var joinValidate = {
 			 } else {
 				return this.resultCode.success_post;
 			}
-		}
-
+		}		
 	}
 
-	
+	function idCheck(id) {
+	 	var return_val = true;
+	 	
+	 	$.ajax({
+	 		type: 'POST',
+	 		url: 'idoverlap?id='+id,
+	 		async: false,
+	 		success: function(data) {
+	 			console.log(data);
+	 			if(data >= 1) {
+	 				return_val = true;
+	 			} else {
+	 				return_val = false;
+	 			}
+	 		},
+	 		error: function() {
+	 			alert(' System ERROR:( ')
+	 		}
+	 	});
+	 	return return_val;
+}
 
 
 

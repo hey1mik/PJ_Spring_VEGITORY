@@ -608,7 +608,7 @@
 				//하나라도 false이면
 			});
 			// 버튼 활성화
-			$('.join_info_box_input').blur(function(){
+			$('.join_info_box_input').keyup(function(){
 				var checkAll = true;
 
 				for(var i=0; i < checkArr.length; i++){
