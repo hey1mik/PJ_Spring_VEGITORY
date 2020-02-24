@@ -20,7 +20,7 @@ var joinValidate = {
 		}, 
 		invalid_id: {
 			code: 4,
-			desc: '아이디는 영문 소문자, 숫자, 특수기호 일부만 사용할 수 있습니다.'
+			desc: '3~15자의 영문/숫자를 조합하여 입력해주세요.'
 		},
 		first_special_id : {
 			code: 5,
@@ -123,7 +123,7 @@ var joinValidate = {
 		checkId : function(id) {	
 		var regEmpty = /\s/g; //공백문자
 		var regEtc = /[~`!@#$%^&*()+=\|\\\{\}\[\]:";'<>.,?//]/g; //특수문자
-		var regId = /[^a-z0-9-_.]+/g; //올바른 아이디 형식
+		var regId = /^(?=.*?[a-z])(?=.*?[0-9]).{3,}$/g; //올바른 아이디 형식
 		
 		if(id == '' || id.length == 0) { //1.값이 있는지 없는지 체크
 				return this.resultCode.empty_val;
@@ -131,8 +131,8 @@ var joinValidate = {
 				return this.resultCode.space_length_val;
 		} else if(id.match(regEtc)){ //3. 특수문자 체크
 			     return this.resultCode.specialStr_id;               
-		} else if(id.match(regId)){ //4. 아이디 정규식 체크
-          	     return this.resultCode.invalid_id;                 
+		} else if(!id.match(regId)){ //4. 아이디 정규식 체크
+          	     return this.resultCode.invalid_id;             
 		} else if(id.charAt(0) == '-' || id.charAt(0) == '_'){ //5. 첫글자 특수문자	
 				 return this.resultCode.first_special_id;
 		} else if(id.length < 3 || id.length > 15){	 //6. 글자수 체크      
@@ -269,8 +269,8 @@ var joinValidate = {
 	 		url: 'idoverlap?id='+id,
 	 		async: false,
 	 		success: function(data) {
-	 			console.log(data);
-	 			if(data >= 1) {
+	 			//console.log(data);
+	 			if(data == "1") {
 	 				return_val = true;
 	 			} else {
 	 				return_val = false;

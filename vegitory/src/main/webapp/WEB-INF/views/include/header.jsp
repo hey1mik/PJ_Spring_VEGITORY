@@ -476,10 +476,10 @@
 								<div class="header_dropdown">
 									<div class="arrow"></div>
 										<ul class="header_dropdown_menu">
-											<li><a href="#">한식</a></li>
-											<li><a href="#">양식</a></li>
-											<li><a href="#">중식</a></li>
-											<li><a href="#">일식</a></li>
+											<li><a href="#">동양식 메인요리</a></li>
+											<li><a href="#">서양식 메인요리</a></li>
+											<li><a href="#">베이커리/디저트</a></li>
+											<li><a href="#">음료</a></li>
 										</ul>	
 									</div>
 								</div>	
@@ -491,6 +491,7 @@
 								<div class="header_dropdown">
 									<div class="arrow"></div>
 										<ul class="header_dropdown_menu">
+											<li><a href="#">비건뉴스</a></li>
 											<li><a href="#">자유게시판</a></li>
 											<li><a href="#">QnA게시판</a></li>
 											<li><a href="#">Review게시판</a></li>

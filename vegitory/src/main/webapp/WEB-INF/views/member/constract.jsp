@@ -305,7 +305,7 @@
 		<header>
 			<div id="header">
 				<div class="naver_logo">
-					<a href="#" class="n_logo"><img src="${path}/resources/img/avocado-removebg-preview.png" width="60px" height="60px">VEGI-TORY</a>
+					<a href="${path}/" class="n_logo"><img src="${path}/resources/img/avocado-removebg-preview.png" width="60px" height="60px">VEGI-TORY</a>
 				</div>	
 			</div>
 		</header>
@@ -461,10 +461,9 @@
 				location.href="${path}/member/join?useon="+agree_one
 														+"&primaryon="+agree_two
 														+"&locon="+agree_three
-														+"&eventon="+agree_four;
-					
-			
-				
+														+"&eventon="+agree_four
+														+"&flag=1";
+
 			});
 			/* 취소버튼 클릭시 INDEX 페이지로 이동 */
 			$('#cons_btn_cancel').on('click', function() {

@@ -33,7 +33,6 @@
 	  position: relative;
 	  margin: 0 0 30px 0;
 	  z-index: 5;
-	  margin-top : 30px;
 	}
 
 	/* Hide the imgs by default */
@@ -125,6 +124,11 @@
 		margin: 20px auto; 
 		z-index: 2;
 
+	}
+	.grocery_list {
+		width: auto;
+		height: auto;
+		background-color: white;
 	}
 	.community_wrap {
 		display: flex;
@@ -324,6 +328,7 @@
 		<div class="title_sub">맛있는 재료, 즐거운 비건 라이프</div> 
 	</div>
 	
+	<div class="grocery_list">
 	<div class="pdt_sort"> BEST </div>
 	<div class="grocery_group"> 
 		<c:forEach items="${BestPdt}" var="pdt" >
@@ -346,6 +351,7 @@
 				<div>${pdt.pmemo}</div>
 			</div>
 		</c:forEach>
+	</div>
 	</div>
 </div>
 

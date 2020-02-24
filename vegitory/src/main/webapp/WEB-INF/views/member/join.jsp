@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="../include/include.jsp" %> 
 <!DOCTYPE html>
 <html>
@@ -243,18 +244,19 @@
 	<div class="wrap">
 	<header>
 		<div class="header">
-			<h1 class="vegitory_logo"><a href="#" class="n_logo">
+			<h1 class="vegitory_logo"><a href="${path}/" class="n_logo">
 				<img src="${path}/resources/img/avocado-removebg-preview.png" width="60px" height="60px">SIGN UP
 			</a></h1>
 		</div>
 	</header>
 	<div class="section_wrap">
 		<section>
-			<form name="frm_join" action="" method="POST">
+			<!--<form id="frm_member" name="frm_member" action="${path}/member/join" method="POST">  -->
+			<form:form id="frm_member" modelAttribute="memberDTO" autocomplete="on">
 			<div class="row_group">
 				<div class="join_row">
 					<span class="ps_box int_id">
-						<input type="text" id="uid" name="uid" class="join_info_box_input" placeholder="아이디">
+						<input type="text" id="uid" name="id" class="join_info_box_input" placeholder="아이디">
 						<span class="input_notice">3~15자의 영문/숫자를 조합하여 입력</span>
 					</span>
 					<div class="warning"> *필수입력사항입니다. </div>
@@ -263,7 +265,7 @@
 				
 				<div class="join_row">
 					<span class="ps_box int_id">
-						<input type="text" id="upw" name="upw" class="join_info_box_input" placeholder="비밀번호">
+						<input type="text" id="upw" name="pw" class="join_info_box_input" placeholder="비밀번호">
 						<span class="input_notice">8~16자의 영문/숫자를 조합하여 입력</span>
 					</span>
 					<div class="warning"> *필수입력사항입니다. </div>
@@ -272,7 +274,7 @@
 				
 				<div class="join_row">
 					<span class="ps_box int_id">
-						<input type="text" id="urpw" name="urpw" class="join_info_box_input" placeholder="비밀번호 재확인">
+						<input type="text" id="urpw" name="rpw" class="join_info_box_input" placeholder="비밀번호 재확인">
 					</span>
 					<div class="warning"> *필수입력사항입니다. </div>
 				</div>
@@ -280,7 +282,7 @@
 				
 				<div class="join_row">
 					<span class="ps_box int_id">
-						<input type="text" id="uname" name="uname" class="join_info_box_input" placeholder="이름">
+						<input type="text" id="uname" name="name" class="join_info_box_input" placeholder="이름">
 						<span class="input_notice">한글 15자 영문 30자까지 가능합니다.</span>
 					</span>
 					<div class="warning"> *필수입력사항입니다. </div>
@@ -289,12 +291,13 @@
 
 				<div id="wrap_email">
 					<div class="email_box">
-						<input type="text" id="uemail1" name="uemail" class="join_info_box_input2" placeholder="이메일">
+						<input type="text" id="uemail1" name="email1" class="join_info_box_input2" placeholder="이메일">
 					</div>
 					<span> @ </span>
 					<div class="email_box2">
-						<input type="text" id="uemail2" class="join_info_box_input2" placeholder="Email 선택">
+						<input type="text" id="uemail2" name="email2" class="join_info_box_input2" placeholder="Email 선택">
 					</div>
+						<input type="hidden" id="allemail" name="email">
 					<div class="email_box3">
 						<select id="selmail">
 						<option value="" selected="selected">Email 선택</option>
@@ -316,7 +319,7 @@
 				
 				<div class="join_row last_row">
 					<span class="ps_box int_id">
-						<input type="text" id="uphone" name="uphone" class="join_info_box_input" placeholder="휴대폰">
+						<input type="text" id="uphone" name="phone" class="join_info_box_input" placeholder="휴대폰">
 						<span class="input_notice">-빼고 입력, 예) 01012345678 </span>
 					</span>
 					
@@ -332,17 +335,18 @@
 					<div class="zipcode"> 
 					<span class="ps_box int_zipcode">
 					<input type="text" id="sample6_postcode"
-						   name="id" class="addr_only join_info_box_input" placeholder="우편번호" readonly value="12345">
+						   name="postcode" class="addr_only join_info_box_input" placeholder="우편번호" readonly>
 					</span>
 					<input type="button" id="btn_post" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 					</div>
 					<div class= area></div>
 					<span class="ps_box int_ad">
-					<input type="text" id="sample6_address" name="id" class="addr_only join_info_box_input" placeholder="주소" readonly><br>
+					<input type="text" id="sample6_address" name="addr1" class="addr_only join_info_box_input" placeholder="주소" readonly><br>
 					</span>
 					<div class= area></div>
 					<span class="ps_box int_detail_ad">
-					<input type="text" id="sample6_detailAddress" name="id" class="join_info_box_input" placeholder="상세주소">
+					<input type="text" id="sample6_detailAddress" name="addr2" class="join_info_box_input" placeholder="상세주소">
+					<input type="hidden" id="sample6_extraAddress" placeholder="참고항목">
 					</span>
 					<div class="warning"> *필수입력사항입니다. </div>
 				</div>
@@ -352,7 +356,8 @@
 					<button type="button" id="btn_join">베지토리 회원가입</button>
 				</div>
 			</div>
-		</form>	
+		</form:form>	
+		<!-- </form> -->
 		</section>
 	</div>
 	<footer>
@@ -377,6 +382,11 @@
 <script src="${path}/resources/js/validation.js"></script>
 <script type="text/javascript">
 		$(function(){
+			//비정상적인 접근인지 판단
+			var flag = '${flag}'; //${flag} 이 값 쓸 때 반드시 '' 따옴표를 붙여서 써야함.
+			if(flag == 0) {
+				location.href="${path}/member/constract";
+			}
 			//비밀번호가 유효한 값인지 체크해주는 Flag값
 			var pwFlag = false;
 
@@ -392,6 +402,7 @@
 				// validation.js의 checkId로 유효성체크를 실행 후
 				// 결과를 result에 담음(code, desc) 
 				var result = joinValidate.checkId(id);	
+				console.log('유효성코드: '+result.code);
 				
 				if(result.code == 0) {
 					checkArr[0] = 'true';
@@ -601,6 +612,12 @@
 				}
 				if(invalidAll) {
 					alert('회원가입 성공!');
+					var id = $('#uemail1').val();
+					var url = $('#uemail2').val();
+					$('#allemail').val(id+'@'+url);
+					$('#frm_member').submit(); // submit : form태그 안에 있는 데이터들을 서버단으로 전송
+					// action: 목적지(MemberController '/join')
+					// method: 방법(POST: 숨겨서)
 				} else {
 					alert('유효성 체크를 진행해주세요!')
 				}
