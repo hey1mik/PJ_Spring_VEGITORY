@@ -1,6 +1,9 @@
 package com.vegitory.contoller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vegitory.domain.MemberDTO;
+import com.vegitory.service.mail.MailService;
 import com.vegitory.service.member.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +25,12 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/member")
 @Controller
 public class MemberController {
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private MailService mailService;
+	
 	/*SessionAttributes로 설정된 변수는
 	 * response를 하기 전에 서버의 기억장소 어딘가에 임시로 보관을 해둔다
 	 * web browser와 server간에 한 번이라도 연결이 이루어졌으면
@@ -37,6 +48,7 @@ public class MemberController {
 	
 	@Autowired
 	MemberService mService;
+	
 	
 	/*
 	 * SessionAttributes를 사용하기 위해서는
@@ -108,9 +120,15 @@ public class MemberController {
 	 * jsp 코드에서 Spring-form tag로 input을 코딩해야 한다.
 	 */
 	@PostMapping("/join")
-	public String join(@ModelAttribute("memberDTO") MemberDTO mDto, SessionStatus sessionStatus) {
+	public String join(@ModelAttribute("memberDTO") MemberDTO mDto, SessionStatus sessionStatus, HttpServletRequest request) {
 			log.info(">>>>>>> MEMBER/JOIN POST DB에 회원정보 저장");
 			log.info(mDto.toString());
+			
+			log.info("password: " + mDto.getPw());// 사용자 입력 pw값
+			//1. 사용자 암호 hash 변환
+			String encPw = passwordEncoder.encode(mDto.getPw());
+			mDto.setPw(encPw);
+			log.info("Password(+Hash): " + mDto.getPw());
 			
 			//DB에 회원 등록
 			int result = mService.memInsert(mDto);
@@ -125,9 +143,24 @@ public class MemberController {
 			//SessionAttributes를 사용할 때 insert, update가 완료되고
 			//view로 보내기 전 반드시 setComplete()를 실행하여
 			//session에 담긴 값을 clear해주어야 한다.
+			
+			//4. 회원가입 인증메일 보내기
+			mailService.mailSendUser(mDto.getEmail(), mDto.getId(), request);
 			sessionStatus.setComplete();
 			
-		return "";
+		return "redirect:/";
+	}
+	
+	//회원가입 후 email 인증
+	@GetMapping("/keyauth") 
+	public String KeyAuth(String id, String key, RedirectAttributes rttr) {
+		mailService.keyAuth(id, key);
+		
+		// 인증 후 메시지 출력을 위한 값 전달
+		rttr.addFlashAttribute("id", id);
+		rttr.addFlashAttribute("key", "auth");
+		
+		 return "redirect:/";
 	}
 
 	

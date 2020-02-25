@@ -74,10 +74,9 @@
 <body>
 	<div class="modal_wrap">
 	<div class="modal_content">
-		<div class="check_leave">정말 탈퇴하시겠습니까?</div>
+		<div class="check_leave">이메일 인증을 완료하셔야 활동하실 수 있습니다.</div>
 		<div class="leave_btn">
-				<a class="btn" id="modal_yes_btn" href="#">탈퇴</a>
-				<a class="btn no_btn" id=modal_no_btn href="#">취소</a>
+				<a class="btn no_btn" id=modal_no_btn href="#">확인</a>
 		</div>	
 	</div>	
 </div>

@@ -374,6 +374,21 @@
 			text-align: center;
 			padding-top: 15px;
 		}
+		.top_btn {
+			position: fixed;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			right:5px;
+			bottom:5px;
+			width: 50px;
+			height: 50px;
+			font-size: 30px;
+			border-radius: 50%;
+			background-color: transparent;
+			color: #498268;
+			cursor: pointer;
+		}
 		
 	</style>
 </head>
@@ -435,6 +450,7 @@
 
 	<header>
 		<div class="header_wrap">
+			<div class="top_btn"><i class="fas fa-arrow-up"></i></div>
 			<!-- wrap : 모니터 사이즈 상관없게 하려고 백그라운드로 깔아두는 것. wrap충돌 때문에 앞에 header를 붙여주는 것 -->
 			<div class="header_content">
 				<div class="header_content_logo">
@@ -613,6 +629,9 @@
 		/* Header 가입하기 버튼 클릭시 동의 페이지로 이동*/
 		$(document).on('click','#header_btn_join',function(){
 				location.href="${path}/member/constract";
+		});
+		$(document).on('click','.top_btn', function(){
+			$('html, body').animate({scrollTop : 0}, 600);
 		});
 	</script>
 </html>

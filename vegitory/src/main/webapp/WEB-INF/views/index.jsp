@@ -128,6 +128,7 @@
 	.grocery_list {
 		width: auto;
 		height: auto;
+		padding-top: 50px;
 		background-color: white;
 	}
 	.community_wrap {
@@ -188,8 +189,12 @@
 		font-size: 16px;
 	}
 	.pdt_sort {
-		padding: 0 0 15px 0;
-		font-size: 18px;
+		width: 195px;
+		height: 300px;
+		text-align: center;
+		line-height: 250px;
+		font-size: 20px;
+		font-style: italic;
 	}
 	.grocery_group{
 		display: flex;
@@ -253,11 +258,11 @@
 		top: 0;
 		left: 0;
 	}
-
 	
 	</style>	
 </head>
 <body>
+
 <div class="content_margin">
 <div class="content_wrap">	
 <div class="title">
@@ -329,8 +334,9 @@
 	</div>
 	
 	<div class="grocery_list">
-	<div class="pdt_sort"> BEST </div>
+	
 	<div class="grocery_group"> 
+		<div class="pdt_sort"> BEST</div>
 		<c:forEach items="${BestPdt}" var="pdt" >
 			<div class="table_unit">
 				<img src="${path}/resources/img/${pdt.p_img}" width="200px" height="200px">
@@ -339,10 +345,12 @@
 				<div>${pdt.pmemo}</div>
 			</div>
 		</c:forEach>
+		<div class="pdt_sort"></div>
 	</div>
 	<br>
-	<div class="pdt_sort"> NEW </div>
+	
 	<div class="grocery_group"> 
+		<div class="pdt_sort"> NEW</div>
 		<c:forEach items="${NewPdt}" var="pdt" >
 			<div class="table_unit">
 				<img src="${path}/resources/img/${pdt.p_img}" width="200px" height="200px">
@@ -351,6 +359,7 @@
 				<div>${pdt.pmemo}</div>
 			</div>
 		</c:forEach>
+		<div class="pdt_sort"></div>
 	</div>
 	</div>
 </div>
@@ -406,5 +415,8 @@ function showSlides(n) {
   dots[slideIndex-1].className += " active";
 }
 
+$(document).on('click','#modal_no_btn',function(){
+	$('.modal_wrap').attr('style','display:none');
+});
 </script>	
 </html>
