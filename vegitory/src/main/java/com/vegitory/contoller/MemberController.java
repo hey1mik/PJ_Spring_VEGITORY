@@ -87,6 +87,7 @@ public class MemberController {
 		return "member/drop";
 	}
 	
+	
 	// 회원가입 ID 중복체크
 	@ResponseBody
 	@PostMapping("/idoverlap")
@@ -120,9 +121,14 @@ public class MemberController {
 	 * jsp 코드에서 Spring-form tag로 input을 코딩해야 한다.
 	 */
 	@PostMapping("/join")
-	public String join(@ModelAttribute("memberDTO") MemberDTO mDto, SessionStatus sessionStatus, HttpServletRequest request) {
-			log.info(">>>>>>> MEMBER/JOIN POST DB에 회원정보 저장");
-			log.info(mDto.toString());
+	public String join(@ModelAttribute("memberDTO") MemberDTO mDto, 
+						SessionStatus sessionStatus, 
+						HttpServletRequest request,
+						RedirectAttributes rttr) {
+		//view단에서 controller단으로 이동	
+		log.info(">>>>>>> MEMBER/JOIN POST출력");
+		//view단에서 전송된 데이터가 잘 전달됐는지 확인
+		log.info(mDto.toString());
 			
 			log.info("password: " + mDto.getPw());// 사용자 입력 pw값
 			//1. 사용자 암호 hash 변환
@@ -147,6 +153,11 @@ public class MemberController {
 			//4. 회원가입 인증메일 보내기
 			mailService.mailSendUser(mDto.getEmail(), mDto.getId(), request);
 			sessionStatus.setComplete();
+			
+			// 회원가입 후 메시지 출력을 위한 값 전달
+			rttr.addFlashAttribute("id", mDto.getId());
+			rttr.addFlashAttribute("email", mDto.getEmail());
+			rttr.addFlashAttribute("key", "join");
 			
 		return "redirect:/";
 	}

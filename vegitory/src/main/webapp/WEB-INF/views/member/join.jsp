@@ -238,6 +238,29 @@
 		#address a:hover{
 			color: #498268;
 		}
+		#back{
+			position: fixed;
+			z-index: 1200;
+			background-color: rgba(0,0,0,0.4);
+			overlow: auto;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			display: none;
+			align-items: center;
+			justify-content: center;
+		}
+		.loading_img {
+			animation: ani_loading 1.5s infinite linear;
+			font-size: 70px;
+			color: #498268;
+		}
+		
+		@keyframes ani_loading {
+			from {-webkit-transform: rotate(0deg);}
+			to {-webkit-transform: rotate(359deg);}
+		}
 	</style>
 </head>
 <body>
@@ -611,10 +634,10 @@
 					} 
 				}
 				if(invalidAll) {
-					alert('회원가입 성공!');
 					var id = $('#uemail1').val();
 					var url = $('#uemail2').val();
 					$('#allemail').val(id+'@'+url);
+					FunLoadingBarStart();
 					$('#frm_member').submit(); // submit : form태그 안에 있는 데이터들을 서버단으로 전송
 					// action: 목적지(MemberController '/join')
 					// method: 방법(POST: 숨겨서)
@@ -724,5 +747,18 @@
             }
         }).open();
     }
+    
+    //로딩바 출력
+    function FunLoadingBarStart() {
+    	var loadingBarImage = ''; //가운데 띄워줄 이미지
+    	loadingBarImage += "<div id='back'>";
+    	loadingBarImage += "<div id='loadingBar'>";
+    	loadingBarImage += "<i class='fas fa-carrot loading_img'></i>"
+    	loadingBarImage += "</div></div>";
+    	$('body').append(loadingBarImage);
+    	$('#back').css('display','flex');
+    	$('#loadingImg').show();
+    }
+ 
 </script>
 </html>

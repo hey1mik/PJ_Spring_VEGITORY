@@ -11,46 +11,46 @@
 	<style type="text/css">
 		*{
 			font-family: 'Nanum Gothic', sans-serif;
-			z-index: 990;
+			z-index: 999;
 		}
 		div.header_wrap {
 			position: fixed;
 			top: 0;
 			width: 100%;
-			background-color: white;
+			background-color: #E2D6C1;
 			box-shadow: 0 0 10px 10px rgba(20,23,28,0.03), 0 3px 1px 0 rgba(20,23,28,0.03);
-			z-index: 990;
+			z-index: 999;
 		}
 		div.header_content {
 			width: 1400px;
 			margin: 0 auto;
 			height: 70px;
 			box-sizing: border-box;
-			background-color: white;
+			background-color: #E2D6C1;
 			display:flex;/*가로여백 맞추기*/
 			align-items: center;
 			justify-content: space-around;
-			z-index: 990;
+			z-index: 999;
 		}
 
 		.header_content_logo > a {
 			display: flex;
 			align-items: center;
-			z-index: 990;
+			z-index: 999;
 
 		}
 		.header_content_search {
 			height: 45px;
-			z-index: 990;
+			z-index: 999;
 		}
 		.header_content_search_group {
 			width: 100%;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			background-color: #f2f3f5;
+			background-color: white;
 			border-radius: 2px;
-			z-index: 990;
+			z-index: 999;
 		}
 	
 		.header_content_nav { 
@@ -59,12 +59,12 @@
 			align-items: center;
 			justify-content: space-between;
 			width:267px;
-			z-index: 990;
+			z-index: 999;
 
 		}
 		.header_content_nav > div {
 			font-size: 20pt;
-			z-index: 990;
+			z-index: 999;
 		}
 		.header_content_member{
 			/*width: 160px;*/
@@ -72,15 +72,15 @@
 			align-items: center;
 			justify-content: space-between;
 			flex-direction: row;
-			z-index: 990; /*default(생략가능)*/
+			z-index: 999; /*default(생략가능)*/
 		}
 		.header_content_member > div {
 			padding: 10px 0px 10px 3px;
-			z-index: 990;
+			z-index: 999;
 		}
 		.header_content_dropdown_group {
 			position: relative;
-			z-index: 990;
+			z-index: 999;
 		}
 		.header_content_dropdown_group > a {
 			display: inline-block;
@@ -91,13 +91,13 @@
 			color: #506763;
 			line-height: 19px;
 			font-size: 14px;
-			z-index: 990;
+			z-index: 999;
 
 		}
 		.header_content_dropdown_group > a:hover {
 			background-color: transparent;
 			border-color: #506763;
-			z-index: 990;
+			z-index: 999;
 			
 		}
 		.header_content_member_cart > a {
@@ -110,18 +110,18 @@
 			text-align: center;
 			padding-top: 16px;
 			line-height: 19px; 
-			z-index: 990;
+			z-index: 999;
 		}
 		.header_content_dropdown_wrap:hover .header_dropdown{
 			display:block;
-			z-index: 990;
+			z-index: 999;
 		}
 
 		.header_content_dropdown_wrap:hover > a,
 		.header_content_member_cart:hover > a {
 			background-color: rgba(20,23,28,.05);
 			border-color: rgba(20,23,28,.05);
-			z-index: 990;
+			z-index: 999;
 		}
 		.header_content_logo_img {
 			width: 180px;
@@ -132,11 +132,11 @@
 			color: #3f6e58;
 			line-height: 65px;
 			text-align: center;
-			z-index: 990;
+			z-index: 999;
 		}
 		.header_logo_img {
 			margin-right: -15px; 
-			z-index: 990;
+			z-index: 999;
 		}
 		.header_content_search_btn {
 			color:white;
@@ -150,7 +150,7 @@
 			outline:none;
 			border-top-right-radius:2px;
 			border-bottom-right-radius: 2px;
-			z-index: 990;
+			z-index: 999;
 		}
 
 		.header_content_search_input {
@@ -163,12 +163,12 @@
 			height: 40px;
 			color: #686f7a;
 			outline:none; /*input태그 focus시 파란테두리*/
-			z-index: 990;
+			z-index: 999;
 		}
 		.header_content_search_btn:hover {
 			background-color: #3f6e58;
 			color:white;
-			z-index: 990;
+			z-index: 999;
 		}
 		.header_dropdown_menu {
 			border-bottom-left-radius: 2px;
@@ -177,7 +177,7 @@
 			background-color:white;
 			padding: 10px 0;
 			position: relative;
-			z-index: 990;
+			z-index: 999;
 			
 		}
 		.header_dropdown_menu a {
@@ -189,21 +189,20 @@
 			padding: 5px 15px; 
 			font-weight: 400;
 			position: relative;
-			z-index: 100;
-			z-index: 990;
+			z-index: 999;
 		}
 		.header_dropdown_menu a:hover {
 			color: #007791;
 			background-color: #f2f3f5;
 			position: relative;
-			z-index: 990;
+			z-index: 999;
 		}
 		.header_dropdown {
 			position: absolute;
 			top:45px;
 			left:0; 
 			display: none;
-			z-index: 990;
+			z-index: 999;
 
 		}
 		.arrow {
@@ -218,9 +217,41 @@
 			transform: rotate(45deg);
 			z-index:999;	
 		}
-	
+		
+		button.btn {
+			display: inline-block;
+			font-weight: 600;
+			text-align: center;
+			font-size: 15px;
+			border-radius: 5px;
+			padding: 10px 10px;
+			width: 100%;
+			height: 100%;
+			cursor: pointer;
+			border: 1px solid transparent;	
+		}
+		
+		button.btn_basic {
+			border: 1px solid #686f7a;
+			background-color: white;
+			color: #686f7a;
+		}
+		button.btn_basic:hover {
+			color: #2f3138;
+			border-color: #2f3138;
+		}
+		button.btn_primary {
+			background-color: #498268;
+			color: white;
+		}
+			
+		button.btn_primary:hover {
+			background-color: #3f6e58;
+			border-color: transparent;
+		}
+					
 		/*모달 로그인 창*/
-		.modal_wrap {
+		.header_modal_wrap {
 			position: fixed;
 			top: 0;
 			z-index: 1000;
@@ -393,7 +424,7 @@
 	</style>
 </head>
 <body>
-	<div class="modal_wrap">
+	<div class="header_modal_wrap">
 		<div class="modal_content">
 			<div class="login_close"><button><i class="fas fa-times"></i></button></div>
 			<div class="welcome"><span id="login">LOGIN</span> </div>
@@ -540,8 +571,10 @@
 							</div>
 					</div>
 				</div>
+				
 					<div><button type="button" class="btn btn_basic login_open">로그인</button></div>
-					<div><button type="button" id="header_btn_join" class="btn btn_primary">회원가입</button></a></div>
+					<div><button type="button" id="header_btn_join" class="btn btn_primary">회원가입</button></div>
+					
 				</div>
 				</div>
 		</div>
@@ -570,7 +603,7 @@
 
 		//로그인 버튼 클릭시 modal창 open
 		$(document).on('click','.login_open', function(){
-			$('.modal_wrap').css('display','flex');
+			$('.header_modal_wrap').css('display','flex');
 			$('#login_id').focus();
 		});
 
@@ -584,7 +617,7 @@
 
 		//modal창의 x버튼을 클릭하면 modal창 close
 		$(document).on('click','.login_close', function(){
-			$('.modal_wrap').css('display','none');
+			$('.header_modal_wrap').css('display','none');
 			//$('.frm_login')[0].reset();
 			$('.login_input').val('');
 			$(this).prev().attr('type','password');

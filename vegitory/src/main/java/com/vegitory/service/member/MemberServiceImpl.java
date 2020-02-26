@@ -9,10 +9,11 @@ import com.vegitory.persistence.MemberDAO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
+	private MemberDAO mDao;
+	
 	@Autowired
 	private SqlSession sqlSession;
 	
-	private MemberDAO mDao;
 	@Autowired
 	public void newMemberDAO() {
 		mDao = sqlSession.getMapper(MemberDAO.class);

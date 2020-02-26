@@ -14,7 +14,7 @@
 		padding: 10px 0; 
 		margin-bottom: 10px;
 	}
-	.btn {
+	.modal_btn {
 		width: 90px;
 		height: 40px;
 		background-color: #498268;
@@ -22,8 +22,9 @@
 		text-align: center;
 		line-height: 40px;
 		border-radius: 2px;
-		margin: 0 10px;
+		margin: 10px 10px;
 		border: 1px solid transparent;
+
 	}
 	.no_btn {
 		background-color: #E2D6C1;
@@ -47,7 +48,7 @@
 		
 		
 	}	
-	.modal_content {
+	.login_modal_content {
 		position: relative;
 		width: 550px;
 		height: 330px;
@@ -63,29 +64,50 @@
 		align-items: center;
 		justify-content: center;
 	}
-	.check_leave {
-		padding: 20px;
+	.check_leave1 {
+		padding: 15px;
 		font-size: 20px;
 		font-weight: 600; 
+	}
+	.check_leave2 {
+		margin-bottom: 10px;
 	}
 	
 	</style>
 </head>
 <body>
 	<div class="modal_wrap">
-	<div class="modal_content">
-		<div class="check_leave">이메일 인증을 완료하셔야 활동하실 수 있습니다.</div>
+	<div class="login_modal_content">
+		<div class="check_leave1"><h2>herory님 회원가입을 축하드립니다.</h2></div>
+		<div class="check_leave2">herory@gmail.com으로 인증메일을 보냈습니다.<br>인증하셔야만 사이트 활동이 가능합니다.</div>
 		<div class="leave_btn">
-				<a class="btn no_btn" id=modal_no_btn href="#">확인</a>
+				<a class="modal_btn no_btn" id=modal_no_btn href="#">확인</a>
 		</div>	
 	</div>	
 </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
-	$(document).on('click','#yes_btn',function(){
-			$('.modal_wrap').attr('style','display:flex');
-		});
+	$(function(){
+		var id='${id}';
+		var email='${email}';
+		var key = '${key}';
+		
+		var join_main_txt = id+'님 회원가입을 축하드립니다.';
+		var join_sub_txt = email+'으로 인증메일을 보냈습니다. 인증하셔야만 사이트 활동이 가능합니다.';
+		var auth_main_txt = id+'님 이메일 인증되셨습니다.';
+		var auth_sub_txt = '지금부터 사이트 활동이 가능합니다. 감사합니다.';
+		
+		if(key == 'join') {
+			$('.check_leave1').text(join_main_txt);
+			$('.check_leave2').text(join_sub_txt);
+			$('.modal_wrap').css('display','flex');
+		} else if(key == 'auth') {
+			$('.check_leave1').text(auth_main_txt);
+			$('.check_leave2').text(auth_sub_txt);
+			$('.modal_wrap').css('display','flex');
+		}
+	});
 	$(document).on('click','#modal_no_btn',function(){
 			$('.modal_wrap').attr('style','display:none');
 		});

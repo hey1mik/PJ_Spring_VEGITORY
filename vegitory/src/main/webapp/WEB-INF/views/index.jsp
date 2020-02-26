@@ -12,7 +12,7 @@
 	* {	
 		box-sizing:border-box;
 		font-family: 'Noto Serif KR', serif;
-		z-index:5;
+		z-index: 5;
 	}
 	.content_margin {
 	margin-top:100px;
@@ -146,31 +146,30 @@
 		flex-direction: column;
 		align-items: center;
 		padding-bottom: 30px;
+		z-index:1;
 	}
 	.dashline {
 		    position: absolute;
 			top: 24px;
 			width: 1280px;
 			height: 1px;
-			background: #A9A9A9;
-			z-index: 2;
-			
+			background: transparent;
 	}
 
 	.title_main{
 		background: #E2D6C1;
 		padding: 0px 40px 1px 40px;
-		word-break: break-all;
+		border-radius: 20%;
 		font-size: 30px;
 		font-family: 'Libre Baskerville', serif;
-		z-index: 3;
 		font-weight: 600;
+		z-index:1;
 	}
 
 	.title_sub{
 		padding:1px;
-		font-size: 18px;
-		
+		font-size: 16px;
+		z-index:1;	
 	}
 	.community_list{
 		display: flex;
@@ -189,12 +188,17 @@
 		font-size: 16px;
 	}
 	.pdt_sort {
-		width: 195px;
+		width: 190px;
 		height: 300px;
 		text-align: center;
 		line-height: 250px;
 		font-size: 20px;
 		font-style: italic;
+	}
+	.pdt_sort > span {
+		background: #E2D6C1;
+		border-radius: 20%;
+		padding: 1px 20px;
 	}
 	.grocery_group{
 		display: flex;
@@ -262,7 +266,7 @@
 	</style>	
 </head>
 <body>
-
+	<%@ include file="include/modal.jsp"%>
 <div class="content_margin">
 <div class="content_wrap">	
 <div class="title">
@@ -336,7 +340,7 @@
 	<div class="grocery_list">
 	
 	<div class="grocery_group"> 
-		<div class="pdt_sort"> BEST</div>
+		<div class="pdt_sort"><span> BEST </span></div>
 		<c:forEach items="${BestPdt}" var="pdt" >
 			<div class="table_unit">
 				<img src="${path}/resources/img/${pdt.p_img}" width="200px" height="200px">
@@ -350,7 +354,7 @@
 	<br>
 	
 	<div class="grocery_group"> 
-		<div class="pdt_sort"> NEW</div>
+		<div class="pdt_sort"> <span> NEW </span></div>
 		<c:forEach items="${NewPdt}" var="pdt" >
 			<div class="table_unit">
 				<img src="${path}/resources/img/${pdt.p_img}" width="200px" height="200px">
@@ -414,6 +418,7 @@ function showSlides(n) {
   slides[slideIndex-1].style.display = "block";
   dots[slideIndex-1].className += " active";
 }
+
 
 $(document).on('click','#modal_no_btn',function(){
 	$('.modal_wrap').attr('style','display:none');

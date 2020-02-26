@@ -38,37 +38,6 @@ a {
 
 /*버튼들*/
 
-button.btn {
-	display: inline-block;
-	font-weight: 600;
-	text-align: center;
-	font-size: 15px;
-	border-radius: 5px;
-	cursor: pointer;
-	padding: 10px 11px;
-	border: 1px solid transparent;
-	
-}
-button.btn_basic {
-	border: 1px solid #686f7a;
-	background-color: white;
-	color: #686f7a;
-}
-button.btn_basic:hover {
-	color: #2f3138;
-	border-color: #2f3138;
-}
-button.btn_primary {
-	background-color: #498268;
-	color: white;
-}
-	
-button.btn_primary:hover {
-	
-	background-color: #3f6e58;
-	border-color: transparent;
-}
-
 button.btn_support {
 	border: 1px solid #D6B785;
 	color: white;
