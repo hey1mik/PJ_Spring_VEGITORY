@@ -64,10 +64,10 @@
 		align-items: center;
 		justify-content: center;
 	}
-	.check_leave1 {
-		padding: 15px;
-		font-size: 20px;
+	.check_leave1 > h2 {
+		font-size: 23px;
 		font-weight: 600; 
+		margin-top: 10px;
 	}
 	.check_leave2 {
 		margin-bottom: 10px;
@@ -78,6 +78,7 @@
 <body>
 	<div class="modal_wrap">
 	<div class="login_modal_content">
+		<div class="vegitory_logo"><img src="${path}/resources/img/avocado-removebg-preview.png" width="55px" height="55px"></div>
 		<div class="check_leave1"><h2>herory님 회원가입을 축하드립니다.</h2></div>
 		<div class="check_leave2">herory@gmail.com으로 인증메일을 보냈습니다.<br>인증하셔야만 사이트 활동이 가능합니다.</div>
 		<div class="leave_btn">

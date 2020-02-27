@@ -6,6 +6,7 @@
 
 	 <typeAliases>
 	 	<typeAlias type="com.vegitory.domain.ProductDTO" alias="ProductDTO"></typeAlias>
+	 	<typeAlias type="com.vegitory.domain.MemberDTO" alias="MemberDTO"></typeAlias>
 	 </typeAliases> 	
 	  	
 

@@ -12,6 +12,9 @@
 		*{
 			box-sizing: border-box;
 		}
+		body {
+			background-color: rgb(226, 214, 193);
+		}
 		.wrap{
 			width: 820px;
 			margin: 50px auto;

@@ -218,6 +218,8 @@
 			z-index:999;	
 		}
 		
+		/*로그인 & 가입하기 버튼 */
+		
 		button.btn {
 			display: inline-block;
 			font-weight: 600;
@@ -324,15 +326,24 @@
 			border-top: 1px solid rgba(0,0,0,0.2);
 			margin: 0px 12px 0 12px;
 		}
+		.warning_notice{
+
+			font-size: 11.5px;
+			padding: 5px 0 3px 0px;
+			color:  #a48443;
+			visibility: hidden;
+		}
 		.signup_notice{
 
 			font-size: 11.5px;
-			padding: 20px 0 15px 0px;
+			padding: 0 0 15px 0px;
 		}
-		.singup_btn > a {
+		.signup_btn > button {
 			font-size: 13px;
 			color: #a48443;
 			text-decoration: underline;
+			background-color: transparent;
+			border:none;
 		}
 		.div_input {
 			width: 270px;
@@ -428,7 +439,8 @@
 		<div class="modal_content">
 			<div class="login_close"><button><i class="fas fa-times"></i></button></div>
 			<div class="welcome"><span id="login">LOGIN</span> </div>
-			<form>
+			<form name="" action="" onsubmit="return false;">
+			<!-- onsubmit이 하는 역할: html5 유효성체크는 하면서 submit은 안하게 하기. ajax쓰려면 페이지 전환을 하면 안되니까 -->
 				<div class="login_section">
 					<div class="div_input">
 						<div class="div_id">
@@ -438,12 +450,13 @@
 						<div class="area"></div>
 						<div class="div_id">
 							<i class="fas fa-unlock"></i>
-							<input type="password" placeholder="비밀번호" required minlength="6" maxlength="18" class="login_input" id="input_pw">
+							<input type="password" placeholder="비밀번호" required minlength="6" maxlength="18" class="login_input" id="login_pw">
 							<span class="pw_eye"><i class="fas fa-eye-slash"></i></span>
 						</div>	
 					</div>
 					<div class="login_btn"> 
-						<button type="#">로그인</button>
+						<button type="submit" id="btn-login">로그인</button>
+						<!-- button타입을 submit으로 하면 enter키로 login동작하는 것이 가능해짐 -->
 					</div>	
 				</div>
 		</form>
@@ -462,13 +475,16 @@
 		</div>
 		
 		<div class="signup">
+			<div class="warning_notice">
+				로그인 중 문제가 발생하였습니다. 아이디 및 비밀번호를 확인해주세요.
+			</div>
 			<div class="signup_notice">
 				VEGITORY에 로그인 하시려면 회원가입을 하셔야 합니다.<br>
 				VEGITORY 회원이 되시면 기본 포인트 적립, 리뷰 포인트 적립, 이벤트 참여,
 				특별 사은품 증정 등 여러가지 혜택을 받으실 수 있습니다. 
 			</div>
-			<div class="singup_btn"> 
-				<a href="../../html/term/constract.html">회원가입</a>
+			<div class="signup_btn"> 
+				<button type="button">회원가입</button>
 			</div>	
 		</div>
 		
@@ -571,9 +587,18 @@
 							</div>
 					</div>
 				</div>
-				
-					<div><button type="button" class="btn btn_basic login_open">로그인</button></div>
-					<div><button type="button" id="header_btn_join" class="btn btn_primary">회원가입</button></div>
+				<c:choose>
+					<c:when test="${empty sessionScope.userid}">
+						<div><button type="button" class="btn btn_basic login_open">로그인</button></div>
+						<div><button type="button" id="header_btn_join" class="btn btn_primary">회원가입</button></div>
+					</c:when>
+					<c:otherwise>
+						<div><button type="button" class="btn btn_basic login_open" id="header_btn_logout">로그아웃</button></div>
+					</c:otherwise>
+				</c:choose>
+					<!--<c:if test="${empty sessionScope.userid}"></c:if> if문이 딱 하나밖에 없을 때 쓰는 방법-->
+		
+					
 					
 				</div>
 				</div>
@@ -623,6 +648,7 @@
 			$(this).prev().attr('type','password');
 				$('.pw_eye').html('<i class="fas fa-eye-slash"></i>')
 					   .css('color','#aaa');
+			$('.warning_notice').css('visibility','hidden');	
 		});
 
 		//값을 가져오는 방법
@@ -658,11 +684,48 @@
 					   .css('color','#aaa'); //이것처럼 계속해서 .html, .css 등등 옵션주는걸 체이닝 기법이라고 한다.
 			}
 		});	
+		
+		//LOGIN버튼 클릭시 AJAX 동작
+		$(document).on('click','#btn-login', function() {
+			var id = $('#login_id').val();
+			var pw = $('#login_pw').val();
+			
+			//login기능에서는 유효성체크를 null만 해주면 됨.
+			if(id != '' && pw != '' && id.length !=0 && pw.length !=0) { //1.값이 있는지 없는지 체크
+				$.ajax({
+					url: '${path}/login/in',
+					type: 'POST',
+					data: 'id='+id+'&pw='+pw,
+					success: function(data) {
+						console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+data);
+						
+						if(data == 0 || data == 3){
+							$('.warning_notice').css('visibility','visible')
+							.text('로그인 중 문제가 발생했습니다. 아이디 및 비밀번호를 확인하거나 계정을 생성하십시오.');
+						}else if(data == 1) {
+							console.log('로그인 성공');
+							location.reload();
+						}else if(data == 2) {
+							$('.warning_notice').css('visibility','visible')
+							.text('이메일 인증 후 로그인 할 수 있습니다.');
+						} 
+					},
+					error: function() {
+						alert(' System Error :( ');
+					}
+				});
+					} 			
+		});
 	
-		/* Header 가입하기 버튼 클릭시 동의 페이지로 이동*/
+		
 		$(document).on('click','#header_btn_join',function(){
 				location.href="${path}/member/constract";
 		});
+		/* Header 가입하기 버튼 클릭시 동의 페이지로 이동*/
+		$(document).on('click','.signup_btn > button',function(){
+				location.href="${path}/member/constract";
+		});
+		
 		$(document).on('click','.top_btn', function(){
 			$('html, body').animate({scrollTop : 0}, 600);
 		});
