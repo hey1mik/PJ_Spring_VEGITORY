@@ -588,12 +588,13 @@
 					</div>
 				</div>
 				<c:choose>
-					<c:when test="${empty sessionScope.userid}">
+					<c:when test="${empty userid}">
 						<div><button type="button" class="btn btn_basic login_open">로그인</button></div>
 						<div><button type="button" id="header_btn_join" class="btn btn_primary">회원가입</button></div>
 					</c:when>
 					<c:otherwise>
-						<div><button type="button" class="btn btn_basic login_open" id="header_btn_logout">로그아웃</button></div>
+						<div><span>${userid} </span><span style="color:#498268">ON &nbsp;&nbsp;</span></div>
+						<div><button type="button" class="btn btn_basic" id="header_btn_logout">로그아웃</button></div>
 					</c:otherwise>
 				</c:choose>
 					<!--<c:if test="${empty sessionScope.userid}"></c:if> if문이 딱 하나밖에 없을 때 쓰는 방법-->
@@ -728,6 +729,22 @@
 		
 		$(document).on('click','.top_btn', function(){
 			$('html, body').animate({scrollTop : 0}, 600);
+		});
+		
+		/*로그아웃 기능*/
+		$(document).on('click','#header_btn_logout', function(){
+			$.ajax({
+				url: '${path}/login/out',
+				type:'POST',
+				success: function(){
+					console.log(' Logout Success :) ');
+					location.reload();
+				},
+				error: function() {
+					alert(' System Error:( ');
+				}
+				
+			});
 		});
 	</script>
 </html>

@@ -223,7 +223,7 @@
 		overflow: hidden;
 		text-align: center;
 		line-height: 300px;		
-		margin: 0 30px;
+		margin: 20px 5px 30px 5px;
 		font-size: 20px;
 		font-weight: 600;
 		cursor: pointer;

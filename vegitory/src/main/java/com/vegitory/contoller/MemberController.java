@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -20,6 +21,9 @@ import com.vegitory.service.mail.MailService;
 import com.vegitory.service.member.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
+
+
+@SessionAttributes({"memberDTO"})
 
 @Slf4j
 @RequestMapping("/member")
