@@ -271,7 +271,7 @@
 	<header>
 		<div class="header">
 			<h1 class="vegitory_logo"><a href="${path}/" class="n_logo">
-				<img src="${path}/resources/img/avocado-removebg-preview.png" width="60px" height="60px">SIGN UP
+				<img id="avoimg" src="${path}/resources/img/avocado-removebg-preview.png" width="60px" height="60px"><span>SIGN UP</span>
 			</a></h1>
 		</div>
 	</header>
@@ -282,7 +282,7 @@
 			<div class="row_group">
 				<div class="join_row">
 					<span class="ps_box int_id">
-						<input type="text" id="uid" name="id" class="join_info_box_input" placeholder="아이디">
+						<input type="text" id="uid" name="id" class="join_info_box_input" placeholder="아이디" value=${user.id}>
 						<span class="input_notice">3~15자의 영문/숫자를 조합하여 입력</span>
 					</span>
 					<div class="warning"> *필수입력사항입니다. </div>
@@ -291,7 +291,7 @@
 				
 				<div class="join_row">
 					<span class="ps_box int_id">
-						<input type="text" id="upw" name="pw" class="join_info_box_input" placeholder="비밀번호">
+						<input type="text" id="upw" name="pw" class="join_info_box_input" placeholder="비밀번호" value="비밀번호 수정은 따로해주세요">
 						<span class="input_notice">8~16자의 영문/숫자를 조합하여 입력</span>
 					</span>
 					<div class="warning"> *필수입력사항입니다. </div>
@@ -300,7 +300,7 @@
 				
 				<div class="join_row">
 					<span class="ps_box int_id">
-						<input type="text" id="urpw" name="rpw" class="join_info_box_input" placeholder="비밀번호 재확인">
+						<input type="text" id="urpw" name="rpw" class="join_info_box_input" placeholder="비밀번호 재확인" value="비밀번호 수정은 따로해주세요">
 					</span>
 					<div class="warning"> *필수입력사항입니다. </div>
 				</div>
@@ -308,7 +308,7 @@
 				
 				<div class="join_row">
 					<span class="ps_box int_id">
-						<input type="text" id="uname" name="name" class="join_info_box_input" placeholder="이름">
+						<input type="text" id="uname" name="name" class="join_info_box_input" placeholder="이름" value=${user.name}>
 						<span class="input_notice">한글 15자 영문 30자까지 가능합니다.</span>
 					</span>
 					<div class="warning"> *필수입력사항입니다. </div>
@@ -317,7 +317,7 @@
 
 				<div id="wrap_email">
 					<div class="email_box">
-						<input type="text" id="uemail1" name="email1" class="join_info_box_input2" placeholder="이메일">
+						<input type="text" id="uemail1" name="email1" class="join_info_box_input2" placeholder="이메일" value=${user.email}>
 					</div>
 					<span> @ </span>
 					<div class="email_box2">
@@ -345,7 +345,7 @@
 				
 				<div class="join_row last_row">
 					<span class="ps_box int_id">
-						<input type="text" id="uphone" name="phone" class="join_info_box_input" placeholder="휴대폰">
+						<input type="text" id="uphone" name="phone" class="join_info_box_input" placeholder="휴대폰" value=${user.phone}>
 						<span class="input_notice">-빼고 입력, 예) 01012345678 </span>
 					</span>
 					
@@ -361,17 +361,17 @@
 					<div class="zipcode"> 
 					<span class="ps_box int_zipcode">
 					<input type="text" id="sample6_postcode"
-						   name="postcode" class="addr_only join_info_box_input" placeholder="우편번호" readonly>
+						   name="postcode" class="addr_only join_info_box_input" placeholder="우편번호" readonly value="${user.postcode}">
 					</span>
 					<input type="button" id="btn_post" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 					</div>
 					<div class= area></div>
 					<span class="ps_box int_ad">
-					<input type="text" id="sample6_address" name="addr1" class="addr_only join_info_box_input" placeholder="주소" readonly><br>
+					<input type="text" id="sample6_address" name="addr1" class="addr_only join_info_box_input" placeholder="주소" readonly value="${user.addr1}"><br>
 					</span>
 					<div class= area></div>
 					<span class="ps_box int_detail_ad">
-					<input type="text" id="sample6_detailAddress" name="addr2" class="join_info_box_input" placeholder="상세주소">
+					<input type="text" id="sample6_detailAddress" name="addr2" class="join_info_box_input" placeholder="상세주소" readonly value="${user.addr2}">
 					<input type="hidden" id="sample6_extraAddress" placeholder="참고항목">
 					</span>
 					<div class="warning"> *필수입력사항입니다. </div>
@@ -408,10 +408,30 @@
 <script src="${path}/resources/js/validation.js"></script>
 <script type="text/javascript">
 		$(function(){
-			//비정상적인 접근인지 판단
-			var flag = '${flag}'; //${flag} 이 값 쓸 때 반드시 '' 따옴표를 붙여서 써야함.
-			if(flag == 0) {
-				location.href="${path}/member/constract";
+			alert('user: '+'${user}');
+			if('${user}' !=''){
+				// 회원정보수정 디자인 변경
+				$('#btn_join').text('수정하기');
+				$('h1 > a').css('display','flex')
+							.css('align-items','flex-end')
+							.css('justify-content','center')
+							.css('font-size','50px')
+							.css('font-weight','500')
+							.css('color','#3f6e58')
+							.css('padding','20px 0px');
+				$('h1 span').text('Manage Account');
+				$('.join_info_box_input:eq(1)').attr('readonly','ture')
+												.removeAttr('id');
+				$('.join_info_box_input:eq(2)').attr('readonly','true')
+												.removeAttr('id');
+				$('.join_info_box_input:eq(0)').attr('readonly','true')
+												.removeAttr('id');
+				$('.email_box2').css('display','none');
+				$('.email_box3').css('display','none');
+				$('#wrap_email > span').css('display','none');
+				$('.email_box').css('width','668px');
+				//여기서 말하는 아이디는 <input>태그의 속성인 id값을 말하는 것! id="id_input" 이런 것
+				
 			}
 			//비밀번호가 유효한 값인지 체크해주는 Flag값
 			var pwFlag = false;

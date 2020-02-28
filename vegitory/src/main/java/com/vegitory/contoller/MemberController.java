@@ -1,6 +1,7 @@
 package com.vegitory.contoller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,7 +32,6 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	@Autowired
 	PasswordEncoder passwordEncoder;
-	
 	@Autowired
 	private MailService mailService;
 	
@@ -59,6 +59,13 @@ public class MemberController {
 	 * 반드시 해당 변수를 생성하는 method가 controller에 있어야하고
 	 * 해당 메서드에는 @ModelAttribute("변수명")가 있어야 한다. => 초기화 작업,변수선언같은거
 	 */
+	
+	//초기화 하는 작업
+	@ModelAttribute("memberDTO")
+	public MemberDTO newMember() {
+		return new MemberDTO();
+	}
+	
 	@GetMapping("/constract")
 	public String viewConstract() {
 		log.info(">>>>>>>> MEMBER/CONSTRACT PAGE 출력");
@@ -81,6 +88,11 @@ public class MemberController {
 		log.info(mDto.toString());
 		log.info(flag);
 		model.addAttribute("flag",flag);
+		
+		//비정상적인 접근일 경우 약관 동의페이지로 이동
+		if(!flag.equals("1")) {
+			return "member/constract";
+		}
 		
 		return "member/join";
 	}
@@ -178,5 +190,27 @@ public class MemberController {
 		 return "redirect:/";
 	}
 
+	// 회원정보수정
+	@GetMapping("/update")
+	public String memUpdate(HttpSession session, Model model) {
+		log.info(">>>>> GET: Member Update Page");
+		
+		//현재 로그인 상태를 확인
+		//+ session값 앞에 String붙여줘야 object타입에서 string타입으로 객체타입이 변환됨
+		String id = (String)session.getAttribute("userid"); 
+		
+		// 로그인이 안되어있으면 비정상적인 접근으로 간주하여
+		// 인덱스페이지로 이동!
+		if(id == null) {
+			return "redirect:/";
+		}
+		
+		//로그인된 유저의 정보를 get!
+		//회원정보주성 페이지로 보내기
+		
+		model.addAttribute("user", mService.userView(id));
+		
+		return "member/join";
+	}
 	
 }

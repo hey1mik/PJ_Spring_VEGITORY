@@ -459,10 +459,10 @@
 				
 				//유효성 체크 통과시 회원가입 페이지로 이동!
 				location.href="${path}/member/join?useon="+agree_one
-														+"&primaryon="+agree_two
-														+"&locon="+agree_three
-														+"&eventon="+agree_four
-														+"&flag=1";
+												  +"&primaryon="+agree_two
+												  +"&locon="+agree_three
+												  +"&eventon="+agree_four
+												  +"&flag=1";
 
 			});
 			/* 취소버튼 클릭시 INDEX 페이지로 이동 */

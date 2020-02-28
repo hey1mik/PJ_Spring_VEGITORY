@@ -577,10 +577,13 @@
 								<div class="header_dropdown">
 									<div class="arrow"></div>
 										<ul class="header_dropdown_menu">
-											<li><a href="../../html/leave/leave.html">회원정보수정</a></li>
-											<li><a href="#">위시리스트</a></li>
-											<li><a href="#">최근주문정보</a></li>
+											<c:if test="${not empty userid}">
+											<li><a href="${path}/member/pwupdate">비밀번호재설정</a></li>
+											<li><a href="${path}/member/update">회원정보수정</a></li>
 											<li><a href="#">등록게시글</a></li>
+											</c:if>
+											<li><a href="#">위시리스트</a></li>
+											<li><a href="#">최근주문정보</a></li>	
 											<li><a href="#">고객센터</a></li>
 										</ul>	
 								</div>
