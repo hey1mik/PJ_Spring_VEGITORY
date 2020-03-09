@@ -291,7 +291,7 @@
 				
 				<div class="join_row">
 					<span class="ps_box int_id">
-						<input type="text" id="upw" name="pw" class="join_info_box_input" placeholder="비밀번호" value="비밀번호 수정은 따로해주세요">
+						<input type="text" id="upw" name="pw" class="join_info_box_input" placeholder="비밀번호">
 						<span class="input_notice">8~16자의 영문/숫자를 조합하여 입력</span>
 					</span>
 					<div class="warning"> *필수입력사항입니다. </div>
@@ -300,7 +300,7 @@
 				
 				<div class="join_row">
 					<span class="ps_box int_id">
-						<input type="text" id="urpw" name="rpw" class="join_info_box_input" placeholder="비밀번호 재확인" value="비밀번호 수정은 따로해주세요">
+						<input type="text" id="urpw" name="rpw" class="join_info_box_input" placeholder="비밀번호 재확인">
 					</span>
 					<div class="warning"> *필수입력사항입니다. </div>
 				</div>
@@ -421,15 +421,17 @@
 							.css('padding','20px 0px');
 				$('h1 span').text('Manage Account');
 				$('.join_info_box_input:eq(1)').attr('readonly','ture')
-												.removeAttr('id');
+											   .removeAttr('id');
 				$('.join_info_box_input:eq(2)').attr('readonly','true')
-												.removeAttr('id');
+											   .attr('placeholder','비밀번호 수정은 따로 해주세요')
+											   .removeAttr('id');
 				$('.join_info_box_input:eq(0)').attr('readonly','true')
 												.removeAttr('id');
 				$('.email_box2').css('display','none');
 				$('.email_box3').css('display','none');
 				$('#wrap_email > span').css('display','none');
 				$('.email_box').css('width','668px');
+		
 				//여기서 말하는 아이디는 <input>태그의 속성인 id값을 말하는 것! id="id_input" 이런 것
 				
 			}
