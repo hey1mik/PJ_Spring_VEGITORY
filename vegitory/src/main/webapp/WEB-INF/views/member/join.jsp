@@ -447,7 +447,6 @@
 				ckName(name);
 				ckPhone(phone);
 				ckEmail1(email1);
-				ckEmail2(email2);
 				ckAddr(postcode, addr2);
 				checkArr[0] = true;
 				checkArr[1] = true;
