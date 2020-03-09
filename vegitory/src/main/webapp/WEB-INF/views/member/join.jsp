@@ -411,6 +411,7 @@
 			
 			//비밀번호가 유효한 값인지 체크해주는 Flag값
 			var pwFlag = false;
+		
 
 			// 유효성체크 여부를 알려주는 배열
 			var checkArr = new Array(6).fill(false);
@@ -695,7 +696,7 @@
 
 			//회원가입 버튼 클릭!
 			$('#btn_join').click(function(){
-				var inavlidAll = true;
+				var invalidAll = true;
 				for(var i = 0; i < checkArr.length; i++) {
 					if(!checkArr[i]) {
 						invalidAll = false;

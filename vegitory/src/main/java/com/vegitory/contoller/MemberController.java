@@ -213,4 +213,11 @@ public class MemberController {
 		return "member/join";
 	}
 	
+	@PostMapping("/update")
+	public String memUpdate(MemberDTO mDto) {
+		log.info(">>>>>> POST: Member Update Action");
+		log.info(mDto.toString());
+		return "redirect:/";
+	}
+	
 }
