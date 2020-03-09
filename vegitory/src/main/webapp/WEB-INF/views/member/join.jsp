@@ -371,7 +371,7 @@
 					</span>
 					<div class= area></div>
 					<span class="ps_box int_detail_ad">
-					<input type="text" id="sample6_detailAddress" name="addr2" class="join_info_box_input" placeholder="상세주소" readonly value="${user.addr2}">
+					<input type="text" id="sample6_detailAddress" name="addr2" class="join_info_box_input" placeholder="상세주소" value="${user.addr2}">
 					<input type="hidden" id="sample6_extraAddress" placeholder="참고항목">
 					</span>
 					<div class="warning"> *필수입력사항입니다. </div>
@@ -408,6 +408,14 @@
 <script src="${path}/resources/js/validation.js"></script>
 <script type="text/javascript">
 		$(function(){
+			
+			//비밀번호가 유효한 값인지 체크해주는 Flag값
+			var pwFlag = false;
+
+			// 유효성체크 여부를 알려주는 배열
+			var checkArr = new Array(6).fill(false);
+			//printCheckArr(checkArr);
+			
 			alert('user: '+'${user}');
 			if('${user}' !=''){
 				// 회원정보수정 디자인 변경
@@ -420,28 +428,51 @@
 							.css('color','#3f6e58')
 							.css('padding','20px 0px');
 				$('h1 span').text('Manage Account');
-				$('.join_info_box_input:eq(1)').attr('readonly','ture')
-											   .removeAttr('id');
-				$('.join_info_box_input:eq(2)').attr('readonly','true')
-											   .attr('placeholder','비밀번호 수정은 따로 해주세요')
-											   .removeAttr('id');
+				$('.join_row:eq(1)').css('visibility','hidden')
+									.css('height','0');
+				$('.join_row:eq(2)').css('visibility','hidden')
+									.css('height','0')
+									.css('margin-top','-17px');
+				
 				$('.join_info_box_input:eq(0)').attr('readonly','true')
 												.removeAttr('id');
-				$('.email_box2').css('display','none');
-				$('.email_box3').css('display','none');
-				$('#wrap_email > span').css('display','none');
-				$('.email_box').css('width','668px');
-		
 				//여기서 말하는 아이디는 <input>태그의 속성인 id값을 말하는 것! id="id_input" 이런 것
+		
+				var name = '${user.name}';
+				var phone = '${user.phone}';
+				var email1 = '${user.email}';
+				var postcode = '${user.postcode}';
+				var addr1 = '${user.addr1}';
+				var addr2= '${user.addr2}';
+				ckName(name);
+				ckPhone(phone);
+				ckEmail1(email1);
+				ckEmail2(email2);
+				ckAddr(postcode, addr2);
+				checkArr[0] = true;
+				checkArr[1] = true;
+				printCheckArr(checkArr);
 				
 			}
-			//비밀번호가 유효한 값인지 체크해주는 Flag값
-			var pwFlag = false;
+			
+			function ckDesign(code, desc, line, msg) { // 유효성 체크 통과 못한애	
+				if(code ==0 || code == 10) {
+				$('.ps_box:eq('+line+')').css('border','1px solid #3f6e58');
+				$('.warning:eq('+msg+')').css('visibility','visible')
+									   .text(desc)
+				                       .css('color','#3f6e58');
+				        return false;
+				
+			} else { //유효성 체크 통과한애
+				$('.ps_box:eq('+line+')').css('border','1px solid #a48443');
+				$('.warning:eq('+msg+')').css('visibility','visible')
+									     .text(desc)
+				                         .css('color','#a48443');
+				       return true;                   
+			}
+		}
 
-			// 유효성체크 여부를 알려주는 배열
-			var checkArr = new Array(6).fill(false);
-			//printCheckArr(checkArr);
-			var invalidAll = true;
+	
 
 			//아이디 유효성 체크:
 			$('#uid').keyup(function(){
@@ -524,20 +555,26 @@
 			// 이름 유효성 체크
 			$('#uname').keyup(function(){
 				var name = $.trim($(this).val());
-				var result = joinValidate.checkName(name);
-				ckDesign(result.code, result.desc, 3,3);
-				if(result.code == 0) {
-					checkArr[2] = true;
-				} else {
-					checkArr[2] = false;
-				}
-				printCheckArr(checkArr);
-				
+				ckName(name);
 			});
+				function ckName(name){
+					var result = joinValidate.checkName(name);
+					ckDesign(result.code, result.desc, 3,3);
+					
+					if(result.code == 0) {
+						checkArr[2] = true;
+					} else {
+						checkArr[2] = false;
+					}
+				}
 
 			// 전화번호 유효성 체크
 			$('#uphone').keyup(function(){
 				var phone = $.trim($(this).val());
+				ckPhone(phone);
+			});
+			
+			function ckPhone(phone){
 				var result = joinValidate.checkPhone(phone);
 				ckDesign(result.code, result.desc, 4,5);
 				if(result.code == 0) {
@@ -545,7 +582,6 @@
 				} else {
 					checkArr[3] = false;
 				}
-				printCheckArr(checkArr);
 				
 				if(result.code == 0) {
 					$('.ps_box:eq(5)').css('border','1px solid #3f6e58');
@@ -553,20 +589,22 @@
 				} else {
 					$('.ps_box:eq(5)').css('border','1px solid #a48443');
 				}
-			});
+			}
 
 			// 이메일 유효성 체크
 			$('#uemail1').keyup(function(){
 				var email1 = $.trim($(this).val());
+				ckEmail1(email1);
+			});
+			
+			function ckEmail1(email1){
 				var result = joinValidate.checkEmail1(email1);
-
 
 				if(result.code == 0) {
 					checkArr[3] = true;
 				} else {
 					checkArr[3] = false;
 				}
-				printCheckArr(checkArr);
 
 				if(result.code == 0) {
 					$('.email_box').css('border','1px solid #3f6e58');
@@ -580,10 +618,15 @@
 										     .text(result.desc)
 					                         .css('color','#a48443');
 				}
-			});
+			}
 
 			$('#uemail2').keyup(function(){
 				var email2 = $.trim($(this).val());
+				ckEmail2(email2);
+			});
+			
+			function ckEmail2(email2){
+				
 				var result = joinValidate.checkEmail2(email2);	
 
 				if(result.code == 0) {
@@ -604,7 +647,8 @@
 										     .text(result.desc)
 					                         .css('color','#a48443');
 				}
-			});
+			}
+				
 
 			$('.addr_only').click(function(){
 				$('#btn_post').click();
@@ -624,7 +668,10 @@
 				var addrDetail = $.trim($(this).val());
 				var addrPost = $('#sample6_postcode').val();
 				//console.log('우편번호: '+addrPost+', 상세주소: '+addrDetail);
-
+				ckAddr(addrDetail, addrPost)
+			});
+			
+			function ckAddr(addrDetail, addrPost) {
 				var result = joinValidate.checkAddr(addrDetail, addrPost);
 
 				if(result.code==3){// 우편번호 & 주소 x
@@ -645,8 +692,7 @@
 				} else {
 					checkArr[5] = false;
 				}
-				printCheckArr(checkArr);
-			});
+			}
 
 			//회원가입 버튼 클릭!
 			$('#btn_join').click(function(){
@@ -696,23 +742,7 @@
 		});
 
 
-			function ckDesign(code, desc, line, msg) { // 유효성 체크 통과 못한애	
-					if(code ==0 || code == 10) {
-					$('.ps_box:eq('+line+')').css('border','1px solid #3f6e58');
-					$('.warning:eq('+msg+')').css('visibility','visible')
-										   .text(desc)
-					                       .css('color','#3f6e58');
-					        return false;
-					
-				} else { //유효성 체크 통과한애
-					$('.ps_box:eq('+line+')').css('border','1px solid #a48443');
-					$('.warning:eq('+msg+')').css('visibility','visible')
-										     .text(desc)
-					                         .css('color','#a48443');
-					       return true;                   
-				}
-			}
-
+	
 			//개발시 사용: 유효성 체크 전체여부를 출력해주는 함수(true, false) 
 			function printCheckArr(checkArr) {
 				for(var i=0; i<checkArr.length; i++) {
