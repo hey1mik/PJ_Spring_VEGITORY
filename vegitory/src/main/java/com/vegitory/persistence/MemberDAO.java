@@ -18,4 +18,7 @@ public interface MemberDAO {
 	
 	//1명의 회원정보
 	public MemberDTO userView(String id);
+	
+	// 회원수정 DB수정
+	public int memUpdate(MemberDTO mDto);
 }

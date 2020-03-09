@@ -206,7 +206,7 @@ public class MemberController {
 		}
 		
 		//로그인된 유저의 정보를 get!
-		//회원정보주성 페이지로 보내기
+		//회원정보수정 페이지로 보내기
 		
 		model.addAttribute("user", mService.userView(id));
 		
@@ -214,9 +214,12 @@ public class MemberController {
 	}
 	
 	@PostMapping("/update")
-	public String memUpdate(MemberDTO mDto) {
+	public String memUpdate(MemberDTO mDto, HttpSession session) {
 		log.info(">>>>>> POST: Member Update Action");
 		log.info(mDto.toString());
+		mService.memUpdate(mDto, session);
+		
+		
 		return "redirect:/";
 	}
 	

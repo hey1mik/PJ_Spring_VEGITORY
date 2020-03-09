@@ -596,7 +596,7 @@
 						<div><button type="button" id="header_btn_join" class="btn btn_primary">회원가입</button></div>
 					</c:when>
 					<c:otherwise>
-						<div><span>${userid} </span><span style="color:#498268">ON &nbsp;&nbsp;</span></div>
+						<div><span>${name} </span><span style="color:#498268">ON &nbsp;&nbsp;</span></div>
 						<div><button type="button" class="btn btn_basic" id="header_btn_logout">로그아웃</button></div>
 					</c:otherwise>
 				</c:choose>
