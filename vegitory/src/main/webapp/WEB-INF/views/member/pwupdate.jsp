@@ -48,14 +48,12 @@
 		padding: 20px 0;
 		border-bottom: 2px solid rgba(73, 130, 104, 0.5);
 	}
-	#service1{
+	.service1{
 		font-size: 20px;
 		font-weight: 600;
 	}
-	#service2{
-		font-size: 15px;
-		font-weight: 550;
-		color: rgba(0,0,0,0.5);
+	.service2 {
+		padding-bottom: 5px;
 	}
 	.service_btn {
 		width: 150px;
@@ -105,7 +103,7 @@
 	}
 	.little_space {
 		width: 100%;
-		height: 5px;
+		height: 20px;
 	}
 	.password_wrap {
 		margin: 20px;
@@ -116,6 +114,7 @@
 		padding: 10px 0; 
 	}
 	.warning {
+		position: absolute;
 		font-size: 12px;
 		visibility: hidden;
 	}
@@ -163,7 +162,7 @@
 		<section>
 		<form:form id="frm_member" modelAttribute="memberDTO" autocomplete="on">
 			<div class="serivce">
-				<span id="service1">본인확인을 위해 현재 비밀번호를 입력해주세요.</span>
+				<span class="service1">본인확인을 위해 현재 비밀번호를 입력해주세요.</span>
 				<div class="password_wrap">
 				<div class="password_box">
 				<label for="input_password">현재 비밀번호</label>
@@ -174,13 +173,13 @@
 				
 			</div>
 			<div class="notice">
-				<span class="notice1">수정할 비밀번호를 입력해주세요.</span>
+				<span class="service1 service2">수정할 비밀번호를 입력해주세요.</span>
 				<div class="password_wrap">
 					<div class="password_box">
 					<label for="input_password">수정할 비밀번호</label>
 					<input type="password" class="passbox" name="rpw" id="upw" name="password">
-					</div>
 					<div class="warning"> *비밀번호를 확인해주세요 </div>
+					</div>
 					<div class="little_space"></div>	
 					<div class="password_box">
 					<label for="input_password">비밀번호 재확인</label>
@@ -247,22 +246,28 @@
 				var pw = $.trim($('#upw').val());
 				var rpw = $.trim($('#urpw').val());
 				
-				var result = joinValidate.checkPw(nowpw, pw, rpw);
-				if(result.code == 0 || result.code == 10 || result.code == 6) {
-					pwFlag = true;
+				var test = joinValidate.checkNowpw(nowpw);
+				if(test.code == 1) {
+					$('.warning:eq(1)').css('visibility','visible')
+				     				   .text('본인확인을 위해 현재 비밀번호 입력을 먼저 진행해주세요!')
+                   					   .css('color','#a48443');
 				} else {
-					pwFlag = false;
-				}
-				ckDesign(result.code, result.desc, 1);
-				
-				if(result.code == 10) {
-					checkArr[1] = true;
-				} else if(result.code == 6) {
-					checkArr[1] = false;
-				} else {
-					checkArr[1] = false;
-				}
-				
+					var result = joinValidate.checkPw(nowpw, pw, rpw);
+					if(result.code == 0 || result.code == 10 || result.code == 6) {
+						pwFlag = true;
+					} else {
+						pwFlag = false;
+					}
+					ckDesign(result.code, result.desc, 1);
+					
+					if(result.code == 10) {
+						checkArr[1] = true;
+					} else if(result.code == 6) {
+						checkArr[1] = false;
+					} else {
+						checkArr[1] = false;
+					}
+				}	
 			});
 			
 			
@@ -271,8 +276,8 @@
 				var rpw = $.trim($('#urpw').val());
 				var result = joinValidate.checkRpw(pw, rpw, pwFlag);
 				ckDesign(result.code, result.desc, 2);
-				
-				if(checkArr[0] = true && result.code == 10) {
+			
+				if(result.code == 10) {
 					checkArr[1] = true;
 				
 				} else if(result.code == 6) {
