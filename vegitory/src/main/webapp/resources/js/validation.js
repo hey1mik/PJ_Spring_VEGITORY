@@ -43,9 +43,13 @@ var joinValidate = {
 			code: 10,
 			desc : '사용가능한 비밀번호입니다.'
 		},
+		success_nowpw : {
+			code: 100,
+			desc : '확인되었습니다.'
+		},
 		invalid_pw : {
 			code: 3,
-			desc: '비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.'
+			desc: '비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다. ^와 ;는 쓸 수 없습니다.'
 		},
 		stream_pw : {
 			code: 4,
@@ -61,7 +65,7 @@ var joinValidate = {
 		},
 		equal_pw: {
 			code: 7,
-			desc: '현재비밀번호와 다르게 입력해주세요.'
+			desc: '현재 비밀번호와 다르게 입력해주세요.'
 		},
 		success_name: {
 			code: 0,
@@ -144,9 +148,9 @@ var joinValidate = {
 		}
 	},
 
-		checkPw : function(pw, rpw) {
+		checkPw : function(nowpw, pw, rpw) {
 			var regEmpty = /\s/g; //공백문자
-			var regPw = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&_*-]).{8,}$/; //유효한 비밀번호 체크
+			var regPw = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%&_*-]).{8,}$/; //유효한 비밀번호 체크
 			var regHangle = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
 
 		if(pw == '' || pw.length == 0) {// 1. 값이 있는지 체크
@@ -159,6 +163,8 @@ var joinValidate = {
 				return this.resultCode.space_length_val;
 			} else if(/(\w)\1\1\1/.test(pw)) { //4.같은 값이 4번 연속으로 사용됐는지 체크
 				return this.resultCode.stream_pw;
+			} else if(pw == nowpw){ // 현재비밀번호랑 수정할 비밀번호가 같은지
+				return this.resultCode.equal_pw;
 			} else if(rpw != '' || rpw.length != 0) { // 6. 비밀번호 재확인 값이 있으면.??
 				if(pw == rpw) {
 					return this.resultCode.equal_success_pw;  
@@ -177,8 +183,7 @@ var joinValidate = {
 				return this.resultCode.equal_success_pw;  
 			} else if(!pwFlag) { //2.비밀번호 유효성 체크
 				return this.resultCode.invalid_pw;
-			} 
-			  else {
+			} else {
 					return this.resultCode.other_pw;
 				}
 			},
@@ -258,7 +263,20 @@ var joinValidate = {
 			 } else {
 				return this.resultCode.success_post;
 			}
-		}		
+		},
+		checkNowpw : function(pw) {
+			var regEmpty = /\s/g; // 공백문자
+			
+			if(pw == '' || pw.length == 0) {// 1. 값이 있는지 체크
+				return this.resultCode.empty_val;
+			} else if(pw.match(regEmpty)) { // 2. 공백값이 있는지 체크
+				return this.resultCode.space_length_val;
+			} else if(pwCheck(pw)) { //3. 현재비밀번호 동일한지 체크
+				return this.resultCode.other_pw;
+			} else { //4. 유효성체크 통과
+				return this.resultCode.success_nowpw;
+			}
+		}
 	}
 
 	function idCheck(id) {
@@ -283,5 +301,24 @@ var joinValidate = {
 	 	return return_val;
 }
 
-
+	function pwCheck(pw) {
+		var return_val = true;
+		$.ajax({
+			type: 'POST',
+			url: 'pwcheck?pw='+pw,
+			async: false,
+			success: function(data) {
+				console.log(data);
+				if(data == 1) {
+					 return_val = false;
+				} else if(data == 0) {
+					 return_val = true;
+				}
+			},
+			error: function() {
+				alert(' System Error :/ ');
+			}
+		});
+		return return_val;
+	}
 

@@ -1,5 +1,7 @@
 package com.vegitory.contoller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +25,7 @@ public class IndexController {
 	IndexService iService; //여기에 indexServiceImpl Beans가 들어간거나 마찬가지
 	
 	@RequestMapping("/")
-	public String indexView(Model model) {
+	public String indexView(Model model, HttpSession session) {
 		log.info(">>>>>> INDEX PAGE 출력");
 		
 		//1. View단에 출력할 베스트 상품 5건
@@ -33,6 +35,9 @@ public class IndexController {
 		// 서비스단으로 이동
 		
 		model.addAttribute("NewPdt",iService.newPdtList());
+		
+		
+		
 		
 		//2. 출력할 화면을 결정
 		return "index";

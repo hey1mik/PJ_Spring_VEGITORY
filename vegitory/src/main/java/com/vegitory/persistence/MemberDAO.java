@@ -21,4 +21,10 @@ public interface MemberDAO {
 	
 	// 회원수정 DB수정
 	public int memUpdate(MemberDTO mDto);
+	
+	//현재 비밀번호 체크
+	public String pwCheck(String id);
+	
+	//비밀번호 업데이트
+	public int pwUpdate(MemberDTO mDto);
 }

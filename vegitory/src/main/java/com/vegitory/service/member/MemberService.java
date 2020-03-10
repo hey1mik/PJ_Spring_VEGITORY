@@ -18,4 +18,10 @@ public interface MemberService {
 	// 1명의 회원정보
 	public MemberDTO userView(String id);
 	
+	// 비밀번호 체크(AJAX)
+	
+	public int pwCheck(String id, String pw);
+	
+	// 비밀번호 수정 (DB 수정)
+	public int pwUpdate(MemberDTO mDto);
 }

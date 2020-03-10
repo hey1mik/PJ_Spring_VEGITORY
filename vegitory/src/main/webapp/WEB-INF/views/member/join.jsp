@@ -455,7 +455,7 @@
 				
 			}
 			
-			function ckDesign(code, desc, line, msg) { // 유효성 체크 통과 못한애	
+			function ckDesign(code, desc, line, msg) { // 유효성 체크 통과 한 애	
 				if(code ==0 || code == 10) {
 				$('.ps_box:eq('+line+')').css('border','1px solid #3f6e58');
 				$('.warning:eq('+msg+')').css('visibility','visible')
@@ -463,7 +463,7 @@
 				                       .css('color','#3f6e58');
 				        return false;
 				
-			} else { //유효성 체크 통과한애
+			} else { //유효성 체크 통과 못 한 애 
 				$('.ps_box:eq('+line+')').css('border','1px solid #a48443');
 				$('.warning:eq('+msg+')').css('visibility','visible')
 									     .text(desc)
@@ -502,7 +502,7 @@
 				var pw = $.trim($('#upw').val());
 				var rpw = $.trim($('#urpw').val());
 				//2. 유효성 체크하기
-				var result = joinValidate.checkPw(pw, rpw);
+				var result = joinValidate.checkPw("",pw, rpw);
 				//3. 체크결과에 따라 디자인
 				if(result.code == 0) {
 					pwFlag = true;
@@ -720,6 +720,10 @@
 			});
 			// 버튼 활성화
 			$('.join_info_box_input').keyup(function(){
+				ckColorBtn();
+			});
+			
+			function ckColorBtn() {
 				var checkAll = true;
 
 				for(var i=0; i < checkArr.length; i++){
@@ -736,7 +740,7 @@
 					//$('#btn_join').prop('disabled',true);
 					$('#btn_join').css('cursor','no-drop');
 				}
-			});
+			}
 
 
 		});
