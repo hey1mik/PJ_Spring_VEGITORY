@@ -115,7 +115,7 @@
 	}
 	.warning {
 		position: absolute;
-		font-size: 12px;
+		font-size: 11px;
 		visibility: hidden;
 	}
 	.leave_btn {
@@ -153,7 +153,7 @@
 	<div class="wrap">
 	<header>
 		<div class="header">
-			<h1 class="vegitory_logo"><a href="#" class="n_logo">
+			<h1 class="vegitory_logo"><a href="${path}/" class="n_logo">
 				<img src="${path}/resources/img/avocado-removebg-preview.png" width="60px" height="60px">CHANGE PASSWORD
 			</a></h1>
 		</div>
@@ -166,7 +166,7 @@
 				<div class="password_wrap">
 				<div class="password_box">
 				<label for="input_password">현재 비밀번호</label>
-				<input type="password" class="passbox" name="pw" id="nowpw" name="password">
+				<input type="password" class="passbox" id="nowpw" name="password">
 				</div>
 				<div class="warning"> *비밀번호를 확인해주세요 </div>
 				</div>
@@ -177,7 +177,7 @@
 				<div class="password_wrap">
 					<div class="password_box">
 					<label for="input_password">수정할 비밀번호</label>
-					<input type="password" class="passbox" name="rpw" id="upw" name="password">
+					<input type="password" class="passbox" name="pw" id="upw" name="password">
 					<div class="warning"> *비밀번호를 확인해주세요 </div>
 					</div>
 					<div class="little_space"></div>	
@@ -191,7 +191,7 @@
 		
 			<div class="leave_btn">
 				<a class="btn" id="yes_btn" href="#" disabled>확인</a>
-				<a class="btn" id="no_btn" href="#">취소</a>
+				<a class="btn" id="no_btn" href="${path}/">취소</a>
 			</div>	
 	</form:form>
 
@@ -319,7 +319,8 @@
 					if(!checkArr[i]) {
 						invalidAll = false;
 						$('.warning:eq('+i+')').css('visibility','visible')
-											   .text('유효성 체크를 해주세요!')
+											   .text('유효성 체크를 진행해주세요!')
+											   .css('color','#a48443')
 					}
 				}
 				if(invalidAll) {

@@ -317,7 +317,7 @@
 
 				<div id="wrap_email">
 					<div class="email_box">
-						<input type="text" id="uemail1" name="email1" class="join_info_box_input2" placeholder="이메일" value=${user.email}>
+						<input type="text" id="uemail1" name="email1" class="join_info_box_input2" placeholder="이메일">
 					</div>
 					<span> @ </span>
 					<div class="email_box2">

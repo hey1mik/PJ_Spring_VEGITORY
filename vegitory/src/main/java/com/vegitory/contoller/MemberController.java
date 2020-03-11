@@ -98,9 +98,32 @@ public class MemberController {
 	}
 	
 	@GetMapping("/drop")
-	public String viewDrop() {
-		log.info(">>>>>>>> MEMBER/CONSTRACT PAGE 출력");
+	public String viewDrop(HttpSession session) {
+		log.info(">>>>>>>> MEMBER/DROP PAGE 출력");
+		String id = (String)session.getAttribute("userid"); 
+		
+		// 로그인이 안되어있으면 비정상적인 접근으로 간주하여
+		// 인덱스페이지로 이동!
+		if(id == null) {
+			return "redirect:/";
+		}
+		
+
 		return "member/drop";
+	}
+	
+	@GetMapping("/mypage")
+	public String viewMypage(HttpSession session, Model model) {
+		log.info(">>>>>>>> MEMBER/MYT PAGE 출력");
+		String id = (String)session.getAttribute("userid"); 
+		
+		// 로그인이 안되어있으면 비정상적인 접근으로 간주하여
+		// 인덱스페이지로 이동!
+		if(id == null) {
+			return "redirect:/";
+		}
+		model.addAttribute("user", mService.userView(id));
+		return "member/mypage";
 	}
 	
 	

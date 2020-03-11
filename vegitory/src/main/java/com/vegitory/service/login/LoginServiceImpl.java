@@ -64,7 +64,7 @@ public class LoginServiceImpl implements LoginService {
 					session.removeAttribute("name"); // 여기도! 웬만하면 써주자.
 					session.setAttribute("userid", loginDto.getId());
 					session.setAttribute("name", loginDto.getName());
-					
+				
 					// session에서 userid 값을 달라고 했는데 나한테 null값을 준다?
 					// 그것은 login이 안됐다는 뜻이다.
 					

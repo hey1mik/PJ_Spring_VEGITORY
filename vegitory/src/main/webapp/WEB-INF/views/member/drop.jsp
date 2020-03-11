@@ -11,10 +11,14 @@
 		*{
 			box-sizing: border-box;
 		}
+		body {
+			background-color: #E2D6C1;
+		}
 		.wrap{
 			width: 820px;
-			margin: 0 auto;
+			margin: 50px auto;
 		}
+
 		h1 > a {
 			display: flex;
 			align-items: flex-end;
@@ -28,10 +32,12 @@
 			width: 100%;
 			background-color: white;
 			border-top: 3px solid #498268;
+			z-index: 1;
 			
 		}
 		section {
 			padding: 30px 66px 30px 66px;
+			z-index: 1;
 		}
 
 	.serivce{
@@ -41,15 +47,18 @@
 		align-items: center; 
 		padding: 20px 0;
 		border-bottom: 2px dashed rgba(73, 130, 104, 0.7);
+		z-index: 1;
 	}
 	#service1{
 		font-size: 20px;
 		font-weight: 600;
+		z-index: 1;
 	}
 	#service2{
 		font-size: 15px;
 		font-weight: 550;
 		color: rgba(0,0,0,0.5);
+		z-index: 1;
 	}
 	.service_btn {
 		width: 150px;
@@ -135,7 +144,6 @@
 	.modal_wrap{
 		display: none;
 		position: fixed;
-		z-index: 1;
 		top: 0;
 		background-color: rgba(0,0,0,0.4);
 		overflow: auto;
@@ -143,6 +151,7 @@
 		height: 100%;
 		justify-content: center;
 		align-items: center;
+		z-index: 1000;
 		
 		
 	}	
@@ -161,11 +170,13 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+		z-index: 50;
 	}
 	.check_leave {
 		padding: 20px;
 		font-size: 20px;
 		font-weight: 600; 
+		z-index: 50;
 	}
 
 	</style>
@@ -183,7 +194,7 @@
 	<div class="wrap">
 	<header>
 		<div class="header">
-			<h1 class="vegitory_logo"><a href="#" class="n_logo">
+			<h1 class="vegitory_logo"><a href="${path}/" class="n_logo">
 				<img src="${path}/resources/img/avocado-removebg-preview.png" width="60px" height="60px">LEAVE VEGI-TORY
 			</a></h1>
 		</div>
@@ -208,7 +219,7 @@
 			<div class="ck_password">
 				<span class="password">탈퇴 전 본인확인을 위해 비밀번호를 다시 입력합니다.</span>
 				<div class="password_box">
-				<label for="input_password">비밀번호 입력</label>
+				<label for="input_password">${userid}님 비밀번호 입력</label>
 				<input type="password" id="input_password" name="password">
 				</div>
 			</div>	
