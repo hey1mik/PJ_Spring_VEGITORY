@@ -203,10 +203,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="${path}/resources/js/validation.js"></script>
 		<script type="text/javascript">
-			$('#yes_btn').click(function(){
-				
-			});
-			
+
 			//$(document) 표시는 나 혼자 동작하겠다는 의미이다.
 			// 나 혼자 동작하고, 누군가와 값을 교환하지 않겠다.
 			

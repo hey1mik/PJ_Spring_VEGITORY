@@ -43,24 +43,28 @@
 		}
 		.side_section{
 			padding-top: 10px;
-			width: 25%;
+			width: 20%;
 			height: 100%;
 			background-color: #7a4d1d;
 			
 		}
 		.side_section li{
-		padding: 8px 0px 8px 15px;
+		padding: 12px 0px 12px 0px;
 		color: white;
-		font-size: 16px;
-		font-weight: 500;
+		font-size: 15px;
+		font-weight: 400;
+		text-align: center;
+		transition: transform .5s;
 		}
 		
 		.side_section li:hover {
 		background-color: #694219;
+		transform: scale(1.2);
 		}
+		
 
 		.content_section{
-			width: 75%;
+			width: 80%;
 			height: 100%;
 			display: flex;
 			flex-direction: column;

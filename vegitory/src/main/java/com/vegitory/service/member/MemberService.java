@@ -24,4 +24,7 @@ public interface MemberService {
 	
 	// 비밀번호 수정 (DB 수정)
 	public int pwUpdate(MemberDTO mDto);
+	
+	// 회원 탈퇴
+	public void memDrop(HttpSession session, String id);
 }

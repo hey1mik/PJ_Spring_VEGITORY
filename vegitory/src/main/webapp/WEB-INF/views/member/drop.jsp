@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../include/include.jsp" %>     
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>        
+<%@ include file="../include/include.jsp" %>
+<%@ include file="../include/modal.jsp" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,6 +60,7 @@
 		font-size: 15px;
 		font-weight: 550;
 		color: rgba(0,0,0,0.5);
+		text-align: center;
 		z-index: 1;
 	}
 	.service_btn {
@@ -108,12 +111,16 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center; 
-		padding: 20px 0;
+		padding: 20px 0 0 0;
 	}
 	.password{
 		font-size: 18px;
 		font-weight: 600;
 		padding: 10px 0; 
+	}
+	#warning{
+		font-size: 12px;
+		visibility: hidden;
 	}
 	.leave_btn {
 		width: 100%;
@@ -126,71 +133,28 @@
 		width: 90px;
 		height: 40px;
 		background-color: #498268;
-		color: white;
+		color: white; 
 		text-align: center;
 		line-height: 40px;
 		border-radius: 2px;
 		margin: 0 10px;
-		border: 1px solid transparent;
+		border: 1px solid rgba(0,0,0,0.2);
 	}
 	.no_btn {
 		background-color: #E2D6C1;
-		color: black; 
-		border: 1px solid rgba(0,0,0,0.2);
+		color: black;
 	}
-	#yes_btn:hover {
-		background-color: #3f6e58;
+	#yes_btn {
+		cursor: no-drop;
+		color: black;
+		background-color: #E2D6C1;
 	}
-	.modal_wrap{
-		display: none;
-		position: fixed;
-		top: 0;
-		background-color: rgba(0,0,0,0.4);
-		overflow: auto;
-		width: 100%;
-		height: 100%;
-		justify-content: center;
-		align-items: center;
-		z-index: 1000;
-		
-		
-	}	
-	.modal_content {
-		position: relative;
-		width: 550px;
-		height: 330px;
-		background-color: white;
-		box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2),
-					0 4px 20 px 0 rgba(0,0,0,0.19);
-		border-radius: 2px;
-		box-sizing: border-box;
-		overflow: hidden;
-		color: rgba(0,0,0,0.6);
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		z-index: 50;
-	}
-	.check_leave {
-		padding: 20px;
-		font-size: 20px;
-		font-weight: 600; 
-		z-index: 50;
-	}
+
 
 	</style>
 </head>
 <body>
-<div class="modal_wrap">
-	<div class="modal_content">
-		<div class="check_leave">정말 탈퇴하시겠습니까?</div>
-		<div class="leave_btn">
-				<a class="btn" id="modal_yes_btn" href="#">탈퇴</a>
-				<a class="btn no_btn" id="modal_no_btn" href="#">취소</a>
-		</div>	
-	</div>	
-</div>
+<form:form id="frm_member" modelAttribute="memberDTO" autocomplete="on">
 	<div class="wrap">
 	<header>
 		<div class="header">
@@ -204,7 +168,7 @@
 			<div class="serivce">
 				<span id="service1">VEGI-TORY는 항상 고객님께 보다 나은 서비스를 제공하고자 합니다.</span>
 				<span id="service2">서비스 이용에 불만족스러운 점이나 미흡한 점이 있었다면 
-									 고객센터에 문의해주세요. 최선을 다해 검토하겠습니다.</span>
+									 고객센터에 문의해주세요.<br>최선을 다해 검토하겠습니다.</span>
 				<a class="service_btn" href="#"> 고객센터 바로가기</a>
 			</div>
 			<div class="notice">
@@ -217,29 +181,88 @@
 				</div>
 			</div>
 			<div class="ck_password">
-				<span class="password">탈퇴 전 본인확인을 위해 비밀번호를 다시 입력합니다.</span>
-				<div class="password_box">
-				<label for="input_password">${userid}님 비밀번호 입력</label>
-				<input type="password" id="input_password" name="password">
-				</div>
+					<span class="password">탈퇴 전 본인확인을 위해 비밀번호를 다시 입력합니다.</span>
+					<div class="password_box">
+					<label for="input_password">비밀번호 입력</label>
+					<input type="password" id="input_password" name="pw">
+					<div id="warning"> *확인되었습니다</div>
+					</div>
 			</div>	
 			<div class="leave_btn">
-				<a class="btn" id=yes_btn href="#">탈퇴</a>
+				<a class="btn" id=yes_btn href="#" disabled>탈퇴</a>
 				<a class="btn no_btn" href="#">취소</a>
 			</div>	
-
 		</section>
 	</div>
 	<footer></footer>
 	</div>
+</form:form>	
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="${path}/resources/js/validation.js"></script>
 <script type="text/javascript">
-	$(document).on('click','#yes_btn',function(){
-			$('.modal_wrap').attr('style','display:flex');
+	
+	
+	$(document).ready(function(){
+		var pwFlag = false;
+		
+		$('#input_password').keyup(function(){
+			var nowpw = $(this).val();
+			var result = joinValidate.checkNowpw(nowpw);
+			//나올 수 있는 code: 1,2,6,100
+			console.log("code: "+result.code);
+			pwFlag = ckDesign(result.code, result.desc);	
+			ckColorBtn();
 		});
-	$(document).on('click','#modal_no_btn',function(){
-			$('.modal_wrap').attr('style','display:none');
+
+	
+	function ckDesign(code, desc) { // 유효성 체크 통과 한 애
+		
+		if(code == 100) {
+			$('#warning').css('visibility','visible')
+			 .text(desc)
+			 .css('color','#3f6e58');
+		        return true;
+		} else { //유효성 체크 통과 못 한 애
+			
+			$('#warning').css('visibility','visible')
+			 .text(desc)
+			 .css('color','#a48443');
+			      return false;                   
+			}
+		
+	}
+	
+	function ckColorBtn() {
+		if(pwFlag==true) {
+			$('#yes_btn').prop('disabled','false')
+						 .css('cursor','pointer')
+						 .css('background-color','rgba(73, 130, 104, 0.97)')
+						 .css('color','white');
+			
+		} else {
+			$('#yes_btn').prop('disabled','true')
+			 			 .css('background-color','#E2D6C1')
+			 			 .css('color','black')
+						 .css('cursor','no-drop');
+		}
+	}
+		
+		$('#yes_btn').click(function(){
+			if(pwFlag==false) {
+				$('#warning').prop('disabled','true')
+							 .css('visibility','visible')
+							 .text('유효성 체크를 진행해주세요!')
+							 .css('color','#a48443');
+				alert('유효성 체크를 진행해주세요!');
+				} else {
+					$('.modal_wrap').css('display','flex');
+				}
+			});
+		$('#modal_yes_btn').click(function(){
+			location.href='${path}/member/dropAction';
 		});
+	
+	});	
 </script>
 </html>

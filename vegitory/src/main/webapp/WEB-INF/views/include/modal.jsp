@@ -24,15 +24,15 @@
 		border-radius: 2px;
 		margin: 10px 10px;
 		border: 1px solid transparent;
-
+	}
+	#modal_yes_btn:hover{
+		background-color: #498268;
+		color: white;
 	}
 	.no_btn {
 		background-color: #E2D6C1;
 		color: black; 
 		border: 1px solid rgba(0,0,0,0.2);
-	}
-	#yes_btn:hover {
-		background-color: #3f6e58;
 	}
 	.modal_wrap{
 		display: none;
@@ -79,10 +79,12 @@
 	<div class="modal_wrap">
 	<div class="login_modal_content">
 		<div class="vegitory_logo"><img src="${path}/resources/img/avocado-removebg-preview.png" width="55px" height="55px"></div>
-		<div class="check_leave1"><h2>herory님 회원가입을 축하드립니다.</h2></div>
-		<div class="check_leave2">herory@gmail.com으로 인증메일을 보냈습니다.<br>인증하셔야만 사이트 활동이 가능합니다.</div>
+		<div class="check_leave1"><h2></h2></div>
+		<div class="check_leave2"></div>
+		<div class="check_leave3"></div>
 		<div class="leave_btn">
-				<a class="modal_btn no_btn" id=modal_no_btn href="#">확인</a>
+				<a class="modal_btn no_btn" id=modal_yes_btn href="#">확인</a>
+				<a class="modal_btn no_btn" id=modal_no_btn href="#">취소</a>
 		</div>	
 	</div>	
 </div>
@@ -95,22 +97,44 @@
 		var key = '${key}';
 		
 		var join_main_txt = id+'님 회원가입을 축하드립니다.';
-		var join_sub_txt = email+'으로 인증메일을 보냈습니다. 인증하셔야만 사이트 활동이 가능합니다.';
+		var join_sub_txt = email+'으로 인증메일을 보냈습니다.';
+		var join_sub2_txt = '인증하셔야만 사이트 활동이 가능합니다.';
 		var auth_main_txt = id+'님 이메일 인증되셨습니다.';
-		var auth_sub_txt = '지금부터 사이트 활동이 가능합니다. 감사합니다.';
+		var auth_sub_txt = '지금부터 사이트 활동이 가능합니다.';
+		var auth_sub2_txt = '베지토리에 가입해주셔서 감사합니다.';
+		var drop_main_text = '${userid}님 정말 탈퇴하시겠습니까?';
+		var dropResult_main_text = id+'님 탈퇴되셨습니다.';
+		var dropResult_sub_text = '그동안 베지토리를 이용해주셔서 감사합니다.';
 		
 		if(key == 'join') {
 			$('.check_leave1').text(join_main_txt);
 			$('.check_leave2').text(join_sub_txt);
+			$('.check_leave3').text(join_sub2_txt);
 			$('.modal_wrap').css('display','flex');
+			$('#modal_yes_btn').css('display','none');//확인버튼 제거
+			$('#modal_no_btn').text('확인');
 		} else if(key == 'auth') {
 			$('.check_leave1').text(auth_main_txt);
 			$('.check_leave2').text(auth_sub_txt);
+			$('.check_leave3').text(auth_sub2_txt);
 			$('.modal_wrap').css('display','flex');
-		}
+			$('#modal_yes_btn').css('display','none');//확인버튼 제거
+			$('#modal_no_btn').text('확인');
+		} else if(key == 'drop') {
+			$('.check_leave1').text(drop_main_text);
+		} else if(key == 'dropResult') {
+			$('.check_leave1').text(dropResult_main_text);
+			$('.check_leave2').text(dropResult_sub_text);
+			$('.modal_wrap').css('display','flex');
+			$('#modal_yes_btn').css('display','none');//확인버튼 제거
+			$('#modal_no_btn').text('확인');
+		};
 	});
-	$(document).on('click','#modal_no_btn',function(){
+	$(document).on('click','#modal_yes_btn',function(){
 			$('.modal_wrap').attr('style','display:none');
 		});
+	$(document).on('click','#modal_no_btn',function(){
+		$('.modal_wrap').attr('style','display:none');
+	});
 </script>
 </html>

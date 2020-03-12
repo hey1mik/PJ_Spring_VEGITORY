@@ -27,4 +27,7 @@ public interface MemberDAO {
 	
 	//비밀번호 업데이트
 	public int pwUpdate(MemberDTO mDto);
+	
+	// 회원 삭제 (useyn=n)
+	public int memDrop(String id);
 }

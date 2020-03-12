@@ -98,7 +98,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("/drop")
-	public String viewDrop(HttpSession session) {
+	public String viewDrop(HttpSession session, Model model) {
 		log.info(">>>>>>>> MEMBER/DROP PAGE 출력");
 		String id = (String)session.getAttribute("userid"); 
 		
@@ -108,8 +108,20 @@ public class MemberController {
 			return "redirect:/";
 		}
 		
+		model.addAttribute("key","drop");
 
 		return "member/drop";
+	}
+	@GetMapping("/dropAction")
+	public String memDrop(HttpSession session, RedirectAttributes rttr) {
+		log.info(">>>>>> GET: Member Drop Action");
+		String id = (String)session.getAttribute("userid");
+		
+		rttr.addFlashAttribute("id",id);
+		rttr.addFlashAttribute("key","dropResult");
+		
+		mService.memDrop(session, id);
+		return "redirect:/";
 	}
 	
 	@GetMapping("/mypage")
