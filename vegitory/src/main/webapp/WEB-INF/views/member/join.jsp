@@ -317,17 +317,16 @@
 
 				<div id="wrap_email">
 					<div class="email_box">
-						<input type="text" id="uemail1" name="email1" class="join_info_box_input2" placeholder="이메일">
+						<input type="text" id="uemail1" name="email" class="join_info_box_input2" placeholder="이메일" value=${user.email}>
 					</div>
 					<span> @ </span>
 					<div class="email_box2">
-						<input type="text" id="uemail2" name="email2" class="join_info_box_input2" placeholder="Email 선택">
+						<input type="text" id="uemail2" name="m_url" class="join_info_box_input2" placeholder="Email 선택" value=${user.m_url}>
 					</div>
-						<input type="hidden" id="allemail" name="email">
 					<div class="email_box3">
 						<select id="selmail">
 						<option value="" selected="selected">Email 선택</option>
-						<option value="directVal">직접입력</option>
+						<option value="1">직접입력</option>
 						<option value="naver.com">naver.com</option>
 						<option value="daum.net">daum.net</option>
 						<option value="gmail.com">gmail.com</option>
@@ -407,14 +406,26 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="${path}/resources/js/validation.js"></script>
 <script type="text/javascript">
-		$(function(){
+	
+	$(function(){
 			
+		$('#selmail').change(function(){ 
+			$("#selmail option:selected").each(function() {
+				if($(this).val()== '1'){ //직접입력일 경우
+					$("#uemail2").val(''); //값 초기화 
+					$("#uemail2").attr("placeholder","직접입력");//활성화
+				}else{ //직접입력이 아닐경우 
+					$("#uemail2").val($(this).text()); //선택값 입력 
+					$("#uemail2").attr("readonly",true); //비활성화 
+				}
+			});
+		});
+
 			//비밀번호가 유효한 값인지 체크해주는 Flag값
 			var pwFlag = false;
 		
-
 			// 유효성체크 여부를 알려주는 배열
-			var checkArr = new Array(6).fill(false);
+			var checkArr = new Array(7).fill(false);
 			//printCheckArr(checkArr);
 			
 			alert('user: '+'${user}');
@@ -442,12 +453,14 @@
 				var name = '${user.name}';
 				var phone = '${user.phone}';
 				var email1 = '${user.email}';
+				var email2 = '${user.m_url}';
 				var postcode = '${user.postcode}';
 				var addr1 = '${user.addr1}';
 				var addr2= '${user.addr2}';
 				ckName(name);
 				ckPhone(phone);
 				ckEmail1(email1);
+				ckEmail2(email2);
 				ckAddr(postcode, addr2);
 				checkArr[0] = true;
 				checkArr[1] = true;
@@ -601,9 +614,9 @@
 				var result = joinValidate.checkEmail1(email1);
 
 				if(result.code == 0) {
-					checkArr[3] = true;
+					checkArr[4] = true;
 				} else {
-					checkArr[3] = false;
+					checkArr[4] = false;
 				}
 
 				if(result.code == 0) {
@@ -619,20 +632,26 @@
 					                         .css('color','#a48443');
 				}
 			}
-
+			
 			$('#uemail2').keyup(function(){
 				var email2 = $.trim($(this).val());
 				ckEmail2(email2);
 			});
+			$('#selmail').click(function(){
+				var email2 = $.trim($(this).val());
+				ckEmail2(email2);
+			});
+			
+			
 			
 			function ckEmail2(email2){
 				
 				var result = joinValidate.checkEmail2(email2);	
 
 				if(result.code == 0) {
-					checkArr[4] = true;
+					checkArr[5] = true;
 				} else {
-					checkArr[4] = false;
+					checkArr[5] = false;
 				}
 				printCheckArr(checkArr);
 
@@ -688,9 +707,9 @@
 				}
 
 				if(result.code == 0) {
-					checkArr[5] = true;
+					checkArr[6] = true;
 				} else {
-					checkArr[5] = false;
+					checkArr[6] = false;
 				}
 			}
 
@@ -705,9 +724,7 @@
 					} 
 				}
 				if(invalidAll) {
-					var id = $('#uemail1').val();
-					var url = $('#uemail2').val();
-					$('#allemail').val(id+'@'+url);
+			
 					FunLoadingBarStart();
 					$('#frm_member').submit(); // submit : form태그 안에 있는 데이터들을 서버단으로 전송
 					// action: 목적지(MemberController '/join')
@@ -722,6 +739,15 @@
 			$('.join_info_box_input').keyup(function(){
 				ckColorBtn();
 			});
+			$('.join_info_box_input2').keyup(function(){
+				ckColorBtn();
+			});
+			$('#selmail').click(function(){
+				ckColorBtn();
+			});
+			
+			
+
 			
 			function ckColorBtn() {
 				var checkAll = true;

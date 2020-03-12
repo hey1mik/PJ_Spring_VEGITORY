@@ -19,6 +19,7 @@ public class MemberDTO {
 	private String name;
 	private String phone;
 	private String email;
+	private String m_url;
 	private String postcode;  // 우편번호
 	private String addr1;     // 주소
 	private String addr2;	  // 상세주소

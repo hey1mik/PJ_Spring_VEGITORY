@@ -8,8 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE id = #{id}
 	</select>
 	<insert id="memInsert">
-		INSERT INTO tbl_member (id, pw, name, phone, email, postcode, addr1, addr2, useon, primaryon, locon, eventon) 
-		VALUES (#{id},#{pw},#{name},#{phone},#{email},#{postcode},#{addr1},#{addr2},#{useon},#{primaryon},#{locon},#{eventon})
+		INSERT INTO tbl_member (id, pw, name, phone, email, m_url, postcode, addr1, addr2, useon, primaryon, locon, eventon) 
+		VALUES (#{id},#{pw},#{name},#{phone},#{email},#{m_url},#{postcode},#{addr1},#{addr2},#{useon},#{primaryon},#{locon},#{eventon})
 	</insert>
 	
 	<update id="getKey">
@@ -32,6 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	SET name = #{name},
 	 		phone = #{phone},
 	 		email = #{email},
+	 		m_url = #{m_url},
 	 		postcode = #{postcode},
 	 		addr1 = #{addr1},
 	 		addr2 = #{addr2}

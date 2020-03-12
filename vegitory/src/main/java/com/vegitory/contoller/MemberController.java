@@ -216,12 +216,13 @@ public class MemberController {
 			//session에 담긴 값을 clear해주어야 한다.
 			
 			//4. 회원가입 인증메일 보내기
-			mailService.mailSendUser(mDto.getEmail(), mDto.getId(), request);
+			String email = mDto.getEmail() + '@' + mDto.getM_url();
+			mailService.mailSendUser(email, mDto.getId(), request);
 			sessionStatus.setComplete();
 			
 			// 회원가입 후 메시지 출력을 위한 값 전달
 			rttr.addFlashAttribute("id", mDto.getId());
-			rttr.addFlashAttribute("email", mDto.getEmail());
+			rttr.addFlashAttribute("email", email);
 			rttr.addFlashAttribute("key", "join");
 			
 		return "redirect:/";
