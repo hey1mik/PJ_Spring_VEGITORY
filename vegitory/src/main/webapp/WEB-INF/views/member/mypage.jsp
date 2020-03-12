@@ -154,7 +154,7 @@
 					<ul>
 						<li>아이디 : ${userid} </li>
 						<li>이름 : ${user.name} </li>
-						<li>이메일 : ${user.email} </li>
+						<li>이메일 : ${user.email}@${user.m_url} </li>
 						<li>전화번호 : ${user.phone} </li>
 						<li>주소 : ${user.addr1} ${user.addr2} </li>
 					</ul>
