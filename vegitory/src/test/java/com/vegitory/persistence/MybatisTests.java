@@ -23,7 +23,7 @@ public class MybatisTests {
 	
 	@Test
 	public void testFactory() {
-		logger.info("SqlFactory:"+sqlFactory);
+		logger.info(">>>>>>>>>>>>>>>>>>>SqlFactory:"+sqlFactory);
 	}
 	@Test
 	public void testSession() {

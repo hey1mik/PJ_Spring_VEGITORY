@@ -19,7 +19,7 @@
 			margin: 50px auto;
 		}
 		body {
-			background-color:rgb(226, 214, 193);
+			background-color: #E2D6C1;
 		}
 		h1 > a {
 			display: flex;
@@ -45,12 +45,12 @@
 			padding-top: 10px;
 			width: 20%;
 			height: 100%;
-			background-color: #7a4d1d;
+			background-color:  #7a4d1d;
 			
 		}
 		.side_section li{
 		padding: 12px 0px 12px 0px;
-		color: white;
+		color: white; 
 		font-size: 15px;
 		font-weight: 400;
 		text-align: center;
@@ -69,6 +69,7 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
+			
 		}
 		.profile_area{
 			padding: 20px 0;

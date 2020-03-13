@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import org.junit.Test;
 
 public class JDBCTests {
+	// 오라클 접속을 확인하기
 	static {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -15,7 +16,7 @@ public class JDBCTests {
 			e.printStackTrace();
 		}
 	}
-	
+	// 마이바티스를 사용해서 오라클 접속 되는지 테스트
 	@Test
 	public void testConnection() {
 		try (Connection conn =
