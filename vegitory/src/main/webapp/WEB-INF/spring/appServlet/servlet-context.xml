@@ -41,4 +41,17 @@
 		</beans:property>
 	</beans:bean>
 	
+	<!-- Add Interceptor Beans -->
+	<beans:bean id="loginInterceptor" class="com.vegitory.interceptor.LoginInterceptor"></beans:bean>
+	
+	<!-- URL Mapping for Interceptor call -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/member/update"></mapping>
+			<mapping path="/member/pwupdate"></mapping>
+			<mapping path="/member/drop"></mapping>
+			<mapping path="/member/mypage"></mapping>
+			<beans:ref bean="loginInterceptor"></beans:ref>
+		</interceptor>
+	</interceptors>
 </beans:beans>

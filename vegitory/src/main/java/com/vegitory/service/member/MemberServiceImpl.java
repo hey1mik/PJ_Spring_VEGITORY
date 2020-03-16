@@ -51,14 +51,6 @@ public class MemberServiceImpl implements MemberService {
 		if(result > 0) { // 수정 성공
 			session.removeAttribute("name"); 
 			session.setAttribute("name", mDto.getName());
-			session.removeAttribute("email"); 
-			session.setAttribute("email", mDto.getEmail());
-			session.removeAttribute("phone"); 
-			session.setAttribute("phone", mDto.getPhone());
-			session.removeAttribute("addr1"); 
-			session.setAttribute("addr1", mDto.getAddr1());
-			session.removeAttribute("addr2"); 
-			session.setAttribute("addr2", mDto.getAddr2());
 		}
 		
 	}

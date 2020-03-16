@@ -46,7 +46,7 @@
 		flex-direction: column;
 		align-items: center; 
 		padding: 20px 0;
-		border-bottom: 2px solid rgba(73, 130, 104, 0.5);
+		border-bottom: 2px solid rgba(73, 130, 104, 0.7);
 	}
 	.service1{
 		font-size: 20px;
@@ -77,7 +77,7 @@
 		flex-direction: column;
 		align-items: center; 
 		padding: 50px 0 25px 0; 
-		border-bottom: 2px solid rgba(73, 130, 104, 0.5);
+		border-bottom: 2px solid rgba(73, 130, 104, 0.7);
 	}
 	.notice1{
 		font-size: 18px;

@@ -608,6 +608,17 @@
 	</header>
 </body>
 	<script type="text/javascript">
+	
+	$(function(){
+		var msg = '${message}';
+		
+		if(msg == 'nologin'){
+			$('.header_modal_wrap').css('display','flex');
+			$('#login_id').focus();
+			$('.warning_notice').css('visibility','visible')
+								.text('로그인이 필요한 기능입니다.');
+		}
+	});
 		//jQuery 문법
 		//$('선택자').옵션();
 		//$('.test').css('color','green');

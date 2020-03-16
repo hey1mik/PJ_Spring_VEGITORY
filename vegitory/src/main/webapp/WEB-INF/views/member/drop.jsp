@@ -48,7 +48,7 @@
 		flex-direction: column;
 		align-items: center; 
 		padding: 20px 0;
-		border-bottom: 2px dashed rgba(73, 130, 104, 0.7);
+		border-bottom: 2px solid rgba(73, 130, 104, 0.7);
 		z-index: 1;
 	}
 	#service1{
@@ -85,7 +85,7 @@
 		flex-direction: column;
 		align-items: center; 
 		padding: 20px 0 25px 0; 
-		border-bottom: 2px dashed rgba(73, 130, 104, 0.7);
+		border-bottom: 2px solid rgba(73, 130, 104, 0.7);
 	}
 	.notice1{
 		font-size: 18px;
@@ -260,7 +260,7 @@
 				}
 			});
 		$('#modal_yes_btn').click(function(){
-			location.href='${path}/member/dropAction';
+			$('#frm_member').submit();
 		});
 	
 	});	

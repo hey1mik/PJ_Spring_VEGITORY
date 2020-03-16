@@ -102,17 +102,11 @@ public class MemberController {
 		log.info(">>>>>>>> MEMBER/DROP PAGE 출력");
 		String id = (String)session.getAttribute("userid"); 
 		
-		// 로그인이 안되어있으면 비정상적인 접근으로 간주하여
-		// 인덱스페이지로 이동!
-		if(id == null) {
-			return "redirect:/";
-		}
-		
 		model.addAttribute("key","drop");
 
 		return "member/drop";
 	}
-	@GetMapping("/dropAction")
+	@PostMapping("/drop")
 	public String memDrop(HttpSession session, RedirectAttributes rttr) {
 		log.info(">>>>>> GET: Member Drop Action");
 		String id = (String)session.getAttribute("userid");
@@ -122,6 +116,8 @@ public class MemberController {
 		
 		mService.memDrop(session, id);
 		return "redirect:/";
+		
+		//이거 POST Maping DROP으로 바꾸기!
 	}
 	
 	@GetMapping("/mypage")
@@ -249,12 +245,7 @@ public class MemberController {
 		//+ session값 앞에 String붙여줘야 object타입에서 string타입으로 객체타입이 변환됨
 		String id = (String)session.getAttribute("userid"); 
 		
-		// 로그인이 안되어있으면 비정상적인 접근으로 간주하여
-		// 인덱스페이지로 이동!
-		if(id == null) {
-			return "redirect:/";
-		}
-		
+
 		//로그인된 유저의 정보를 get!
 		//회원정보수정 페이지로 보내기
 		
@@ -277,9 +268,6 @@ public class MemberController {
 	public String pwUpdate(HttpSession session) {
 		log.info(">>>>>>>> GET: Password Update Page");
 		String id=(String)session.getAttribute("userid");
-		if(id == null) {
-			return "redirect:/";
-		}
 	
 		return "member/pwupdate";
 	}
@@ -295,11 +283,7 @@ public class MemberController {
 		mDto.setId(id);
 		
 		mService.pwUpdate(mDto);
-		
-		if(mService.pwUpdate(mDto) == 1) {
-			log.info("<<<<<<<<<<<<<<<<<<<<<<<<<< 성공!!!!!!!!!!!!!!!");
-		}
-		
+
 		return "redirect:/";
 	}
 	

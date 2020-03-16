@@ -413,7 +413,8 @@
 			$("#selmail option:selected").each(function() {
 				if($(this).val()== '1'){ //직접입력일 경우
 					$("#uemail2").val(''); //값 초기화 
-					$("#uemail2").attr("placeholder","직접입력");//활성화
+					$("#uemail2").attr("placeholder","직접입력")
+								 .attr("readonly",false);//활성화
 				}else{ //직접입력이 아닐경우 
 					$("#uemail2").val($(this).text()); //선택값 입력 
 					$("#uemail2").attr("readonly",true); //비활성화 
