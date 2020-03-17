@@ -54,13 +54,13 @@
 			height: 140px;
 		}
 		.category_btn{
+		  background-color:transparent;
 		  display: flex;
 		  flex-direction: column;
 		  justify-content: flex-end;
 		  align-items: center;
 		  padding-bottom: 5px;
-		  background-color: #B8D9C6;
-		  color: white;
+		  color: black;
 		  width: 100%;
 		  height: 120px;
 		  font-size: 13px;
@@ -68,8 +68,8 @@
 		  outline: none;
 		}
 		.category_btn_dropdown {
-		  background-color: #B8D9C6;
-		  color: white;
+		  background-color: transparent;
+		  color: #B8D9C6;
 		  width: 100%;
 		  height: 20px;
 		  font-size: 14px;
@@ -101,10 +101,6 @@
 		  display: block;
 		}
 
-		.category_btn:hover, .dropdown:hover .category_btn {
-		  background-color: #B8D9C6;
-		}
-
 		.category_common{
 			width: 90%;
 			display: flex;
@@ -114,10 +110,14 @@
 		.category_common li {
 			float: left;
 			text-align: center;
-			background-color: #B8D9C6;
 			width: 100%;
-			height: 140px;
+			height: 155.25px;
 			font-size: 12px;
+			border-radius: 200px;
+			transition: 0.4s;
+		}
+		.category_common li:hover {
+			transform: scale(1.2);
 		}
 		.category_common a{
 			width: 100%;
@@ -143,7 +143,7 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			padding: 15px 10px;
+			padding: 10px 10px 15px 10px;
 			border-bottom: 3px solid rgba(73, 130, 104, 0.5);
 		}
 		.board_filter > li{
@@ -170,7 +170,7 @@
 		.board_list > li {
 			float:left;
 			width: 50%;
-			padding: 20px 10px;
+			padding: 30px 20px;
 		}
 		.flip-card {
 		  position: relative;
