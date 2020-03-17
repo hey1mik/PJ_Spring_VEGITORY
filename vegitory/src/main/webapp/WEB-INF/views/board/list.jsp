@@ -18,7 +18,7 @@
 		.board_wrap{
 			width: 1400px;
 			overflow: hidden;
-			margin: 80px auto 0px auto; 
+			margin: 70px auto 0px auto; 
 			display: flex;
 			flex-direction: column;
 			align-items: center;
@@ -144,7 +144,7 @@
 			justify-content: space-between;
 			align-items: center;
 			padding: 15px 10px;
-			z-index:2;
+			border-bottom: 3px solid rgba(73, 130, 104, 0.5);
 		}
 		.board_filter > li{
 			float: left;
@@ -161,33 +161,44 @@
 		    font-weight: 550;
 		}
 		.board_list {
+			display: block;
 			width: 100%;
-			padding: 0px 0 20px 0;
-			z-index: 1;
+			height: 100%;
+			padding: 20px 0;
+			border-bottom: 3px solid rgba(73, 130, 104, 0.5);
 		}
-		table.board_table {
-		  border-collapse: collapse;
+		.board_list > li {
+			float:left;
+			width: 50%;
+			padding: 20px 10px;
+		}
+		.flip-card {
+		  position: relative;
+		  background-color: transparent;
+		  width: 650px;
+		  height: 400px;
+		  overflow:hidden;
+		}
+		
+		 .flip-card-front, .flip-card-back {
+		  position: absolute;
 		  width: 100%;
+		  height: 100%;
 		}
-
-		th, td {
-		  padding: 20px 0px;
-		  border-bottom: 3px solid rgba(73, 130, 104, 0.5);
-		  border-top: 3px solid rgba(73, 130, 104, 0.5);
-		  text-align: left;
+		 .flip-card-back {
+		  background-color: rgba(0,0,0,0.5);
+		  color: white;
+		  font-size: 15px;
+		  text-align: center;
+		  left: -650px;
+		  transition: 0.5s;
+		
 		}
-		td.board_post_photo {
-			width: 70%;
-			height: 400px;
+		
+		.flip-card:hover .flip-card-back {
+		 left: 0px;
 		}
-		td.board_post_info{
-			width: 30%;
-			height: 400px;
-		}
-		.board_image {
-			width: 700px;
-			height: 450px;
-		}
+	
 		.page_table {
 			padding: 20px 10px;
 		}
@@ -266,50 +277,60 @@
 				<button type="button" class="board_write_btn"> 글쓰기 </button>
 			</div>
 		</div>
-		<div class="board_list">
-		<table class="board_table">
-		  <tr>
-		    <td class="board_post_photo"><a href="#"><img src="${path}/resources/img/레시피4.jpg" class="board_image"></a></td>
-		    <td class="board_post_info">
-		    	<div>제목: 맛있는 버거 </div>
-		    	<div>추천: 0 </div>
-		    	<div>조회: 0 </div>
-		    	<div>by 헤롤</div>
-		    	<div>2020-03-17</div>
-		    </td>
-		  </tr>
-		    <tr>
-		    <td class="board_post_photo"><a href="#"><img src="${path}/resources/img/레시피2.jpg" class="board_image"></a></td>
-		    <td class="board_post_info">
-		    	<div>제목: 맛있는 버거 </div>
-		    	<div>추천: 0 </div>
-		    	<div>조회: 0 </div>
-		    	<div>by 헤롤</div>
-		    	<div>2020-03-17</div>
-		    </td>
-		  </tr>
-		   <tr>
-		    <td class="board_post_photo"><a href="#"><img src="${path}/resources/img/레시피1.jpg" class="board_image"></a></td>
-		    <td class="board_post_info">
-		    	<div>제목: 맛있는 버거 </div>
-		    	<div>추천: 0 </div>
-		    	<div>조회: 0 </div>
-		    	<div>by 헤롤</div>
-		    	<div>2020-03-17</div>
-		    </td>
-		  </tr>
-		  <tr>
-		    <td class="board_post_photo"><a href="#"><img src="${path}/resources/img/레시피5.jpg" class="board_image"></a></td>
-		    <td class="board_post_info">
-		    	<div>제목: 맛있는 버거 </div>
-		    	<div>추천: 0 </div>
-		    	<div>조회: 0 </div>
-		    	<div>by 헤롤</div>
-		    	<div>2020-03-17</div>
-		    </td>
-		  </tr>
-		</table>
-		</div>
+		<ul class="board_list">
+			<li><a href="#">
+			<div class="flip-card">
+			    <div class="flip-card-front">
+			      <img src="${path}/resources/img/레시피2.jpg" alt="Avatar" style="width:650px;height:400px;">
+			    </div>
+			    <div class="flip-card-back">
+			      <h1>맛있는 버거 </h1>
+					<div>카테고리1: 동양식 메인요리</div><div>카테고리2: 커리/덮밥</div><div>추천: 0 </div>
+					<div>조회: 0 </div><div>by 헤롤</div>
+					<div>2020-03-17</div>
+			  </div>
+			</div>
+			</a></li>
+			<li><a href="#">
+			<div class="flip-card">
+			    <div class="flip-card-front">
+			      <img src="${path}/resources/img/레시피3.jpg" alt="Avatar" style="width:650px;height:400px;">
+			    </div>
+			    <div class="flip-card-back">
+			      <h1>맛있는 버거 </h1>
+					<div>카테고리1: 동양식 메인요리</div><div>카테고리2: 커리/덮밥</div><div>추천: 0 </div>
+					<div>조회: 0 </div><div>by 헤롤</div>
+					<div>2020-03-17</div>
+			  </div>
+			</div>
+			</a></li>
+			<li><a href="#">
+			<div class="flip-card">
+			    <div class="flip-card-front">
+			      <img src="${path}/resources/img/레시피4.jpg" alt="Avatar" style="width:650px;height:400px;">
+			    </div>
+			    <div class="flip-card-back">
+			      <h1>맛있는 버거 </h1>
+					<div>카테고리1: 동양식 메인요리</div><div>카테고리2: 커리/덮밥</div><div>추천: 0 </div>
+					<div>조회: 0 </div><div>by 헤롤</div>
+					<div>2020-03-17</div>
+			  </div>
+			</div>
+			</a></li>
+			<li><a href="#">
+			<div class="flip-card">
+			    <div class="flip-card-front">
+			      <img src="${path}/resources/img/레시피1.jpg" alt="Avatar" style="width:650px;height:400px;">
+			    </div>
+			    <div class="flip-card-back">
+			      <h1>맛있는 버거 </h1>
+					<div>카테고리1: 동양식 메인요리</div><div>카테고리2: 커리/덮밥</div><div>추천: 0 </div>
+					<div>조회: 0 </div><div>by 헤롤</div>
+					<div>2020-03-17</div>
+			  </div>
+			</div>
+			</a></li>														
+		</ul>
 
 		<div class="page_table">
 		<ul class="pagination">
@@ -343,6 +364,7 @@
 				$('.category_asian').css('display','none');
 				$('.category_western').css('display','none');
 			});	
+				
 		});
 	</script>	
 </html>
