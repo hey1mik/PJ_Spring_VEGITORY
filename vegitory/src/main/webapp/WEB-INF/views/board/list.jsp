@@ -114,7 +114,7 @@
 		.category_common li {
 			float: left;
 			text-align: center;
-			background-color: #D3C3C3;
+			background-color: #B8D9C6;
 			width: 100%;
 			height: 140px;
 			font-size: 12px;
@@ -284,7 +284,7 @@
 			      <img src="${path}/resources/img/레시피2.jpg" alt="Avatar" style="width:650px;height:400px;">
 			    </div>
 			    <div class="flip-card-back">
-			      <h1>맛있는 버거 </h1>
+			      <h1>토마토 & 퀴노아 샐러드 </h1>
 					<div>카테고리1: 동양식 메인요리</div><div>카테고리2: 커리/덮밥</div><div>추천: 0 </div>
 					<div>조회: 0 </div><div>by 헤롤</div>
 					<div>2020-03-17</div>
@@ -297,7 +297,7 @@
 			      <img src="${path}/resources/img/레시피3.jpg" alt="Avatar" style="width:650px;height:400px;">
 			    </div>
 			    <div class="flip-card-back">
-			      <h1>맛있는 버거 </h1>
+			      <h1> 두부 샌드위치 </h1>
 					<div>카테고리1: 동양식 메인요리</div><div>카테고리2: 커리/덮밥</div><div>추천: 0 </div>
 					<div>조회: 0 </div><div>by 헤롤</div>
 					<div>2020-03-17</div>
@@ -310,7 +310,7 @@
 			      <img src="${path}/resources/img/레시피4.jpg" alt="Avatar" style="width:650px;height:400px;">
 			    </div>
 			    <div class="flip-card-back">
-			      <h1>맛있는 버거 </h1>
+			      <h1> 그린커리 </h1>
 					<div>카테고리1: 동양식 메인요리</div><div>카테고리2: 커리/덮밥</div><div>추천: 0 </div>
 					<div>조회: 0 </div><div>by 헤롤</div>
 					<div>2020-03-17</div>
@@ -323,7 +323,7 @@
 			      <img src="${path}/resources/img/레시피1.jpg" alt="Avatar" style="width:650px;height:400px;">
 			    </div>
 			    <div class="flip-card-back">
-			      <h1>맛있는 버거 </h1>
+			      <h1> 비건 파스타 </h1>
 					<div>카테고리1: 동양식 메인요리</div><div>카테고리2: 커리/덮밥</div><div>추천: 0 </div>
 					<div>조회: 0 </div><div>by 헤롤</div>
 					<div>2020-03-17</div>
