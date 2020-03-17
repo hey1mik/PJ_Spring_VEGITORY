@@ -9,10 +9,6 @@
 <title> VEGITORY :: 산뜻한 식단 </title>
 <link rel="stylesheet" type="text/css" href=${path}/resources/css/common.css>
 	<style type="text/css">
-		*{
-			font-family: 'Nanum Gothic', sans-serif;
-			z-index: 999;
-		}
 		div.header_wrap {
 			position: fixed;
 			top: 0;
@@ -501,7 +497,7 @@
 			<!-- wrap : 모니터 사이즈 상관없게 하려고 백그라운드로 깔아두는 것. wrap충돌 때문에 앞에 header를 붙여주는 것 -->
 			<div class="header_content">
 				<div class="header_content_logo">
-					<a href="#">
+					<a href="${path}/">
 					<img class="header_logo_img" src="${path}/resources/img/avocado-removebg-preview.png" width="40px" height="40px">	
 					<span class="header_content_logo_img">VEGI-TORY</span>
 					</a>
@@ -535,14 +531,13 @@
 
 					<div class="header_content_dropdown_wrap">
 						<div class="header_content_dropdown_group">
-							<a href="#" class="magicline">레시피</a>
+							<a href="${path}/board/list" class="magicline">레시피</a>
 								<div class="header_dropdown">
 									<div class="arrow"></div>
 										<ul class="header_dropdown_menu">
-											<li><a href="#">동양식 메인요리</a></li>
-											<li><a href="#">서양식 메인요리</a></li>
-											<li><a href="#">베이커리/디저트</a></li>
-											<li><a href="#">음료</a></li>
+											<li><a href="${path}/board/list">동양식 메인요리</a></li>
+											<li><a href="${path}/board/list">서양식 메인요리</a></li>
+											<li><a href="${path}/board/list">음료/디저트</a></li>
 										</ul>	
 									</div>
 								</div>	

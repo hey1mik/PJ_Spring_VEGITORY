@@ -1,8 +1,7 @@
 /*구글 웹폰트*/
 @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap');
 /*공통사항*/
-* { box-sizing: border-box; 
-	z-index: 999;}
+* { box-sizing: border-box; }
 form {
 	margin:0;
 }	
