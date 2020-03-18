@@ -160,47 +160,32 @@
 		    color: #498268;
 		    font-weight: 550;
 		}
-		.board_list {
-			display: block;
+		.free_board_list {
 			width: 100%;
 			height: 100%;
 			padding: 20px 0;
-			border-bottom: 3px solid rgba(73, 130, 104, 0.5);
+	
+			border-bottom: 3px solid rgba(73, 130, 104, 0.5);	
 		}
-		.board_list > li {
-			float:left;
-			width: 50%;
-			padding: 30px 20px;
+		.free_board_list > table {
+			border-collapse: collapse;
+			width: 100%;
+			margin: 0 auto;
+		    font-size: 17px;
+		    text-align: left;
+		    border-spacing: 2px;
+		    margin: 0 -80px 0 80px;
 		}
-		.flip-card {
-		  position: relative;
-		  background-color: transparent;
-		  width: 650px;
-		  height: 400px;
-		  overflow:hidden;
+		.free_board_list td {
+			padding: 0px;
+			border-left: transparent;
 		}
-		
-		 .flip-card-front, .flip-card-back {
-		  position: absolute;
-		  width: 100%;
-		  height: 100%;
-		}
-		 .flip-card-back {
-		  background-color: rgba(0,0,0,0.5);
-		  color: white;
-		  font-size: 15px;
-		  text-align: center;
-		  left: -650px;
-		  transition: 0.5s;
-		
-		}
-		
-		.flip-card:hover .flip-card-back {
-		 left: 0px;
+		.free_board_list tr {
+			height: 50px;
 		}
 	
 		.page_table {
-			padding: 20px 10px;
+			padding: 40px 10px;
 		}
 		ul.pagination {
 			display: inline-block;
@@ -208,15 +193,33 @@
 		}
 		ul.pagination > li {
 			padding: 0px 10px;
+			font-size: 16px;
 			float: left;
+		}
+		.new_color{
+			color: tomato;
+			padding: 3px 5px;
+			margin-left: 7px;
+			font-size: 12px;
+		}
+		.twincle_eff{
+			animation-name: twinkle;
+			animation-duration: 1.2s;
+			animation-iteration-count: infinite;
+		}
+		@keyframes twinkle {
+			0% {opacity: 0;}
+			100% {opacity: 1;}
 		}
 	</style>
 </head>
 <body>
+<jsp:useBean id="now" class="java.util.Date"/>
+<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
 	<div class="board_wrap">
 			<div class="board_title">
-				<div class="board_name">RECIPES</div>
-				<div class="board_sub_name"> 쉽고 간단해요!</div>
+				<div class="board_name">COMMNUITY</div>
+				<div class="board_sub_name"> 같이 정보를 나눠요.</div>
 			</div>
 			<div class="category_list">
 				<div class="category_select">
@@ -279,61 +282,46 @@
 				<button type="button" class="board_write_btn"> 글쓰기 </button>
 			</div>
 		</div>
-		<ul class="board_list">
-			<li><a href="#">
-			<div class="flip-card">
-			    <div class="flip-card-front">
-			      <img src="${path}/resources/img/레시피2.jpg" alt="Avatar" style="width:650px;height:400px;">
-			    </div>
-			    <div class="flip-card-back">
-			      <h1>토마토 & 퀴노아 샐러드 </h1>
-					<div>카테고리1: 동양식 메인요리</div><div>카테고리2: 커리/덮밥</div><div>글번호:1</div><div>추천: 0 </div>
-					<div>조회: 0 </div><div>댓글: 0</div><div>by 헤롤</div>
-					<div>2020-03-17</div>
-			  </div>
-			</div>
-			</a></li>
-			<li><a href="#">
-			<div class="flip-card">
-			    <div class="flip-card-front">
-			      <img src="${path}/resources/img/레시피3.jpg" alt="Avatar" style="width:650px;height:400px;">
-			    </div>
-			    <div class="flip-card-back">
-			      <h1> 두부 샌드위치 </h1>
-					<div>카테고리1: 동양식 메인요리</div><div>카테고리2: 커리/덮밥</div><div>글번호:2</div><div>추천: 0 </div>
-					<div>조회: 0 </div><div>댓글: 0</div><div>by 헤롤</div>
-					<div>2020-03-17</div>
-			  </div>
-			</div>
-			</a></li>
-			<li><a href="#">
-			<div class="flip-card">
-			    <div class="flip-card-front">
-			      <img src="${path}/resources/img/레시피4.jpg" alt="Avatar" style="width:650px;height:400px;">
-			    </div>
-			    <div class="flip-card-back">
-			      <h1> 그린커리 </h1>
-					<div>카테고리1: 동양식 메인요리</div><div>카테고리2: 커리/덮밥</div><div>글번호:3</div><div>추천: 0 </div>
-					<div>조회: 0 </div><div>댓글: 0</div><div>by 헤롤</div>
-					<div>2020-03-17</div>
-			  </div>
-			</div>
-			</a></li>
-			<li><a href="#">
-			<div class="flip-card">
-			    <div class="flip-card-front">
-			      <img src="${path}/resources/img/레시피1.jpg" alt="Avatar" style="width:650px;height:400px;">
-			    </div>
-			    <div class="flip-card-back">
-			      <h1> 볶음 채소 파스타 </h1>
-					<div>카테고리1: 동양식 메인요리</div><div>카테고리2: 커리/덮밥</div><div>글번호:4</div><div>추천: 0 </div>
-					<div>조회: 0 </div><div>댓글: 0</div><div>by 헤롤</div>
-					<div>2020-03-17</div>
-			  </div>
-			</div>
-			</a></li>														
-		</ul>
-
+		<div class="free_board_list">
+			<table>
+			  <tr>
+			    <th>글번호</th>
+			    <th>제목</th>
+			    <th>조회수</th>
+			    <th>댓글수</th>
+			    <th>좋아요</th>
+			    <th>글쓴이</th>
+			    <th>등록일자</th>
+			  </tr>
+			 
+			<c:forEach items="${map.list}" var="list" >
+				<fmt:formatDate value="${list.updatedate}" pattern="yyyy-MM-dd" var="regdate"/>
+			  <tr>
+			    <td>${list.bno}</td>
+			    <td>
+			    <a href="#">${list.title}</a>
+			    <c:if test="${today == regdate}"><span class="new_color twincle_eff">N</span></c:if>
+			    </td>
+			    <td>${list.viewcnt}</td>
+			    <td>${list.replycnt}</td>
+			    <td>${list.goodcnt}</td>
+			    <td>${list.writer}</td>
+			    <td>
+			     <c:choose>
+			    	<c:when test="${today == regdate}">
+			    	 <fmt:formatDate value="${list.updatedate}" pattern="HH:mm:ss"/>
+			    	</c:when>
+			    	<c:otherwise>
+			    		<fmt:formatDate value="${list.updatedate}" pattern="yyyy-MM-ss"/>
+			    	</c:otherwise>
+			    </c:choose>
+			    </td>
+			    <!-- today와 글 쓴 날짜가 같으면 시간이 뜨게 해주고, 다르면 년월일 나오게 출력 -->
+			   
+			  </tr>
+			 </c:forEach> 
+			</table>
+		</div>	
 		<div class="page_table">
 		<ul class="pagination">
 			<li><a href="#">이전목록</a></li>
@@ -345,7 +333,7 @@
 			<li><a href="#">다음목록</a></li>
 		</ul>	
 		</div>
-	</div>
+		</div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vegitory.persistence.BoardDAO">
+	<select id="freeBoardList" resultType="BoardDTO">
+		 SELECT * 
+		 FROM tbl_board b, tbl_member m
+		 WHERE b.writer = m.name AND b.show = 'y'
+		 ORDER BY b.bno DESC
+		 <!-- m.name과 비교함으로써 회원인 사람들의 글만 가져오게함 -->
+	</select>
+</mapper>

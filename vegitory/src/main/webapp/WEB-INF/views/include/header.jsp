@@ -545,7 +545,7 @@
 
 					<div class="header_content_dropdown_wrap">
 						<div class="header_content_dropdown_group">
-							<a href="#" class="magicline">커뮤니티</a>
+							<a href="${path}/board/freelist" class="magicline">커뮤니티</a>
 								<div class="header_dropdown">
 									<div class="arrow"></div>
 										<ul class="header_dropdown_menu">
