@@ -31,7 +31,7 @@ public class Pager {
 		//원하는 페이지가 몇번째 블록에 속하는지 계산
 		curBlock=(curPage-1)/BLOCK_SCALE + 1;
 		//블록의 시작페이지, 끝페이지 번호 계산
-		blockBegin=(curPage-1)*BLOCK_SCALE+1;
+		blockBegin=(curBlock-1)*BLOCK_SCALE+1;
 		blockEnd=blockBegin+BLOCK_SCALE-1;
 		//마지막 블록 번호가 범위를 초과하지 않도록 처리
 		if(blockEnd > totPage) {

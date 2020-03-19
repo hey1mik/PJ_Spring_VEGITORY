@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
 <%@ include file="../include/header.jsp" %>    
 <!DOCTYPE html>
 <html>
@@ -211,6 +212,11 @@
 			0% {opacity: 0;}
 			100% {opacity: 1;}
 		}
+		
+		#check_color {
+		color:tomato;
+		
+		}
 	</style>
 </head>
 <body>
@@ -271,14 +277,16 @@
 			</div>
 		<div class="FilterNSearch">
 			<ul class="board_filter">
-				<li><a href="#">최신순</a></li>
-				<li><a href="#">추천순</a></li>
-				<li><a href="#">조회순</a></li>
-				<li><a href="#">댓글순</a></li>
+				<li><a href="${path}/board/freelist?sort_option=new&keyword=${map.keyword}" id="sort_new">최신순</a></li>
+				<li><a href="${path}/board/freelist?sort_option=cnt&keyword=${map.keyword}" id="sort_cnt">조회순</a></li>
+				<li><a href="${path}/board/freelist?sort_option=reply&keyword=${map.keyword}" id="sort_reply">댓글순</a></li>
+				<li><a href="${path}/board/freelist?sort_option=good&keyword=${map.keyword}" id="sort_good">추천순</a></li>
 			</ul>
 			<div class="board_search_wrap">
-				<input type="text" placeholder="레시피 검색" name="keyword" class="board_search_input">
-				<button type="button" class="board_search_btn"><i class="fas fa-search"></i></button>
+			<form action="${path}/board/freelist" method="GET">
+				<input type="text" placeholder="게시글 검색" name="keyword" class="board_search_input">
+				<button type="submit" class="board_search_btn"><i class="fas fa-search"></i></button>
+			</form>	
 				<button type="button" class="board_write_btn"> 글쓰기 </button>
 			</div>
 		</div>
@@ -323,14 +331,30 @@
 			</table>
 		</div>	
 		<div class="page_table">
-		<ul class="pagination">
-			<li><a href="#">이전목록</a></li>
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#">다음목록</a></li>
+			<ul class="pagination">
+			<c:if test="${map.pager.curBlock > 1}">
+				<li><a href="${path}/board/freelist?curPage=${map.pager.blockBegin-10}&sort_option=&${map.sort_option}&keyword=${map.keyword}" class="page_left"><i class="fas fa-angle-left"></i></a></li>
+				<li><a href="${path}/board/freelist?curPage=1&sort_option=${map.sort_option}&keyword=${map.keyword}" class="">1</a></li>
+				<li><span>...</span></li>
+			</c:if>
+			
+			
+			<c:forEach var="num" begin="${map.pager.blockBegin}" end="${map.pager.blockEnd}">
+			<c:choose>
+				<c:when test="${num == map.pager.curPage}">
+					<li><a href="${path}/board/freelist?curPage=${num}&sort_option=${map.sort_option}&keyword=${map.keyword}" id="check_color">${num}</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="${path}/board/freelist?curPage=${num}&sort_option=${map.sort_option}&keyword=${map.keyword}">${num}</a></li>
+				</c:otherwise>			
+			</c:choose>
+			</c:forEach>
+			
+			<c:if test="${map.pager.curBlock < map.pager.totBlock}">
+				<li><span>...</span></li>
+				<li><a href="${path}/board/freelist?curPage=${map.pager.totPage}&sort_option=&${map.sort_option}&keyword=${map.keyword}" class="">${map.pager.totPage}</a></li>
+				<li><a href="${path}/board/freelist?curPage=${map.pager.blockEnd + 1}&sort_option=${map.sort_option}&keyword=${map.keyword}" class="page_right"><i class="fas fa-angle-right"></i></a></li>
+			</c:if>
 		</ul>	
 		</div>
 		</div>
@@ -339,6 +363,18 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
+			var sort_option = '${map.sort_option}';
+	
+			if(sort_option == 'new') {
+				$('#sort_new').css('color','tomato');
+			} else if(sort_option == 'cnt') {
+				$('#sort_cnt').css('color','tomato');
+			}  else if(sort_option == 'reply') {
+				$('#sort_reply').css('color','tomato');
+			}  else if(sort_option == 'good') {
+				$('#sort_good').css('color','tomato');
+			}
+			
 			$('#western').click(function(){
 				$('.category_dessert').css('display','none');
 				$('.category_asian').css('display','none');
@@ -357,4 +393,4 @@
 				
 		});
 	</script>	
-</html>
+</html>		
