@@ -143,9 +143,13 @@
 			width: 100%;
 			display: flex;
 			justify-content: space-between;
-			align-items: center;
+			align-items: flex-end;
 			padding: 10px 10px 15px 10px;
 			border-bottom: 3px solid rgba(73, 130, 104, 0.5);
+		}
+		.board_search_wrap{
+		  display:flex;
+		  flex-direction: row; 
 		}
 		.board_filter > li{
 			float: left;
@@ -160,6 +164,7 @@
 		    outline: none;
 		    color: #498268;
 		    font-weight: 550;
+		    font-size: 16px;
 		}
 		.free_board_list {
 			width: 100%;
@@ -283,12 +288,13 @@
 				<li><a href="${path}/board/freelist?sort_option=good&keyword=${map.keyword}" id="sort_good">추천순</a></li>
 			</ul>
 			<div class="board_search_wrap">
-			<form action="${path}/board/freelist" method="GET">
-				<input type="text" placeholder="게시글 검색" name="keyword" class="board_search_input">
-				<button type="submit" class="board_search_btn"><i class="fas fa-search"></i></button>
-			</form>	
+				<form action="${path}/board/freelist" method="GET">
+					<input type="text" placeholder="게시글 검색" name="keyword" class="board_search_input">
+					<button type="submit" class="board_search_btn"><i class="fas fa-search"></i></button>
+				</form>	
 				<button type="button" class="board_write_btn"> 글쓰기 </button>
 			</div>
+			
 		</div>
 		<div class="free_board_list">
 			<table>
