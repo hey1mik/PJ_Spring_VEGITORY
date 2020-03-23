@@ -189,13 +189,13 @@
 <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
 	<div class="board_wrap">
 			<div class="board_title">
-				<div class="board_name">COMMNUITY</div>
-				<div class="board_sub_name"> 같이 정보를 나눠요.</div>
+				<div class="board_name">COMMUNITY</div>
+				<div class="board_sub_name"> '자유게시판' 입니다. </div>
 			</div>
 			<div class="category_list">
 				<ul class="category_common category_asian">
 					<li><a href="#"><img src="${path}/resources/img/c4.png"><span>비건뉴스</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c5.png"><span>자유게시판</span></a></li>
+					<li><a href="${path}/board/freelist"><img src="${path}/resources/img/c5.png"><span>자유게시판</span></a></li>
 					<li><a href="#"><img src="${path}/resources/img/c6.png"><span> Q&A 게시판</span></a></li>
 					<li><a href="#"><img src="${path}/resources/img/c7.png"><span>리뷰 게시판</span></a></li>
 				</ul>	

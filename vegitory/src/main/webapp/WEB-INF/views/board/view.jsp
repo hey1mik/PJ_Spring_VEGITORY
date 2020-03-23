@@ -99,11 +99,15 @@
 	.view_title {
 		font-weight: bold; 
 		font-size: 18px;
+		padding-bottom: 5px;
 	}
 
 	.view_other_info {
 		width: 100%;
 		
+	}
+	.info_div {
+		font-weight: 550;
 	}
 
 	.view_content {
@@ -166,6 +170,8 @@
 		width: 10%;
 		cursor: pointer;
 	}
+	
+
 	</style>
 	</head>
 	<body>
@@ -177,7 +183,7 @@
 				<div class="category_list">
 				<ul class="category_common category_asian">
 					<li><a href="#"><img src="${path}/resources/img/c4.png"><span>비건뉴스</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c5.png"><span>자유게시판</span></a></li>
+					<li><a href="${path}/board/freelist"><img src="${path}/resources/img/c5.png"><span>자유게시판</span></a></li>
 					<li><a href="#"><img src="${path}/resources/img/c6.png"><span> Q&A 게시판</span></a></li>
 					<li><a href="#"><img src="${path}/resources/img/c7.png"><span>리뷰 게시판</span></a></li>
 				</ul>	
@@ -186,10 +192,10 @@
 					<div class="free_view_info">
 						<div class="view_title">${view.title}</div>
 						<div class="view_other_info">
-							<span id="view_id">${view.writer}</span>
-							<span id="view_viewno">글번호 ${view.bno}</span>
-							<span id="view_viewcnt">조회 ${view.viewcnt}</span>
-							<span id="view_regdate">
+							<span id="view_id"><span class="info_div">작성자</span> ${view.writer}</span>
+							<span id="view_viewno"><span class="info_div">글번호</span> ${view.bno}</span>
+							<span id="view_viewcnt"><span class="info_div">조회수</span> ${view.viewcnt}</span>
+							<span id="view_regdate"><span class="info_div">작성일자</span>
 							<c:choose>
 						    	<c:when test="${today == regdate}">
 						    	 <fmt:formatDate value="${view.updatedate}" pattern="HH:mm:ss"/>
