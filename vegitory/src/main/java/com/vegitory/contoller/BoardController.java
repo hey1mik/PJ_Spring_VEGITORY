@@ -26,6 +26,9 @@ public class BoardController {
 	@Autowired
 	BoardService bService;
 	
+	BoardDTO bDto = new BoardDTO();
+	
+	
 	@GetMapping("/list")
 	public String ViewBoard(){
 		return "board/list";
@@ -64,5 +67,17 @@ public class BoardController {
 		model.addAttribute("map", map);
 		
 		return "board/freelist";
+	}
+	
+	@GetMapping("/view")
+	public String ViewFreeBoardView(@RequestParam(defaultValue="bno") int bno,
+									Model model){
+		log.info(">>>>>>>>>> GET: BOARD DETAIL PAGE");
+		
+		
+		bDto = bService.freeBoardView(bno);
+		model.addAttribute("view", bDto);
+		
+		return "board/view";
 	}
 }

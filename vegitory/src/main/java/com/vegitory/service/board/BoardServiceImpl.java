@@ -48,4 +48,10 @@ public class BoardServiceImpl implements BoardService {
 		return bDao.countArticle(map);
 	}
 
+	@Override
+	public BoardDTO freeBoardView(int bno) {
+		
+		return bDao.freeBoardView(bno);
+	}
+
 }

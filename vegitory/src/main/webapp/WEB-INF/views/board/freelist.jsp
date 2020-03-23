@@ -48,59 +48,6 @@
 			justify-content: center;
 			z-index:50;
 		}
-		.category_select {
-			display: flex;
-			flex-direction: column;
-			width: 10%;
-			height: 140px;
-		}
-		.category_btn{
-		  background-color:transparent;
-		  display: flex;
-		  flex-direction: column;
-		  justify-content: flex-end;
-		  align-items: center;
-		  padding-bottom: 5px;
-		  color: black;
-		  width: 100%;
-		  height: 120px;
-		  font-size: 13px;
-		  border: none;
-		  outline: none;
-		}
-		.category_btn_dropdown {
-		  background-color: transparent;
-		  color: #B8D9C6;
-		  width: 100%;
-		  height: 20px;
-		  font-size: 14px;
-		  border: none;
-		  outline: none;
-		}
-		.dropdown_content {
-		  display: none;
-		  position: absolute;
-		  background-color: #f1f1f1;
-		  width: 140px;
-		  z-index:51;	
-		}
-
-		.dropdown_content > a {
-		  color: black;
-		  text-align: center;
-		  padding: 10px 5px;  
-		  font-size: 12px;
-		  text-decoration: none;
-		  display: block;
-		}
-
-		.dropdown_content a:hover {
-		background-color: #ddd;
-		}
-
-		.dropdown:hover .dropdown_content {
-		  display: block;
-		}
 
 		.category_common{
 			width: 90%;
@@ -170,14 +117,23 @@
 			width: 100%;
 			height: 100%;
 			padding: 20px 0;
-	
 			border-bottom: 3px solid rgba(73, 130, 104, 0.5);	
+		}
+		.free_search_result {
+			display: none;
+			width: 100%;
+			text-align: center;
+			margin-bottom:20px;
+			float:left;
+		}
+		.free_search_result > a {
+			color: tomato;
 		}
 		.free_board_list > table {
 			border-collapse: collapse;
 			width: 100%;
 			margin: 0 auto;
-		    font-size: 17px;
+		    font-size: 16px;
 		    text-align: left;
 		    border-spacing: 2px;
 		    margin: 0 -80px 0 80px;
@@ -222,6 +178,10 @@
 		color:tomato;
 		
 		}
+		
+		#color {
+		 background-color: rgba(73, 130, 104, 0.3);
+		}
 	</style>
 </head>
 <body>
@@ -233,51 +193,11 @@
 				<div class="board_sub_name"> 같이 정보를 나눠요.</div>
 			</div>
 			<div class="category_list">
-				<div class="category_select">
-					<button class="category_btn"><img src="${path}/resources/img/c2.png" width="70px" height="70px"><span>카테고리</span></button>
-						<div class="dropdown">
-						  <button class="category_btn_dropdown">
-						    <i class="fa fa-caret-down"></i>
-						  </button>
-						  <div class="dropdown_content">
-						    <a href="#" id="asian">동양식 메인요리</a>
-						    <a href="#" id="western">서양식 메인요리</a>
-						    <a href="#" id="dessert">음료와 디저트</a>
-						  </div>
-						</div>
-				</div>
 				<ul class="category_common category_asian">
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>국/찌개</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>커리/덮밥</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>볶음밥</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>김밥/롤</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>면/국수</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>튀긴요리</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>죽류</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>나물/반찬</span></a></li>
-				
-				</ul>	
-				<ul class="category_common category_western">
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>샐러드</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>토스트/햄버거</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>퀘사디아/부리또/타코</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>스테이크</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>파스타</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>오트밀/이유식</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>라이스류</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>기타</span></a></li>
-				
-				</ul>	
-				<ul class="category_common category_dessert">
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>커피</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>쥬스</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>쉐이크</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>베이커리</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>케이크</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>쿠키</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>기타</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>기타2</span></a></li>
-				
+					<li><a href="#"><img src="${path}/resources/img/c4.png"><span>비건뉴스</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c5.png"><span>자유게시판</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c6.png"><span> Q&A 게시판</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c7.png"><span>리뷰 게시판</span></a></li>
 				</ul>	
 			</div>
 		<div class="FilterNSearch">
@@ -297,6 +217,11 @@
 			
 		</div>
 		<div class="free_board_list">
+			<div class="free_search_result">
+				"${map.keyword}" 검색결과  ${map.count}건 검색되었습니다.
+				<a href="${path}/board/freelist" class="board_clear_btn"> 초기화 </a>
+			</div>
+			
 			<table>
 			  <tr>
 			    <th>글번호</th>
@@ -313,7 +238,7 @@
 			  <tr>
 			    <td>${list.bno}</td>
 			    <td>
-			    <a href="#">${list.title}</a>
+			    <a href="${path}/board/view?bno=${list.bno}" class="free_board_title">${list.title}</a>
 			    <c:if test="${today == regdate}"><span class="new_color twincle_eff">N</span></c:if>
 			    </td>
 			    <td>${list.viewcnt}</td>
@@ -370,6 +295,25 @@
 	<script type="text/javascript">
 		$(function(){
 			var sort_option = '${map.sort_option}';
+			var free_search_result = '${map.keyword}';
+			var count = '${map.count}';
+			var title = new Array(count).fill('');
+			var newtitle = new Array(count).fill('');
+			
+			if(free_search_result != '') {
+				$('.board_search_input').attr('placeholder','false');
+				$('.board_search_input').val('${map.keyword}');
+				$('.free_search_result').css('display','block');
+				
+				for(var i=0;i<count;i++){
+					title[i] = $('.free_board_title:eq('+i+')').text();
+					newtitle[i] = title[i].replace("${map.keyword}","<span id=color>${map.keyword}</span>");
+					$('.free_board_title:eq('+i+')').html(newtitle[i]);
+				}
+			
+			
+				
+			}
 	
 			if(sort_option == 'new') {
 				$('#sort_new').css('color','tomato');
@@ -381,21 +325,6 @@
 				$('#sort_good').css('color','tomato');
 			}
 			
-			$('#western').click(function(){
-				$('.category_dessert').css('display','none');
-				$('.category_asian').css('display','none');
-				$('.category_western').css('display','flex');
-			});
-				$('#asian').click(function(){
-				$('.category_dessert').css('display','none');
-				$('.category_asian').css('display','flex');
-				$('.category_western').css('display','none');
-			});
-				$('#dessert').click(function(){
-				$('.category_dessert').css('display','flex');
-				$('.category_asian').css('display','none');
-				$('.category_western').css('display','none');
-			});	
 				
 		});
 	</script>	
