@@ -226,32 +226,19 @@
 							</div>
 						</div> 
 					</div>	
-				<div class="free_board_comments">
-					<div class="comment_cnt"> 댓글: ${view.replycnt} </div>
-					<div class="comment_area">
-						<div class="one_comment">
-							<div class="comment_info">
-								<span class="comment_id">혜롤리</span>
-								<span class="comment_regdate">2020-03-23</span>
-								<button id="alter_comment" class="borad_btn">수정</button>
-								<button id="delete_comment" class="borad_btn">삭제</button>
-								<button id="reply_comment" class="borad_btn">답변</button>
-							</div>
-							<div class="comment_content">와 정말 유용한 정보네요. 좋은 글 감사드립니다.</div>
-						</div>
-						<div class="input_comment">
-							<input type="text" class="comment_content_input" name="comment">
-							<button type="submit" class="comment_submit_button"> 댓글등록 </button>
-						</div>
-					</div>
-				</div>	
+					
+					
+					<!-- 댓글 창 -->
+					<div id="listReply"></div>
 			</div>
 		</div>		
 	</body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
+			
+			listReply();
+			
 			$('#list_view').click(function(){
 				$(this).html('<i class="fas fa-heart"></i> ${view.goodcnt+1}');
 			});
@@ -262,5 +249,16 @@
 				location.href='${path}/board/delete?bno=${view.bno}';
 			});
 		});
+		
+		// 댓글 목록 출력 함수 
+		function listReply() {
+			$.ajax({
+				type:"get",
+				url:"${path}/reply/freelist?bno=${view.bno}",
+				success: function(result) {
+				$("#listReply").html(result);
+				}		
+			});
+		}
 	</script>	
 	</html>
