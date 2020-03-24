@@ -15,4 +15,7 @@ public interface BoardDAO {
 	public int countArticle(@Param("map") Map<String, Object> map);
 	
 	public BoardDTO freeBoardView(int bno);
+	
+	public int increaseViewCnt(@Param("bno") int bno);
+	
 }

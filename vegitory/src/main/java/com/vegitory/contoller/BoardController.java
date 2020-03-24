@@ -73,13 +73,18 @@ public class BoardController {
 	
 	
 	@GetMapping("/view/{bno}")
-	public String ViewFreeBoardView(@PathVariable(value="bno") int bno, //PathVariable은 옵션이 value 하나밖에 없음!
+	public String ViewFreeBoardView(@PathVariable(value="bno") int bno,
+									HttpSession session,
+									//PathVariable은 옵션이 value 하나밖에 없음!
 									Model model){
 		log.info(">>>>>>>>>> GET: BOARD DETAIL PAGE");
 		
-		
+		//1. 해당 bno의 조회수+1 증가
+		bService.increaseViewCnt(session, bno);
+		//2. DB에서 해당 bno정보를 get해서 view단으로 전송하는 과정
 		bDto = bService.freeBoardView(bno);
 		model.addAttribute("view", bDto);
+		
 		
 		return "board/view";
 	}

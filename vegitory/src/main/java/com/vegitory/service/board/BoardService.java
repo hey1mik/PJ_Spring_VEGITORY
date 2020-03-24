@@ -2,6 +2,8 @@ package com.vegitory.service.board;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.vegitory.domain.BoardDTO;
 
 public interface BoardService {
@@ -11,4 +13,6 @@ public interface BoardService {
 	public int countArticle(String search_option, String keyword);
 	
 	public BoardDTO freeBoardView(int bno);
+	
+	public void increaseViewCnt(HttpSession session, int bno);
 }
