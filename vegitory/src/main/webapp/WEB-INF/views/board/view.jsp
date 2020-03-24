@@ -215,7 +215,7 @@
 						<div class="view_content_buttons">
 							<div class="listNanswer">
 								<button id="list_view" class="borad_btn"> <i class="far fa-heart"></i> ${view.goodcnt} </button>
-								<button id="list_view" class="borad_btn"> 목록 </button>
+								<a href="${header.referer}" id="list_view"> 목록 </a>
 								<button id="reply_view" class="borad_btn"> 답변 </button>
 							</div>
 							<div class="alterNdelete">
