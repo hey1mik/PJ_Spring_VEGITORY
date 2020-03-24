@@ -15,4 +15,6 @@ public interface BoardService {
 	public BoardDTO freeBoardView(int bno);
 	
 	public void increaseViewCnt(HttpSession session, int bno);
+	
+	public int delBoard(int bno);
 }

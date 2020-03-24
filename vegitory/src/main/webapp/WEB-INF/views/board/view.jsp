@@ -258,6 +258,9 @@
 			$('#delete_view').click(function(){
 				$('.modal_wrap').css('display','flex');
 			});
+			$('#modal_yes_btn').click(function(){
+				location.href='${path}/board/delete?bno=${view.bno}';
+			});
 		});
 	</script>	
 	</html>

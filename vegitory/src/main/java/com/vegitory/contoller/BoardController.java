@@ -89,5 +89,12 @@ public class BoardController {
 		return "board/view";
 	}
 	
+	@GetMapping("/delete")
+	public String delete(int bno) {
+		log.info(">>>>>>>>>>GET: Board delete Action");
+		bService.delBoard(bno);
+	
+		return "redirect:/board/freelist";
+	}
 	
 }

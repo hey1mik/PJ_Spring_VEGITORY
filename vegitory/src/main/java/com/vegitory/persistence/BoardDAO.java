@@ -18,4 +18,6 @@ public interface BoardDAO {
 	
 	public int increaseViewCnt(@Param("bno") int bno);
 	
+	public int delBoard(@Param("bno") int bno);
+	
 }

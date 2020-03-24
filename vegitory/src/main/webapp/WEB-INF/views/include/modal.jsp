@@ -105,7 +105,7 @@
 		var drop_main_text = '${userid}님 정말 탈퇴하시겠습니까?';
 		var dropResult_main_text = id+'님 탈퇴되셨습니다.';
 		var dropResult_sub_text = '그동안 베지토리를 이용해주셔서 감사합니다.';
-		var dropBoard_main_txt = '정말 삭제하시겠습니까?';
+		var dropBoard_main_txt = '게시글을 삭제하시겠습니까?';
 		var dropBoardNo_main_txt = '댓글이 있는 게시글은 삭제할 수 없습니다.';
 		
 		
