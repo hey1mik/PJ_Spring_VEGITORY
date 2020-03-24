@@ -105,6 +105,9 @@
 		var drop_main_text = '${userid}님 정말 탈퇴하시겠습니까?';
 		var dropResult_main_text = id+'님 탈퇴되셨습니다.';
 		var dropResult_sub_text = '그동안 베지토리를 이용해주셔서 감사합니다.';
+		var dropBoard_main_txt = '정말 삭제하시겠습니까?';
+		var dropBoardNo_main_txt = '댓글이 있는 게시글은 삭제할 수 없습니다.';
+		
 		
 		if(key == 'join') {
 			$('.check_leave1').text(join_main_txt);
@@ -128,8 +131,17 @@
 			$('.modal_wrap').css('display','flex');
 			$('#modal_yes_btn').css('display','none');//확인버튼 제거
 			$('#modal_no_btn').text('확인');
-		};
-	});
+		} else if(key == 'dropBoard') {
+			if('${view.replycnt}' == 0) { //댓글이 없는 경우
+				$('.check_leave1').text(dropBoard_main_txt);
+			} else { // 댓글이 있는 경우
+					$('.check_leave2').text(dropBoardNo_main_txt);
+					$('#modal_yes_btn').css('display','none');//확인버튼 제거
+					$('#modal_no_btn').text('확인');
+			 	}	
+			}
+		});
+	
 	$(document).on('click','#modal_yes_btn',function(){
 			$('.modal_wrap').attr('style','display:none');
 		});

@@ -84,7 +84,7 @@ public class BoardController {
 		//2. DB에서 해당 bno정보를 get해서 view단으로 전송하는 과정
 		bDto = bService.freeBoardView(bno);
 		model.addAttribute("view", bDto);
-		
+		model.addAttribute("key", "dropBoard");
 		
 		return "board/view";
 	}

@@ -175,6 +175,7 @@
 	</style>
 	</head>
 	<body>
+		<%@ include file="../include/modal.jsp" %>
 		<div class="board_wrap">
 				<div class="free_board_title">
 					<div class="free_board_name">COMMUNITY</div>
@@ -253,6 +254,9 @@
 		$(function(){
 			$('#list_view').click(function(){
 				$(this).html('<i class="fas fa-heart"></i> ${view.goodcnt+1}');
+			});
+			$('#delete_view').click(function(){
+				$('.modal_wrap').css('display','flex');
 			});
 		});
 	</script>	
