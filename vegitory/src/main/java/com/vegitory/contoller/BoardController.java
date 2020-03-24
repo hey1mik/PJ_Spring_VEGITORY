@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -70,8 +71,9 @@ public class BoardController {
 		return "board/freelist";
 	}
 	
-	@GetMapping("/view")
-	public String ViewFreeBoardView(@RequestParam(defaultValue="1") int bno,
+	
+	@GetMapping("/view/{bno}")
+	public String ViewFreeBoardView(@PathVariable(value="bno") int bno, //PathVariable은 옵션이 value 하나밖에 없음!
 									Model model){
 		log.info(">>>>>>>>>> GET: BOARD DETAIL PAGE");
 		
@@ -81,4 +83,6 @@ public class BoardController {
 		
 		return "board/view";
 	}
+	
+	
 }

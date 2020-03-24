@@ -238,7 +238,7 @@
 			  <tr>
 			    <td>${list.bno}</td>
 			    <td>
-			    <a href="${path}/board/view?bno=${list.bno}" class="free_board_title">${list.title}</a>
+			    <a href="${path}/board/view/${list.bno}" class="free_board_title">${list.title}</a>
 			    <c:if test="${today == regdate}"><span class="new_color twincle_eff">N</span></c:if>
 			    </td>
 			    <td>${list.viewcnt}</td>

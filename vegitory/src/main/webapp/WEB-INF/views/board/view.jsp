@@ -218,8 +218,10 @@
 								<button id="reply_view" class="borad_btn"> 답변 </button>
 							</div>
 							<div class="alterNdelete">
+								<c:if test="${name == view.writer}">
 								<button id="alter_view" class="borad_btn"> 수정 </button>
 								<button id="delete_view" class="borad_btn"> 삭제 </button>
+								</c:if>
 							</div>
 						</div> 
 					</div>	
