@@ -25,6 +25,20 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @SessionAttributes({"memberDTO"})
+/*SessionAttributes로 설정된 변수는
+ * response를 하기 전에 서버의 기억장소 어딘가에 임시로 보관을 해둔다
+ * web browser와 server간에 한 번이라도 연결이 이루어졌으면
+ * session에 등록된 변수는 서버가 중단될때까지 그 값이 그대로 유지된다.
+ * web은 클라이언트의 request를 서버가 받아서
+ * response를 수행하고 나면 모든 정보가 사라지는 특성이 있다.
+ * 이런 특성과는 달리 Spring기반의 web은 일부 데이터들을
+ * 메모리에 보관했다가 재사용하는 기법이 있다.
+ * 그 중 SessionAttributes라는 기능이 있다.
+ * 
+ * SessionAttributes()에 설정하는 문자열(이름)은
+ * 클래스의 표준 객체생성 패턴에 의해 만들어진 이름
+ * MemoDTO memoDTO
+ */
 
 @Slf4j
 @RequestMapping("/member")
@@ -34,22 +48,6 @@ public class MemberController {
 	PasswordEncoder passwordEncoder;
 	@Autowired
 	private MailService mailService;
-	
-	/*SessionAttributes로 설정된 변수는
-	 * response를 하기 전에 서버의 기억장소 어딘가에 임시로 보관을 해둔다
-	 * web browser와 server간에 한 번이라도 연결이 이루어졌으면
-	 * session에 등록된 변수는 서버가 중단될때까지 그 값이 그대로 유지된다.
-	 * web은 클라이언트의 request를 서버가 받아서
-	 * response를 수행하고 나면 모든 정보가 사라지는 특성이 있다.
-	 * 이런 특성과는 달리 Spring기반의 web은 일부 데이터들을
-	 * 메모리에 보관했다가 재사용하는 기법이 있다.
-	 * 그 중 SessionAttributes라는 기능이 있다.
-	 * 
-	 * sessionAttributes()에 설정하는 문자열(이름)은
-	 * 클래스의 표준 객체생성 패턴에 의해 만들어진 이름
-	 * MemoDTO memoDTO
-	 */
-	
 	@Autowired
 	MemberService mService;
 	
@@ -181,6 +179,8 @@ public class MemberController {
 	 * 단, 이 기능을 효율적으로 사용하려면
 	 * jsp 코드에서 Spring-form tag로 input을 코딩해야 한다.
 	 */
+	
+	
 	@PostMapping("/join")
 	public String join(@ModelAttribute("memberDTO") MemberDTO mDto, 
 						SessionStatus sessionStatus, 

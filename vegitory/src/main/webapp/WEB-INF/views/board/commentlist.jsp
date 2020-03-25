@@ -15,7 +15,7 @@
 							<div class="one_comment">
 								<div class="comment_info">
 									<span class="comment_id">${list.writer}</span>
-									<span class="comment_regdate">${list.regdate}</span>
+									<span class="comment_regdate"><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd"/></span>
 									<button id="alter_comment" class="borad_btn">수정</button>
 									<button id="delete_comment" class="borad_btn">삭제</button>
 									<button id="reply_comment" class="borad_btn">답변</button>

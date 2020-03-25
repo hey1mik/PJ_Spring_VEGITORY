@@ -90,7 +90,7 @@ public class BoardController {
 	}
 	
 	@GetMapping("/delete")
-	public String delete(int bno) {
+	public String delete(@PathVariable(value="bno") int bno) {
 		log.info(">>>>>>>>>>GET: Board delete Action");
 		bService.delBoard(bno);
 	

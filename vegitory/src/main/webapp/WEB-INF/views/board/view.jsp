@@ -196,13 +196,13 @@
 							<span id="view_id"><span class="info_div">작성자</span> ${view.writer}</span>
 							<span id="view_viewno"><span class="info_div">글번호</span> ${view.bno}</span>
 							<span id="view_viewcnt"><span class="info_div">조회수</span> ${view.viewcnt}</span>
-							<span id="view_regdate"><span class="info_div">작성일자</span>
+							<span id="view_regdate"><span class="info_div">마지막 수정일</span>
 							<c:choose>
-						    	<c:when test="${today == regdate}">
+						    	<c:when test="${today == view.regdate}">
 						    	 <fmt:formatDate value="${view.updatedate}" pattern="HH:mm:ss"/>
 						    	</c:when>
 						    	<c:otherwise>
-						    		<fmt:formatDate value="${view.updatedate}" pattern="yyyy-MM-ss"/>
+						    		<fmt:formatDate value="${view.updatedate}" pattern="yyyy-MM-dd"/>
 						    	</c:otherwise>
 						   		 </c:choose>
 							</span>
