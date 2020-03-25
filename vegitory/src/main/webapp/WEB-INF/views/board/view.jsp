@@ -170,7 +170,17 @@
 		width: 10%;
 		cursor: pointer;
 	}
-	
+	.comment_available {
+		padding: 30px 0;
+	}
+	#span_login{
+		padding: 0;
+		border: none;
+		background-color: transparent;
+		color: rgba(73, 130, 104, 0.9);
+		cursor: pointer;	
+		font-weight: bold;
+	}
 
 	</style>
 	</head>
@@ -248,6 +258,8 @@
 			$('#modal_yes_btn').click(function(){
 				location.href='${path}/board/delete?bno=${view.bno}';
 			});
+			
+			
 		});
 		
 		// 댓글 목록 출력 함수 
@@ -255,7 +267,10 @@
 			$.ajax({
 				type:"get",
 				url:"${path}/reply/freelist?bno=${view.bno}",
+				async: true,
+				cache: true,
 				success: function(result) {
+				$("#listReply").children().remove();	
 				$("#listReply").html(result);
 				}		
 			});

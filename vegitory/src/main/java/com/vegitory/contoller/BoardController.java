@@ -72,8 +72,8 @@ public class BoardController {
 	}
 	
 	
-	@GetMapping("/view/{bno}")
-	public String ViewFreeBoardView(@PathVariable(value="bno") int bno,
+	@GetMapping("/view")
+	public String ViewFreeBoardView(@RequestParam int bno,
 									HttpSession session,
 									//PathVariable은 옵션이 value 하나밖에 없음!
 									Model model){
@@ -90,7 +90,7 @@ public class BoardController {
 	}
 	
 	@GetMapping("/delete")
-	public String delete(@PathVariable(value="bno") int bno) {
+	public String delete(@RequestParam int bno) {
 		log.info(">>>>>>>>>>GET: Board delete Action");
 		bService.delBoard(bno);
 	

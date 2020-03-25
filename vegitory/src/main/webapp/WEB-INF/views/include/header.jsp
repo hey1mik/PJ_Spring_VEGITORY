@@ -638,6 +638,7 @@
 		$(document).on('click','.login_open', function(){
 			$('.header_modal_wrap').css('display','flex');
 			$('#login_id').focus();
+			
 		});
 
 		//로그인 input(id,pw)에 focus되면 테두리색 변경
