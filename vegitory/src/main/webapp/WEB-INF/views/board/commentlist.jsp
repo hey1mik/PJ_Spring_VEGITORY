@@ -11,7 +11,8 @@
 	<jsp:useBean id="now" class="java.util.Date"/>
 	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
 	<div class="free_board_comments">
-						<div class="comment_cnt"> 댓글: ${list.size()} </div>
+						<div class="comment_cnt"> <span>댓글: ${list.size()}</span> <i id="refresh_btn" class="fas fa-redo"></i> </div>
+						<input type="hidden" class="replyListCnt" value="${list.size()}">
 						<div class="comment_area">
 							<c:forEach items="${list}" var="list" >
 							<div class="one_comment">
@@ -34,15 +35,22 @@
 								<span class="comment_content">현재 등록된 댓글이 없습니다.</span>
 							</div>
 							</c:if>
-							<c:choose>
+														<c:choose>
 								<c:when test="${empty userid}">
 								 	<div class="comment_available"> <button id="span_login">로그인</button>을 하셔야만 댓글을 등록할 수 있습니다.</div>
 								</c:when>
 								<c:otherwise>
+								<form class="frm_reply"> <!-- 여기서 싸는 폼은 내용을 보따리처럼 싸주기 위함이라서 ACTION, METHOD안써도 됨 -->
+								<input type="hidden" name="bno" id="reply_bno">
+								<input type="hidden" name="type" id="reply_type">
+								<input type="hidden" name="writer" id="reply_writer">
 								<div class="input_comment">
-									<input type="text" class="comment_content_input" name="comment">
-									<button type="submit" class="comment_submit_button"> 댓글등록 </button>
+									<textarea id="comment_content_input" name="content"></textarea>
+									<button type="button" class="comment_submit_button"> 댓글등록 </button>
+									<!-- button type안에는 button을 주세요! form안에 들어있으면 button은 어차피 submit이 기본임 -->
 								</div>
+								<div class="commnet_err_msg"> 댓글 내용을 입력해주세요! </div>
+								</form>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -57,5 +65,6 @@
 				$('#login_id').focus();
 			});
 				});
+		
 		</script>
 </html>

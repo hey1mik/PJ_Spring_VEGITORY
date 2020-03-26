@@ -6,5 +6,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list" resultType="ReplyDTO">
 	 SELECT * FROM tbl_reply
 	 WHERE bno = #{bno}
+	 ORDER BY rno ASC
 	</select>
+	<insert id="insert">
+		INSERT INTO tbl_reply(rno, type, content, writer, bno)
+		VALUES(seq_reply.NEXTVAL, #{reply.type}, #{reply.content}, #{reply.writer}, #{reply.bno})
+	</insert>
 </mapper>

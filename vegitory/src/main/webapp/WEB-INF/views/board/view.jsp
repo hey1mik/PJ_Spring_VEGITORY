@@ -119,7 +119,7 @@
 		width: 100%;
 		height: 150px;
 		margin-bottom: 10px;
-		border-top: 1px solid rgba(0,0,0,0.3);
+		border-top: 1px solid rgba(0, 0, 0, 0.2);
 		padding-top: 15px;
 	}
 	.view_content_input {
@@ -135,9 +135,12 @@
 		display: flex;
 		justify-content: space-between;
 	}
+	
 	.free_board_comments {
+		margin-top: 10px;
 		padding: 20px 0; 
 		width: 95%;
+		border-top: 1px solid rgba(0, 0, 0, 0.2);
 	}
 
 	.comment_cnt {
@@ -147,7 +150,10 @@
 
 	.one_comment {
 		width: 95%;
-		padding: 10px 0px;
+		padding: 10px 0px 10px 5px;
+	}
+	.comment_id {
+		font-weight: bold;
 	}
 	.borad_btn {
 		border: none;
@@ -160,7 +166,7 @@
 		padding: 10px 0;
 	}
 
-	.comment_content_input {
+	#comment_content_input {
 		width: 90%;
 		height: 150px; 
 	}
@@ -180,6 +186,15 @@
 		color: rgba(73, 130, 104, 0.9);
 		cursor: pointer;	
 		font-weight: bold;
+	}
+	.commnet_err_msg {
+		visibility: hidden;
+		color: #a48443;
+	}
+	#refresh_btn {
+		cursor: pointer;
+		padding-left: 5px;
+		color: rgba(0, 0, 0, 0.7);
 	}
 
 	</style>
@@ -206,6 +221,7 @@
 							<span id="view_id"><span class="info_div">작성자</span> ${view.writer}</span>
 							<span id="view_viewno"><span class="info_div">글번호</span> ${view.bno}</span>
 							<span id="view_viewcnt"><span class="info_div">조회수</span> ${view.viewcnt}</span>
+								<span id="view_viewcnt"><span class="info_div">댓글수</span> <span id="view_viewcnt2">${view.replycnt}</span></span>
 							<span id="view_regdate"><span class="info_div">마지막 수정일</span>
 							<c:choose>
 						    	<c:when test="${today == view.regdate}">
@@ -266,14 +282,59 @@
 		function listReply() {
 			$.ajax({
 				type:"get",
+				async: false,
 				url:"${path}/reply/freelist?bno=${view.bno}",
-				async: true,
-				cache: true,
 				success: function(result) {
-				$("#listReply").children().remove();	
 				$("#listReply").html(result);
 				}		
 			});
+			
+			$('#view_viewcnt2').text($('.replyListCnt').val());
+			
 		}
+		
+		//게시글 댓글수 수정
+	
+		
+		// $(function(){}); 이것은 $(document).ready(function(){}); 이거라서! 이 document는 view.jsp만 뜻하는거라
+		//view.jsp가 ready인 경우만 포함함. commentlist.jsp의 ready여부는 포함하지 않음.
+		//on은 준비가 되면 이 아니라, 그냥 commnet_submit_button이 클릭이 되면! 이라는 의미임.
+		
+		$(document).on('click','.comment_submit_button', function(){
+			var reply = $('#comment_content_input').val();
+			if(reply == '' || reply.length == 0){
+				$('#comment_content_input').focus();
+				$('.commnet_err_msg').css('visibility','visible');
+				return false;
+			}
+			
+			$('#reply_bno').val('${view.bno}');
+			$('#reply_type').val('${view.type}');
+			$('#reply_writer').val('${name}');
+			
+
+			
+			$.ajax({
+				url: '${path}/reply/insert',
+				type: 'POST',
+				data: $('.frm_reply').serialize(),
+				success: function(data) {
+					listReply();
+				}
+			});
+			
+		});
+		
+		$(document).on('keyup','#comment_content_input', function(){
+			var reply = $.trim($('#comment_content_input').val());
+			if(reply != ''){
+				$('.commnet_err_msg').css('visibility','hidden');
+			}
+		});
+		
+		$(document).on('click','#refresh_btn', function(){
+			$('#refresh_btn').css('color','white');
+			listReply();
+		});
 	</script>	
 	</html>

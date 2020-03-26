@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.vegitory.domain.BoardDTO;
+import com.vegitory.domain.ReplyDTO;
 
 
 public interface BoardDAO {
@@ -20,5 +21,7 @@ public interface BoardDAO {
 	public int increaseViewCnt(@Param("bno") int bno);
 	
 	public int delBoard(@Param("bno") int bno);
+	
+	public void replyCntUpdate(@Param("reply") ReplyDTO rDto);
 	
 }

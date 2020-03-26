@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="freeBoardList" resultType="BoardDTO">
 	<!-- 게시글 목록을 출력할때 쓰는 SQL문 -->
 		 <include refid="paging_header"/>
-		 SELECT bno, title, writer, name, updatedate, viewcnt, replycnt, goodcnt, show
+		 SELECT bno, type, title, writer, name, updatedate, viewcnt, replycnt, goodcnt, show
 		 FROM tbl_board b, tbl_member m
 		 <include refid="search"></include>
 		 <if test="map.sort_option == 'new'">
@@ -80,5 +80,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE tbl_board
 		SET show = 'n'
 		WHERE bno = #{bno}
+	</update>
+	<update id="replyCntUpdate">
+		UPDATE tbl_board
+		SET replycnt = replycnt + 1
+		WHERE bno = #{reply.bno}
 	</update>
 </mapper>

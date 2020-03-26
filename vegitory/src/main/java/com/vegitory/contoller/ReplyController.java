@@ -7,10 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-
-
+import com.vegitory.domain.ReplyDTO;
 import com.vegitory.service.reply.ReplyService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -41,5 +42,15 @@ public class ReplyController {
 		log.info(">>>>>>>>GET: Reply List Page");
 		model.addAttribute("list", rService.list(bno));
 		return "/board/commentlist";
+	}
+	
+	@ResponseBody
+	@PostMapping("/insert")
+	public void insert(ReplyDTO rDto) {
+		log.info(">>>>>>>>POST: Reply Insert DB");
+		log.info(rDto.toString());
+		
+		rService.insert(rDto);
+		
 	}
 }
