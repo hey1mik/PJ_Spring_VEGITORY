@@ -1,5 +1,6 @@
 package com.vegitory.service.reply;
 
+import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,14 +40,25 @@ public class ReplyServiceImpl implements ReplyService {
 		//해당 게시글의 reply_cnt를 +1함
 		//1. 댓글등록
 		rDao.insert(rDto);
-		bDao.replyCntUpdate(rDto);
+		
+		String type = "plus";
+		HashMap<String,Object> map = new HashMap<>();
+		map.put("bno", rDto.getBno());
+		map.put("type", type);
+		bDao.replyCntUpdate(map);
+		
 		
 	}
 
 	@Override
 	public void delete(int rno, int bno) {
 		rDao.delete(rno);
-		bDao.replyCntMinus(bno);
+		
+		String type = "minus";
+		HashMap<String,Object> map = new HashMap<>();
+		map.put("bno", bno);
+		map.put("type", type);
+		bDao.replyCntUpdate(map);
 		
 	}
 

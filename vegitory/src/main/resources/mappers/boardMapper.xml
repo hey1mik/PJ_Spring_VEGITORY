@@ -83,12 +83,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<update id="replyCntUpdate">
 		UPDATE tbl_board
+		<if test="map.type == 'plus'">
 		SET replycnt = replycnt + 1
-		WHERE bno = #{reply.bno}
-	</update>
-	<update id="replyCntMinus">
-		UPDATE tbl_board
+		WHERE bno = #{map.bno}
+		</if>
+		<if test="map.type == 'minus'">
 		SET replycnt = replycnt - 1
-		WHERE bno = #{bno}
+		WHERE bno = #{map.bno}
+		</if>		
 	</update>
+
 </mapper>

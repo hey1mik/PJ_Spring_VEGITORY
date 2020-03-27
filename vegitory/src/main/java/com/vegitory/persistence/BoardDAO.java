@@ -22,8 +22,6 @@ public interface BoardDAO {
 	
 	public int delBoard(@Param("bno") int bno);
 	
-	public void replyCntUpdate(@Param("reply") ReplyDTO rDto);
-	
-	public void replyCntMinus(int bno);
+	public void replyCntUpdate(@Param("map") Map<String, Object> map);
 	
 }
