@@ -11,16 +11,23 @@
 	<jsp:useBean id="now" class="java.util.Date"/>
 	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
 	<div class="free_board_comments">
-						<div class="comment_cnt"> <span>댓글: ${list.size()}</span> <i id="refresh_btn" class="fas fa-redo"></i> </div>
+						<div class="comment_cnt"> <span>댓글: ${list.size()}</span> <span id="refresh_btn"><i class="fas fa-redo"></i></span> </div>
 						<input type="hidden" class="replyListCnt" value="${list.size()}">
 						<div class="comment_area">
 							<c:forEach items="${list}" var="list" >
 							<div class="one_comment">
 								<div class="comment_info">
+									
 									<span class="comment_id">${list.writer}</span>
 									<span class="comment_regdate"><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd"/></span>
+									<c:if test="${list.writer == name}">
 									<button id="alter_comment" class="borad_btn">수정</button>
-									<button id="delete_comment" class="borad_btn">삭제</button>
+									<button id="delete_comment" class="borad_btn" data_num="${list.rno}">삭제</button>
+									
+									<!-- 따로 만든 input 안에 hidden으로 rno 값을 넣어주는 방법:
+									<input type="hidden" class="comment_rno" value="${list.rno}">
+									 -->
+									</c:if>
 									<button id="reply_comment" class="borad_btn">답변</button>
 								</div>
 								<div class="comment_content">${list.content}</div>
@@ -63,6 +70,10 @@
 			$('#span_login').click(function(){
 				$('.header_modal_wrap').css('display','flex');
 				$('#login_id').focus();
+			});
+			
+			$('#refresh_btn').click(function(){
+				$(this).css('color','white');
 			});
 				});
 		

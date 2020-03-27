@@ -291,6 +291,7 @@
 			
 			$('#view_viewcnt2').text($('.replyListCnt').val());
 			
+
 		}
 		
 		//게시글 댓글수 수정
@@ -325,6 +326,20 @@
 			
 		});
 		
+		$(document).on('click','#delete_comment', function(){
+			var rno = $(this).attr('data_num');
+			var bno = ${view.bno};
+			$.ajax({
+				url: '${path}/reply/delete',
+				type: 'post',
+				data: {'rno' : rno, 'bno' : bno},
+				success: function(data) {
+					listReply();
+				} 
+			});
+			
+		});
+		
 		$(document).on('keyup','#comment_content_input', function(){
 			var reply = $.trim($('#comment_content_input').val());
 			if(reply != ''){
@@ -333,7 +348,6 @@
 		});
 		
 		$(document).on('click','#refresh_btn', function(){
-			$('#refresh_btn').css('color','white');
 			listReply();
 		});
 	</script>	

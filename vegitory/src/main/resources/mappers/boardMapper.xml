@@ -86,4 +86,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET replycnt = replycnt + 1
 		WHERE bno = #{reply.bno}
 	</update>
+	<update id="replyCntMinus">
+		UPDATE tbl_board
+		SET replycnt = replycnt - 1
+		WHERE bno = #{bno}
+	</update>
 </mapper>

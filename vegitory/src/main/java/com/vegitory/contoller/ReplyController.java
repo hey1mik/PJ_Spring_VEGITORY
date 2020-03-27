@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vegitory.domain.ReplyDTO;
@@ -52,5 +53,14 @@ public class ReplyController {
 		
 		rService.insert(rDto);
 		
+	}
+	
+	@ResponseBody
+	@PostMapping("/delete")
+	public void delete(int rno, int bno) {
+		log.info(">>>>>>>>GET: RNO 정보 받았음!");
+		log.info("하하"+rno);
+		
+		rService.delete(rno, bno);
 	}
 }

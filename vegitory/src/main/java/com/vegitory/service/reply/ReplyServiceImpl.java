@@ -43,4 +43,11 @@ public class ReplyServiceImpl implements ReplyService {
 		
 	}
 
+	@Override
+	public void delete(int rno, int bno) {
+		rDao.delete(rno);
+		bDao.replyCntMinus(bno);
+		
+	}
+
 }

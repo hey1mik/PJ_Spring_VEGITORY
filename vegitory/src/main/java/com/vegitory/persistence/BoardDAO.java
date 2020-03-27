@@ -24,4 +24,6 @@ public interface BoardDAO {
 	
 	public void replyCntUpdate(@Param("reply") ReplyDTO rDto);
 	
+	public void replyCntMinus(int bno);
+	
 }
