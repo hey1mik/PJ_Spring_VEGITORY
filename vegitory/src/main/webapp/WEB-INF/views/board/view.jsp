@@ -194,7 +194,11 @@
 	#refresh_btn {
 		cursor: pointer;
 		padding-left: 5px;
-		color: rgba(0, 0, 0, 0.7);
+		color: rgba(0, 0, 0, 0.6);
+	}
+	#refresh_btn:hover {
+		color: white;
+		color: rgba(0, 0, 0, 0.7)
 	}
 
 	</style>
@@ -262,12 +266,16 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
+			//5분에 한번씩 refreshReply라는 애를 새로고침 해줘라
+			setInterval(listReply, 180000);
 			
 			listReply();
 			
 			$('#list_view').click(function(){
 				$(this).html('<i class="fas fa-heart"></i> ${view.goodcnt+1}');
 			});
+			
+			// 삭제버튼 클릭시 모달창 open
 			$('#delete_view').click(function(){
 				$('.modal_wrap').css('display','flex');
 			});
@@ -356,5 +364,7 @@
 		$(document).on('click','#refresh_btn', function(){
 			listReply();
 		});
+
+		
 	</script>	
 	</html>
