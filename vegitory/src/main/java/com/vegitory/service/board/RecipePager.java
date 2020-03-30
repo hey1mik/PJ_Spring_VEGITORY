@@ -1,8 +1,8 @@
 package com.vegitory.service.board;
 
-public class Pager {
-	public static final int PAGE_SCALE = 10; //페이지당 게시물 수
-	public static final int BLOCK_SCALE = 10; // 화면당 페이지 수 
+public class RecipePager {
+	public static final int PAGE_SCALE = 4; //페이지당 게시물 수
+	public static final int BLOCK_SCALE = 5; // 화면당 페이지 수 
 	
 	private int curPage; // 현재 페이지
 	private int prevPage; // 이전 페이지
@@ -18,7 +18,7 @@ public class Pager {
 	private int blockEnd; // 블록의 끝페이지 번호
 	
 	
-	public Pager(int count, int curPage) {
+	public RecipePager(int count, int curPage) {
 		curBlock = 1; // 현재 블록 번호
 		this.curPage = curPage; // 현재 페이지 번호
 		setTotPage(count); //전체 페이지 갯수 계산

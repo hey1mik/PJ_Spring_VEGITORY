@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="../include/header.jsp" %>    
 <!DOCTYPE html>
 <html>
@@ -178,6 +179,7 @@
 		  width: 650px;
 		  height: 400px;
 		  overflow:hidden;
+		  transition: .5s ease;
 		}
 		
 		 .flip-card-front, .flip-card-back {
@@ -186,18 +188,21 @@
 		  height: 100%;
 		}
 		 .flip-card-back {
+		  transition: .5s ease;
+		  opacity: 0;
 		  background-color: rgba(0,0,0,0.5);
 		  color: white;
 		  font-size: 15px;
 		  text-align: center;
-		  left: -650px;
 		  transition: 0.5s;
 		
 		}
 		
 		.flip-card:hover .flip-card-back {
+		 opacity: 1;
 		 left: 0px;
 		}
+
 	
 		.page_table {
 			padding: 20px 10px;
@@ -280,69 +285,57 @@
 			</div>
 		</div>
 		<ul class="board_list">
+		<c:forEach items="${map.list}" var="list" >
 			<li><a href="#">
 			<div class="flip-card">
 			    <div class="flip-card-front">
-			      <img src="${path}/resources/img/레시피2.jpg" alt="Avatar" style="width:650px;height:400px;">
+			      <img src="${path}/resources/img/${list.img}" alt="Avatar" style="width:650px;height:400px;">
 			    </div>
 			    <div class="flip-card-back">
-			      <h1>토마토 & 퀴노아 샐러드 </h1>
-					<div>카테고리1: 동양식 메인요리</div><div>카테고리2: 커리/덮밥</div><div>글번호:1</div><div>추천: 0 </div>
-					<div>조회: 0 </div><div>댓글: 0</div><div>by 헤롤</div>
-					<div>2020-03-17</div>
+			      <h1>${list.title} </h1>
+					<div>카테고리1: 동양식 메인요리</div><div>카테고리2: 커리/덮밥</div><div>글번호 : ${list.bno}</div><div>좋아요 : ${list.goodcnt} </div>
+					<div>조회: ${list.viewcnt} </div><div>댓글: ${list.replycnt}</div><div>by ${list.writer}</div>
+					<div>
+						 <c:choose>
+					    	<c:when test="${today == regdate}">
+					    	 <fmt:formatDate value="${list.updatedate}" pattern="HH:mm:ss"/>
+					    	</c:when>
+					    	<c:otherwise>
+					    		<fmt:formatDate value="${list.updatedate}" pattern="yyyy-MM-ss"/>
+					    	</c:otherwise>
+				    	</c:choose>
+					</div>
 			  </div>
 			</div>
 			</a></li>
-			<li><a href="#">
-			<div class="flip-card">
-			    <div class="flip-card-front">
-			      <img src="${path}/resources/img/레시피3.jpg" alt="Avatar" style="width:650px;height:400px;">
-			    </div>
-			    <div class="flip-card-back">
-			      <h1> 두부 샌드위치 </h1>
-					<div>카테고리1: 동양식 메인요리</div><div>카테고리2: 커리/덮밥</div><div>글번호:2</div><div>추천: 0 </div>
-					<div>조회: 0 </div><div>댓글: 0</div><div>by 헤롤</div>
-					<div>2020-03-17</div>
-			  </div>
-			</div>
-			</a></li>
-			<li><a href="#">
-			<div class="flip-card">
-			    <div class="flip-card-front">
-			      <img src="${path}/resources/img/레시피4.jpg" alt="Avatar" style="width:650px;height:400px;">
-			    </div>
-			    <div class="flip-card-back">
-			      <h1> 그린커리 </h1>
-					<div>카테고리1: 동양식 메인요리</div><div>카테고리2: 커리/덮밥</div><div>글번호:3</div><div>추천: 0 </div>
-					<div>조회: 0 </div><div>댓글: 0</div><div>by 헤롤</div>
-					<div>2020-03-17</div>
-			  </div>
-			</div>
-			</a></li>
-			<li><a href="#">
-			<div class="flip-card">
-			    <div class="flip-card-front">
-			      <img src="${path}/resources/img/레시피1.jpg" alt="Avatar" style="width:650px;height:400px;">
-			    </div>
-			    <div class="flip-card-back">
-			      <h1> 볶음 채소 파스타 </h1>
-					<div>카테고리1: 동양식 메인요리</div><div>카테고리2: 커리/덮밥</div><div>글번호:4</div><div>추천: 0 </div>
-					<div>조회: 0 </div><div>댓글: 0</div><div>by 헤롤</div>
-					<div>2020-03-17</div>
-			  </div>
-			</div>
-			</a></li>														
+		</c:forEach>		
 		</ul>
-
+		
 		<div class="page_table">
-		<ul class="pagination">
-			<li><a href="#">이전목록</a></li>
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#">다음목록</a></li>
+			<ul class="pagination">
+			<c:if test="${map.pager.curBlock > 1}">
+				<li><a href="${path}/board/list?curPage=${map.pager.blockBegin-5}&sort_option=&${map.sort_option}&keyword=${map.keyword}" class="page_left"><i class="fas fa-angle-left"></i></a></li>
+				<li><a href="${path}/board/list?curPage=1&sort_option=${map.sort_option}&keyword=${map.keyword}" class="">1</a></li>
+				<li><span>...</span></li>
+			</c:if>
+			
+			
+			<c:forEach var="num" begin="${map.pager.blockBegin}" end="${map.pager.blockEnd}">
+			<c:choose>
+				<c:when test="${num == map.pager.curPage}">
+					<li><a href="${path}/board/list?curPage=${num}&sort_option=${map.sort_option}&keyword=${map.keyword}" id="check_color">${num}</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="${path}/board/list?curPage=${num}&sort_option=${map.sort_option}&keyword=${map.keyword}">${num}</a></li>
+				</c:otherwise>			
+			</c:choose>
+			</c:forEach>
+			
+			<c:if test="${map.pager.curBlock < map.pager.totBlock}">
+				<li><span>...</span></li>
+				<li><a href="${path}/board/list?curPage=${map.pager.totPage}&sort_option=&${map.sort_option}&keyword=${map.keyword}" class="">${map.pager.totPage}</a></li>
+				<li><a href="${path}/board/list?curPage=${map.pager.blockEnd + 1}&sort_option=${map.sort_option}&keyword=${map.keyword}" class="page_right"><i class="fas fa-angle-right"></i></a></li>
+			</c:if>
 		</ul>	
 		</div>
 	</div>

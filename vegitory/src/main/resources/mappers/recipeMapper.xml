@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vegitory.persistence.BoardDAO">
+	<select id="RecipeList" resultType="RecipeDTO">
+	<!-- 게시글 목록을 출력할때 쓰는 SQL문 -->
+		 <include refid="paging_h"/>
+		 SELECT bno, img, type, title, writer, name, updatedate, viewcnt, replycnt, goodcnt, show
+		 FROM tbl_recipe r, tbl_member m
+		 <include refid="r_search"></include>
+		 <if test="map.sort_option == 'new'">
+		 	ORDER BY r.bno 
+		 </if>
+		 <if test="map.sort_option == 'cnt'">
+		 	ORDER BY viewcnt
+		 </if>
+		 <if test="map.sort_option == 'reply'">
+		 	ORDER BY replycnt
+		 </if>
+		 <if test="map.sort_option == 'good'">
+		 	ORDER BY goodcnt
+		 </if>
+		 <include refid="paging_f"/>
+		 <!-- m.name과 비교함으로써 회원인 사람들의 글만 가져오게함 -->
+	</select>
+	
+	<select id="rCountArticle" resultType="Integer">
+		<!-- 페이지네이션에 쓰는 SQL문 -->
+		 SELECT COUNT(*) 
+		 FROM tbl_recipe r, tbl_member m 
+		<include refid="r_search"></include>
+	</select>
+	
+	
+	<!-- 공통 SQL들은 밖으로 빼준다. -->
+	<sql id="r_search">
+		<choose>
+		 	<when test="map.search_option != 'all'">
+		 		<!-- 검색 옵션이 있을때 -->
+		 		WHERE r.writer = m.name
+		 		      AND r.show = 'y'
+		 		      AND #{map.search_option} LIKE #{map.keyword}
+		 	</when>
+		 	<otherwise>
+		 	<!-- 검색 옵션이 없을때 -->
+		 		WHERE r.writer = m.name
+		 			AND r.show = 'y'
+		 			AND (title LIKE #{map.keyword}
+		 						OR content LIKE #{map.keyword}
+		 						OR name LIKE #{map.keyword})
+		 	</otherwise>
+		 </choose>
+	</sql>
+	<sql id="paging_h">
+		SELECT * 
+		FROM (
+			SELECT rownum AS rnum, A.*
+			FROM(
+	</sql>	
+		
+	<sql id="paging_f">		
+			)A
+		) WHERE rnum BETWEEN #{map.start} AND #{map.end}	
+	</sql>
+	
+	
+</mapper>	

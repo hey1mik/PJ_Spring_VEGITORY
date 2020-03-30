@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vegitory.domain.BoardDTO;
+import com.vegitory.domain.RecipeDTO;
+import com.vegitory.domain.ReplyDTO;
 import com.vegitory.service.board.BoardService;
 import com.vegitory.service.board.Pager;
+import com.vegitory.service.board.RecipePager;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,10 +38,6 @@ public class BoardController {
 		return "board/write";
 	}
 	
-	@GetMapping("/list")
-	public String ViewBoard(){
-		return "board/list";
-	}
 	@GetMapping("/freelist")
 	public String ViewFreeBoard(@RequestParam(defaultValue="1") int curPage,
 								@RequestParam(defaultValue="new") String sort_option, 
@@ -74,6 +73,43 @@ public class BoardController {
 		model.addAttribute("map", map);
 		
 		return "board/freelist";
+	}
+	
+	@GetMapping("/list")
+	public String ViewRecipeBoard(@RequestParam(defaultValue="1") int curPage,
+								@RequestParam(defaultValue="new") String sort_option, 
+								@RequestParam(defaultValue="all") String search_option,
+								@RequestParam(defaultValue="") String keyword,
+								Model model){//model 안에 curpage=1, sort_option="new"가 담겨있는 것.
+		
+		log.info(">>>>>>> GET: Board List Page");
+
+		
+		// 게시글 갯수 계산
+		int count =  bService.rCountArticle(search_option, keyword);
+		log.info(">>>>>>> GET: Board List 게시물 갯수를 셌음!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		// 페이지 관련 설정
+		//new Pager = 생성자 메서드, 생성자 메서드 안에 매개변수가 들어있다?! 
+		// 객체생성됐네 ㅎㅎ 하고 끝나는게 아니라 무슨 일이 일어나는지 호출한 클래스를 가봐야함
+		RecipePager rPager = new RecipePager(count, curPage);
+		int start = rPager.getPageBegin();
+		int end = rPager.getPageEnd();
+		
+		List<RecipeDTO> list = bService.RecipeList(sort_option, search_option, keyword, start,end); // 게시물 목록 가져오기
+		//sort_option이 있어야 매퍼에 가서 키워드 검색 후 최신순, 추천순 등등으로 정렬할 수 있음. 
+		log.info(">>>>>>> GET: Board List 게시물을 가져왔음!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		
+		HashMap<String,Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("count", count);
+		map.put("pager", rPager);
+		map.put("sort_option", sort_option);
+		map.put("search_option", search_option);
+		map.put("keyword", keyword);
+		
+		model.addAttribute("map", map);
+		
+		return "board/list";
 	}
 	
 	

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.vegitory.domain.BoardDTO;
+import com.vegitory.domain.RecipeDTO;
 import com.vegitory.persistence.BoardDAO;
 import com.vegitory.persistence.ProductDAO;
 import com.vegitory.service.index.IndexServiceImpl;
@@ -41,6 +42,18 @@ public class BoardServiceImpl implements BoardService {
 		
 		return bDao.freeBoardList(map);
 	}
+	
+	@Override
+	public List<RecipeDTO> RecipeList(String sort_option, String search_option, String keyword, int start, int end) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("sort_option", sort_option);
+		map.put("search_option", search_option);
+		map.put("keyword","%"+keyword+"%");
+		map.put("start",start);
+		map.put("end", end);
+		
+		return bDao.RecipeList(map);
+	}
 
 	@Override
 	public int countArticle(String search_option, String keyword) {
@@ -48,6 +61,14 @@ public class BoardServiceImpl implements BoardService {
 		map.put("search_option", search_option);
 		map.put("keyword","%"+keyword+"%");
 		return bDao.countArticle(map);
+	}
+	
+	@Override
+	public int rCountArticle(String search_option, String keyword) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("search_option", search_option);
+		map.put("keyword","%"+keyword+"%");
+		return bDao.rCountArticle(map);
 	}
 
 	@Override
@@ -83,5 +104,5 @@ public class BoardServiceImpl implements BoardService {
 	public int delBoard(int bno) {
 		return bDao.delBoard(bno);
 	}
-
+	
 }
