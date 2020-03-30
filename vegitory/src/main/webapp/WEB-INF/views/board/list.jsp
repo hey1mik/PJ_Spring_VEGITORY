@@ -147,6 +147,30 @@
 			padding: 10px 10px 15px 10px;
 			border-bottom: 3px solid rgba(73, 130, 104, 0.5);
 		}
+			.SearchNWrite{
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+		.board_search_wrap{
+		  display:flex;
+		  flex-direction: row; 
+		  justify-content: space-around;
+		  height: 25px;
+		  width: 280x;
+		  border-bottom: 1px solid rgba(0,0,0,0.3);
+		}
+		.board_search_input {
+		 font-size: 14px;
+		 width: 250px;
+		 height: 20px;
+		 border: none;
+		 }
+		.board_search_btn{
+		  border: none;
+		  background-color: transparent;
+		  height: 20px;
+		}
 		.board_filter > li{
 			float: left;
 			padding: 2px 10px;
@@ -238,36 +262,36 @@
 						</div>
 				</div>
 				<ul class="category_common category_asian">
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>국/찌개</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>커리/덮밥</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>볶음밥</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>김밥/롤</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>면/국수</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>튀긴요리</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>죽류</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>나물/반찬</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c15.png"><span>국/찌개</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c18.png"><span>커리/덮밥</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c17.png"><span>볶음밥</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c20.png"><span>김밥/롤</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c19.png"><span>면/국수</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c23.png"><span>튀긴요리</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c17.png"><span>죽류</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c5.png"><span>나물/반찬</span></a></li>
 				
 				</ul>	
 				<ul class="category_common category_western">
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>샐러드</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>토스트/햄버거</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>퀘사디아/부리또/타코</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>스테이크</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>파스타</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>오트밀/이유식</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>라이스류</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>기타</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c4.png"><span>샐러드</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c2.png"><span>토스트/햄버거</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c16.png"><span>퀘사디아/부리또/타코</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c3.png"><span>스테이크</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c19.png"><span>파스타</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c17.png"><span>오트밀/이유식</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c18.png"><span>라이스류</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c11.png"><span>기타</span></a></li>
 				
 				</ul>	
 				<ul class="category_common category_dessert">
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>커피</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>쥬스</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>쉐이크</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>베이커리</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>케이크</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>쿠키</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>기타</span></a></li>
-					<li><a href="#"><img src="${path}/resources/img/c1.png"><span>기타2</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c9.png"><span>커피</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c24.png"><span>쥬스</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c22.png"><span>쉐이크</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c12.png"><span>베이커리</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c8.png"><span>케이크</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c10.png"><span>쿠키</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c21.png"><span>기타</span></a></li>
+					<li><a href="#"><img src="${path}/resources/img/c13.png"><span>기타2</span></a></li>
 				
 				</ul>	
 			</div>
@@ -278,10 +302,15 @@
 				<li><a href="#">조회순</a></li>
 				<li><a href="#">댓글순</a></li>
 			</ul>
+			<div class="SearchNWrite">
 			<div class="board_search_wrap">
-				<input type="text" placeholder="레시피 검색" name="keyword" class="board_search_input">
-				<button type="button" class="board_search_btn"><i class="fas fa-search"></i></button>
-				<button type="button" class="board_write_btn"> 글쓰기 </button>
+				<form action="${path}/board/freelist" method="GET">
+					<input type="text" placeholder="레시피 검색" name="keyword" class="board_search_input">
+					<button type="submit" class="board_search_btn"><i class="fas fa-search"></i></button>
+				</form>	
+				
+			</div>
+			<a href="${path}/board/write" class="board_write_btn"> 글쓰기 </a>
 			</div>
 		</div>
 		<ul class="board_list">
@@ -315,7 +344,7 @@
 			<ul class="pagination">
 			<c:if test="${map.pager.curBlock > 1}">
 				<li><a href="${path}/board/list?curPage=${map.pager.blockBegin-5}&sort_option=&${map.sort_option}&keyword=${map.keyword}" class="page_left"><i class="fas fa-angle-left"></i></a></li>
-				<li><a href="${path}/board/list?curPage=1&sort_option=${map.sort_option}&keyword=${map.keyword}" class="">1</a></li>
+				<li><a href="${path}/board/list?curPage=1&sort_option=${map.sort_option}&keyword=${map.keyword}" class="">prev</a></li>
 				<li><span>...</span></li>
 			</c:if>
 			
@@ -333,7 +362,7 @@
 			
 			<c:if test="${map.pager.curBlock < map.pager.totBlock}">
 				<li><span>...</span></li>
-				<li><a href="${path}/board/list?curPage=${map.pager.totPage}&sort_option=&${map.sort_option}&keyword=${map.keyword}" class="">${map.pager.totPage}</a></li>
+				<li><a href="${path}/board/list?curPage=${map.pager.totPage}&sort_option=&${map.sort_option}&keyword=${map.keyword}" class="">next</a></li>
 				<li><a href="${path}/board/list?curPage=${map.pager.blockEnd + 1}&sort_option=${map.sort_option}&keyword=${map.keyword}" class="page_right"><i class="fas fa-angle-right"></i></a></li>
 			</c:if>
 		</ul>	

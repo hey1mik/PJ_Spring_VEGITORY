@@ -64,33 +64,9 @@
 
 	/* On hover, add a black background color with a little bit see-through */
 	.prev:hover, .next:hover {
-	  background-color: rgba(0,0,0,0.8);
+	  color: rgba(0,0,0,0.4);
 	}
 
-	/* Number text (1/3 etc) */
-	.numbertext {
-	  color: #f2f2f2;
-	  font-size: 12px;
-	  padding: 8px 12px;
-	  position: absolute;
-	  top: 0;
-	}
-
-	/* The dots/bullets/indicators */
-	.dot {
-	  cursor: pointer;
-	  height: 10px;
-	  width: 10px;
-	  margin: 0 2px;
-	  background-color: #bbb;
-	  border-radius: 50%;
-	  display: inline-block;
-	  transition: background-color 0.6s ease;
-	}
-
-	.active, .dot:hover {
-	  background-color: #717171;
-	}
 
 	/* Fading animation */
 	.fade {
@@ -148,6 +124,15 @@
 		padding-bottom: 30px;
 		z-index:1;
 	}
+	
+	.grocery_title {
+		margin-top: 10px;
+		margin-left: -50px;
+	}
+	.community_title {
+		margin-left: -10px;
+	}
+	
 	.dashline {
 		    position: absolute;
 			top: 24px;
@@ -303,35 +288,14 @@
   <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
   <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
-  <div style="text-align:center">
-  <span class="dot" onclick="currentSlide(1)"></span>
-  <span class="dot" onclick="currentSlide(2)"></span>
-  <span class="dot" onclick="currentSlide(3)"></span>
-  <span class="dot" onclick="currentSlide(4)"></span>
-  <span class="dot" onclick="currentSlide(5)"></span>
-  <span class="dot" onclick="currentSlide(6)"></span>
-</div>
 
 </div>
 <br>
 
 <!-- The dots/circles -->
 
-
-<div class="recipe_wrap">
-	<div class="title"> 
-		<div class="title_main">TODAY'S RECIPE</div> 
-		<div class="dashline"></div>
-		<div class="title_sub">쉽고 간단해요!</div> 
-	</div>
-	  	<div class="recipe_unit">
-	  		<div><img src="${path}/resources/img/레시피1.jpg" width="800px" height="550px"></div>
-	  		<span id="recipe_name"> <img src="https://img.icons8.com/emoji/50/000000/woman-cook.png" width="30px" height="30px">&nbsp; 볶음채소 파스타</span>
-	  	</div>
-</div>
-
 <div class="grocery_wrap">
-	<div class="title"> 
+	<div class="title grocery_title"> 
 		<div class="title_main">GROCERY</div>  
 		<div class="dashline"></div>
 		<div class="title_sub">맛있는 재료, 즐거운 비건 라이프</div> 
@@ -368,8 +332,20 @@
 	</div>
 </div>
 
-<div class="community_wrap">
+<div class="recipe_wrap">
 	<div class="title"> 
+		<div class="title_main">TODAY'S RECIPE</div> 
+		<div class="dashline"></div>
+		<div class="title_sub">쉽고 간단해요!</div> 
+	</div>
+	  	<div class="recipe_unit">
+	  		<div><img src="${path}/resources/img/레시피1.jpg" width="800px" height="550px"></div>
+	  		<span id="recipe_name"> 볶음채소 파스타</span>
+	  	</div>
+</div>
+
+<div class="community_wrap">
+	<div class="title community_title"> 
 		<div class="title_main">COMMUNITY</div> 
 		<div class="dashline"></div>
 		<div class="title_sub">같이 정보를 나눠요</div> 
@@ -407,20 +383,15 @@ function currentSlide(n) {
 function showSlides(n) {
   var i;
   var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
   if (n > slides.length) {slideIndex = 1}
   if (n < 1) {slideIndex = slides.length}
   for (i = 0; i < slides.length; i++) {
       slides[i].style.display = "none";
   }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace("active", "");
-  }
+
   slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
+
 }
-
-
 
 
 
