@@ -366,6 +366,9 @@
 </body>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+
+setInterval(autoPlus, 4000);
+
 var slideIndex = 1;
 
 showSlides(slideIndex);
@@ -375,10 +378,6 @@ function plusSlides(n) {
   showSlides(slideIndex += n);
 }
 
-// Thumbnail img controls
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
 
 function showSlides(n) {
   var i;
@@ -392,6 +391,10 @@ function showSlides(n) {
   slides[slideIndex-1].style.display = "block";
 
 }
+
+function autoPlus() {
+	  plusSlides(1)  
+	}
 
 
 
