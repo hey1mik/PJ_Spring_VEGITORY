@@ -299,7 +299,6 @@
 			
 			$('#view_viewcnt2').text($('.replyListCnt').val());
 			
-
 		}
 		
 		//게시글 댓글수 수정

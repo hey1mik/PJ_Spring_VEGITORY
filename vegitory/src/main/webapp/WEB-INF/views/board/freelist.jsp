@@ -91,12 +91,32 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: flex-end;
-			padding: 10px 10px 15px 10px;
+			padding: 10px 10px 7px 10px;
 			border-bottom: 3px solid rgba(73, 130, 104, 0.5);
+		}
+		.SearchNWrite{
+			display: flex;
+			flex-direction: row;
+			align-items: center;
 		}
 		.board_search_wrap{
 		  display:flex;
 		  flex-direction: row; 
+		  justify-content: space-around;
+		  height: 25px;
+		  width: 280x;
+		  border-bottom: 1px solid rgba(0,0,0,0.3);
+		}
+		.board_search_input {
+		 font-size: 14px;
+		 width: 250px;
+		 height: 20px;
+		 border: none;
+		 }
+		.board_search_btn{
+		  border: none;
+		  background-color: transparent;
+		  height: 20px;
 		}
 		.board_filter > li{
 			float: left;
@@ -207,14 +227,16 @@
 				<li><a href="${path}/board/freelist?sort_option=reply&keyword=${map.keyword}" id="sort_reply">댓글순</a></li>
 				<li><a href="${path}/board/freelist?sort_option=good&keyword=${map.keyword}" id="sort_good">추천순</a></li>
 			</ul>
+			<div class="SearchNWrite">
 			<div class="board_search_wrap">
 				<form action="${path}/board/freelist" method="GET">
 					<input type="text" placeholder="게시글 검색" name="keyword" class="board_search_input">
 					<button type="submit" class="board_search_btn"><i class="fas fa-search"></i></button>
 				</form>	
-				<button type="button" class="board_write_btn"> 글쓰기 </button>
+				
 			</div>
-			
+			<a href="${path}/board/write" class="board_write_btn"> 글쓰기 </a>
+			</div>
 		</div>
 		<div class="free_board_list">
 			<div class="free_search_result">

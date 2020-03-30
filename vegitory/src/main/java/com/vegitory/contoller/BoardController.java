@@ -30,6 +30,10 @@ public class BoardController {
 	
 	BoardDTO bDto = new BoardDTO();
 	
+	@GetMapping("/write")
+	public String ViewWrite(){
+		return "board/write";
+	}
 	
 	@GetMapping("/list")
 	public String ViewBoard(){
