@@ -318,7 +318,11 @@
 			$.ajax({
 				url: '${path}/reply/insert',
 				type: 'POST',
-				data: $('.frm_reply').serialize(),
+				data: $('.frm_reply').serialize(),// 쿼리스트링으로 데이터 보내는 방법. 
+				// 쿼리스트링방식 데이터 전송 : ${path}/reply/insert?bno=bno&type=type&writer=name&content=content
+				// serialize가 하는 역할 = 쿼리스트링을 자동으로 만들어줌.	
+				// commentlist의 name값을 key값으로 data 가져옴
+				// 즉, commnetlist의 name값이 DTO의 변수 이름과 일치해야한다.
 				success: function(data) {
 					listReply();
 				}
@@ -332,7 +336,9 @@
 			$.ajax({
 				url: '${path}/reply/delete',
 				type: 'post',
-				data: {'rno' : rno, 'bno' : bno},
+				data: {'rno' : rno, 'bno' : bno}, 
+				// Json 방식으로 데이터 보내는 법(HashMap처럼 쓰는 것). 이 방식은 key값으로 데이터를 보내기때문에
+				// 이것을 쓰기 위해서는 key값이 쓰고자하는 (매개변수를 DTO로 담았다면)매개변수의 DTO의 이름과 같아야함.
 				success: function(data) {
 					listReply();
 				} 
