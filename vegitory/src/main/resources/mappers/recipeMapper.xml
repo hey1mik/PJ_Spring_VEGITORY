@@ -10,16 +10,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 FROM tbl_recipe r, tbl_member m
 		 <include refid="r_search"></include>
 		 <if test="map.sort_option == 'new'">
-		 	ORDER BY r.bno 
+		 	ORDER BY r.bno DESC
 		 </if>
 		 <if test="map.sort_option == 'cnt'">
-		 	ORDER BY viewcnt
+		 	ORDER BY viewcnt DESC
 		 </if>
 		 <if test="map.sort_option == 'reply'">
-		 	ORDER BY replycnt
+		 	ORDER BY replycnt DESC
 		 </if>
 		 <if test="map.sort_option == 'good'">
-		 	ORDER BY goodcnt
+		 	ORDER BY goodcnt DESC
 		 </if>
 		 <include refid="paging_f"/>
 		 <!-- m.name과 비교함으로써 회원인 사람들의 글만 가져오게함 -->
@@ -61,7 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	<sql id="paging_f">		
 			)A
-		) WHERE rnum BETWEEN #{map.start} AND #{map.end}	
+		) WHERE rnum BETWEEN #{map.start} AND #{map.end} 	
 	</sql>
 	
 	

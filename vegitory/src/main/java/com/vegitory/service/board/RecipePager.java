@@ -8,7 +8,7 @@ public class RecipePager {
 	private int prevPage; // 이전 페이지
 	private int nextPage; // 다음 페이지
 	private int totPage; // 전체 페이지 갯수
-	private int totBlock; // 전체 페이지 블록 갯수
+	private int totBlock; // 블록 갯수
 	private int curBlock; // 현재 블록
 	private int prevBlock; // 이전 블록
 	private int nextBlock; // 다음 블록

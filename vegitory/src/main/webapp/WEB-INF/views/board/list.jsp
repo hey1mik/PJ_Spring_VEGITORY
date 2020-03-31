@@ -343,8 +343,8 @@
 		<div class="page_table">
 			<ul class="pagination">
 			<c:if test="${map.pager.curBlock > 1}">
+				<li><a href="${path}/board/list?curPage=1&sort_option=${map.sort_option}&keyword=${map.keyword}" class="">first page</a></li>
 				<li><a href="${path}/board/list?curPage=${map.pager.blockBegin-5}&sort_option=&${map.sort_option}&keyword=${map.keyword}" class="page_left"><i class="fas fa-angle-left"></i></a></li>
-				<li><a href="${path}/board/list?curPage=1&sort_option=${map.sort_option}&keyword=${map.keyword}" class="">prev</a></li>
 				<li><span>...</span></li>
 			</c:if>
 			
@@ -362,8 +362,8 @@
 			
 			<c:if test="${map.pager.curBlock < map.pager.totBlock}">
 				<li><span>...</span></li>
-				<li><a href="${path}/board/list?curPage=${map.pager.totPage}&sort_option=&${map.sort_option}&keyword=${map.keyword}" class="">next</a></li>
 				<li><a href="${path}/board/list?curPage=${map.pager.blockEnd + 1}&sort_option=${map.sort_option}&keyword=${map.keyword}" class="page_right"><i class="fas fa-angle-right"></i></a></li>
+				<li><a href="${path}/board/list?curPage=${map.pager.totPage}&sort_option=&${map.sort_option}&keyword=${map.keyword}" class="">last page</a></li>
 			</c:if>
 		</ul>	
 		</div>

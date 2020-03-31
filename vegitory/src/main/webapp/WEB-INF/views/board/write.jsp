@@ -72,7 +72,7 @@
 		margin-right: 5px;
 	}
 	.posting {
-		width: 100%;
+		width: 99.83%;
 		height: 600px;
 	}
 
@@ -113,34 +113,57 @@
 					<div class="posting_board_name">POST</div>
 					<div class="posting_board_sub_name"> 새 글을 작성합니다. </div>
 				</div>
+				
 				<div class="posting_contents">
+				<form:form  id="frm_posting" modelAttribute="boardDTO" autocomplete="on">
 					<div class="posting_info">
-						<select id="sel_type">
-							<option value="0" selected="selected">자유게시판</option>
-							<option value="1">비건뉴스</option>
-							<option value="2">Q & A 게시판</option>
-							<option value="3">리뷰게시판</option>
+						<select id="sel_type" name="type">
+							<option value="free" selected="selected">자유게시판</option>
+							<option value="news">비건뉴스</option>
+							<option value="qna">QnA 게시판</option>
+							<option value="review">리뷰게시판</option>
 						</select>
 						<input class="posting_title" name="title" placeholder="제목을 입력하세요"></input>
+						<input type="hidden" id="posting_writer" name="writer" value="${name}"></input>
 					</div>	
 					<div class="posting_postarea">
-						<textarea class="posting"></textarea>
+						<script type="text/javascript" src="${path}/resources/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+						<textarea id="board_post_content" name="content" class="posting"></textarea>
 						<div class="attachment"> 첨부하고 싶은 파일을 드래그 하세요 </div>
 					</div>	
 				<div class="posting_buttons">
-					<button class="cancel_btn post_btn">취소</button>
-					<button class="insert_btn post_btn">등록</button>
+					<button type="button" class="cancel_btn post_btn">취소</button>
+					<button type="button" class="insert_btn post_btn">등록</button>
 				</div>	
+					</form:form>
 			</div>
+		
 		</div>		
 	</body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript">
-	$(function(){
-		$('.cancel_btn').click(function(){
-			location.href="${path}/board/freelist";
-		});
+	$(document).on('click','.cancel_btn',function(){
+			var referer = '${header.referer}';
+			console.log(referer);
+			
+			var index = referer.indexOf('/board/freelist');
+			console.log('index: '+referer.indexOf('/board/freelist'));
+	
+			if(index == '-1'){
+				location.href = '${path}/board/freelist';
+			} else {
+				location.href = '${header.referer}';
+			}
+	
 	});
-		
-	</script>	
+	
+	var oEditors = [];
+	nhn.husky.EZCreator.createInIFrame({
+	 oAppRef: oEditors,
+	 elPlaceHolder: "board_post_content", //textarea의 아이디값과 반.드.시. 일치해야함!
+	 sSkinURI: "${path}/resources/smarteditor/SmartEditor2Skin.html",
+	 fCreator: "createSEditor2"
+	});
+	
+	</script>		
 	</html>
