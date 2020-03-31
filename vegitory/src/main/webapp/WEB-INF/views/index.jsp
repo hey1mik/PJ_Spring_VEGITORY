@@ -371,24 +371,24 @@ setInterval(autoPlus, 4000);
 
 var slideIndex = 1;
 
-showSlides(slideIndex);
+ oneSlide(slideIndex);
 
 // Next/previous controls
 function plusSlides(n) {
-  showSlides(slideIndex += n);
+  oneSlide(slideIndex += n);
 }
 
 
-function showSlides(n) {
+function oneSlide(n) {
   var i;
-  var slides = document.getElementsByClassName("mySlides");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
+  var slide = document.getElementsByClassName("mySlides");
+  if (n > slide.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slide.length}
+  for (i = 0; i < slide.length; i++) {
+      slide[i].style.display = "none";
   }
 
-  slides[slideIndex-1].style.display = "block";
+  slide[slideIndex-1].style.display = "block";
 
 }
 

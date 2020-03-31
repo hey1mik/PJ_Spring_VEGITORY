@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,6 +37,14 @@ public class BoardController {
 	@GetMapping("/write")
 	public String ViewWrite(){
 		return "board/write";
+	}
+	
+	@PostMapping("/write")
+	public String RegisterwWrite(BoardDTO bDto){
+		log.info(">>>>>>>>>>POST:BOARD WRITE ACTION");
+		log.info(bDto.toString());
+		return "redirect:/board/freelist";
+		//데이터 작업한 건 반드시 redirect로 보내기!
 	}
 	
 	@GetMapping("/freelist")

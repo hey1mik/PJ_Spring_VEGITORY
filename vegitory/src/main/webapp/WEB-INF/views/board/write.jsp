@@ -104,6 +104,10 @@
 	.insert_btn {
 		color: #3f6e58;
 	}
+	.posting_warning {
+		visibility: hidden;
+		text-align: center;
+	}
 
 	</style>
 	</head>
@@ -135,6 +139,7 @@
 					<button type="button" class="cancel_btn post_btn">취소</button>
 					<button type="button" class="insert_btn post_btn">등록</button>
 				</div>	
+				<div class="posting_warning"> 값을 입력해주세요 </div>
 					</form:form>
 			</div>
 		
@@ -155,6 +160,18 @@
 				location.href = '${header.referer}';
 			}
 	
+	});
+	$(document).on('click','.insert_btn',function(){
+			var title = $('.posting_title').val();
+			if(title.length == 0 || title == ''){
+				$('.posting_warning').css('visibility','visible')
+                					 .css('color','#a48443')
+                					 .text('제목을 입력해주세요');
+				return false;
+			} else {
+				alert('서버로 보내줄게~');
+				$('#frm_posting').submit();
+			}
 	});
 	
 	var oEditors = [];
