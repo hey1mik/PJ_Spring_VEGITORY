@@ -104,5 +104,10 @@ public class BoardServiceImpl implements BoardService {
 	public int delBoard(int bno) {
 		return bDao.delBoard(bno);
 	}
+
+	@Override
+	public void write(BoardDTO bDto) {
+		bDao.write(bDto);
+	}
 	
 }

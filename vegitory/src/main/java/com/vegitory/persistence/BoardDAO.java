@@ -29,4 +29,6 @@ public interface BoardDAO {
 	
 	public void replyCntUpdate(@Param("map") Map<String, Object> map);
 	
+	public void write(@Param("board")BoardDTO bDto);
+	
 }

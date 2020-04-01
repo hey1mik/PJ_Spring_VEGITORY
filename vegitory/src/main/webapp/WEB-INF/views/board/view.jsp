@@ -117,7 +117,7 @@
 	
 	.orginal_view_content {
 		width: 100%;
-		height: 150px;
+		height: 100%;
 		margin-bottom: 10px;
 		border-top: 1px solid rgba(0, 0, 0, 0.2);
 		padding-top: 15px;
@@ -126,7 +126,7 @@
 		border: 1px solid rgba(0,0,0,0.3);
 		padding: 0px; 
 		width: 100%;
-		height: 150px;
+		height: 100%;
 		margin-bottom: 10px;
 		display: none;
 	}

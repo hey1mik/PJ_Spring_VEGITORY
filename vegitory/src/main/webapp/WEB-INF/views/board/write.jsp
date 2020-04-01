@@ -169,7 +169,7 @@
                 					 .text('제목을 입력해주세요');
 				return false;
 			} else {
-				alert('서버로 보내줄게~');
+				oEditors.getById["board_post_content"].exec("UPDATE_CONTENTS_FIELD", []);// 클래스도 아니고 아이디로 해야됨
 				$('#frm_posting').submit();
 			}
 	});

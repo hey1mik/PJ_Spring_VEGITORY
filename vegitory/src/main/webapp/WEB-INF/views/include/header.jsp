@@ -603,10 +603,9 @@
 	</header>
 </body>
 	<script type="text/javascript">
-	
+	var msg = '${message}';
+	var uri = '${uri}';
 	$(function(){
-		var msg = '${message}';
-		
 		if(msg == 'nologin'){
 			$('.header_modal_wrap').css('display','flex');
 			$('#login_id').focus();
@@ -713,7 +712,12 @@
 							.text('로그인 중 문제가 발생했습니다. 아이디 및 비밀번호를 확인하거나 계정을 생성하십시오.');
 						}else if(data == 1) {
 							console.log('로그인 성공');
+							if(uri == ''){
 							location.reload();
+							} else {
+							 location.href = uri;
+							}
+							
 						}else if(data == 2) {
 							$('.warning_notice').css('visibility','visible')
 							.text('이메일 인증 후 로그인 할 수 있습니다.');

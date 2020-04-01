@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString
 public class ReplyDTO {
 	 private int rno;
-	 private char type;  
+	 private String type;  
 	 private String content;
 	 private String writer; 
 	 private Date regdate;  

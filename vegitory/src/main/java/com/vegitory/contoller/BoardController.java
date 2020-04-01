@@ -43,8 +43,9 @@ public class BoardController {
 	public String RegisterwWrite(BoardDTO bDto){
 		log.info(">>>>>>>>>>POST:BOARD WRITE ACTION");
 		log.info(bDto.toString());
+		bService.write(bDto);
 		return "redirect:/board/freelist";
-		//데이터 작업한 건 반드시 redirect로 보내기!
+		//데이터 작업한 건 반드시 redirect로 보내기!		
 	}
 	
 	@GetMapping("/freelist")
