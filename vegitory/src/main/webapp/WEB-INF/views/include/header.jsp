@@ -435,7 +435,7 @@
 		<div class="modal_content">
 			<div class="login_close"><button><i class="fas fa-times"></i></button></div>
 			<div class="welcome"><span id="login">LOGIN</span> </div>
-			<form name="" action="" onsubmit="return false;">
+			<form class="frm_login" onsubmit="return false;">
 			<!-- onsubmit이 하는 역할: html5 유효성체크는 하면서 submit은 안하게 하기. ajax쓰려면 페이지 전환을 하면 안되니까 -->
 				<div class="login_section">
 					<div class="div_input">
@@ -653,6 +653,7 @@
 			$('.header_modal_wrap').css('display','none');
 			//$('.frm_login')[0].reset();
 			$('.login_input').val('');
+			uri == '';
 			$(this).prev().attr('type','password');
 				$('.pw_eye').html('<i class="fas fa-eye-slash"></i>')
 					   .css('color','#aaa');

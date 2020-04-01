@@ -40,8 +40,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 					referer = "http://localhost:8081/vegitory/";
 					
 				} else {
-					
-					// 게시판 내부에서 접속했는데 아이디가 없을 때
+				
+					// 글쓰기 창에서 로그아웃 할 때
 					int index = referer.lastIndexOf("/");
 					int len = referer.length();
 					log.info(">>>>> 인덱스: " + index);
@@ -54,8 +54,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 						response.sendRedirect(request.getContextPath() + "/board/freelist");
 						return false;
 					}
+					
 			
-			
+			// 글쓰기 창에서 로그아웃하는 경우 이외에, 게시판 내부에서 로그인이 필요한 기능에 접속했는데 아이디가 없을 때
 			String uri = request.getRequestURI();	
 			log.info(">>>>>>목적지 : "+uri);
 			FlashMap fMap = RequestContextUtils.getOutputFlashMap(request);

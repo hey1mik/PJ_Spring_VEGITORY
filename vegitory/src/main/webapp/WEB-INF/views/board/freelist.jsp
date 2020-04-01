@@ -136,7 +136,8 @@
 		.free_board_list {
 			width: 100%;
 			height: 100%;
-			padding: 20px 0;
+			padding: 10px 0;
+			padding-left: 80px;
 			border-bottom: 3px solid rgba(73, 130, 104, 0.5);	
 		}
 		.free_search_result {
@@ -156,7 +157,7 @@
 		    font-size: 16px;
 		    text-align: left;
 		    border-spacing: 2px;
-		    margin: 0 -80px 0 80px;
+		    margin: 0 auto;
 		}
 		.free_board_list td {
 			padding: 0px;
