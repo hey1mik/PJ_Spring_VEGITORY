@@ -24,4 +24,6 @@ public interface BoardService {
 	public int delBoard(int bno);
 	
 	public void write(BoardDTO bDto);
+	
+	public void updateBoard(int bno, BoardDTO bDto);
 }

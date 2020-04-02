@@ -96,4 +96,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO tbl_board(bno, type, title, content, writer)
 		VALUES(seq_board.NEXTVAL, #{board.type}, #{board.title}, #{board.content}, #{board.writer})
 	</insert>
+	<update id="updateBoard">
+		UPDATE tbl_board
+		SET type = #{board.type},
+			title = #{board.title},
+			content = #{board.content},
+			updatedate = SYSDATE
+		WHERE bno = #{board.bno} 
+	</update>
 </mapper>

@@ -226,7 +226,7 @@
 							<span id="view_viewno"><span class="info_div">글번호</span> ${view.bno}</span>
 							<span id="view_viewcnt"><span class="info_div">조회수</span> ${view.viewcnt}</span>
 								<span id="view_viewcnt"><span class="info_div">댓글수</span> <span id="view_viewcnt2">${view.replycnt}</span></span>
-							<span id="view_regdate"><span class="info_div">마지막 수정일</span>
+							<span id="view_regdate"><span class="info_div">등록일</span>
 							<c:choose>
 						    	<c:when test="${today == view.regdate}">
 						    	 <fmt:formatDate value="${view.updatedate}" pattern="HH:mm:ss"/>
@@ -236,6 +236,14 @@
 						    	</c:otherwise>
 						   		 </c:choose>
 							</span>
+							<c:choose>
+							
+							<c:when test="${view.updatedate != view.regdate}">
+							<span><span class="info_div">수정일</span> 
+						    	 <fmt:formatDate value="${view.updatedate}" pattern="yyyy-MM-dd-HH:mm:ss"/>
+							</span>
+							</c:when>
+							</c:choose>
 							
 						</div>
 					</div>	
@@ -244,13 +252,13 @@
 						<input type="text" class="view_content_input" name="content">
 						<div class="view_content_buttons">
 							<div class="listNanswer">
-								<button id="list_view" class="borad_btn"> <i class="far fa-heart"></i> ${view.goodcnt} </button>
-								<a href="${header.referer}" id="list_view"> 목록 </a>
+								<button id="good_view" class="borad_btn"> <i class="far fa-heart"></i> ${view.goodcnt} </button>
+								<button id="list_view" class="borad_btn"> 목록 </button>
 								<button id="reply_view" class="borad_btn"> 답변 </button>
 							</div>
 							<div class="alterNdelete">
 								<c:if test="${name == view.writer}">
-								<button id="alter_view" class="borad_btn"> 수정 </button>
+								<a href="${path}/board/update?bno=${view.bno}" id="alter_view" class="borad_btn"> 수정 </a>
 								<button id="delete_view" class="borad_btn"> 삭제 </button>
 								</c:if>
 							</div>
@@ -271,7 +279,7 @@
 			
 			listReply();
 			
-			$('#list_view').click(function(){
+			$('#good_view').click(function(){
 				$(this).html('<i class="fas fa-heart"></i> ${view.goodcnt+1}');
 			});
 			
@@ -283,6 +291,14 @@
 				location.href='${path}/board/delete?bno=${view.bno}';
 			});
 			
+			$('#list_view').click(function(){
+				var url = '${path}/board/freelist';
+				if('${header.referer}' == ''){
+					location.href = '${path}/board/freelist';
+				} else {
+					location.href = '${header.referer}';
+				}
+			});
 			
 		});
 		

@@ -148,5 +148,24 @@ public class BoardController {
 		return "redirect:/board/freelist";
 	}
 	
+	@GetMapping("/update")
+	public String updateView(@RequestParam int bno, Model model) {
+		log.info(">>>>>>>>>GET BOARD UPDATE VIEW PAGE");
+		log.info(">>>>>bno: "+bno);
+		
+		//수정을 원하는 게시글의 정보(1줄)를 원함
+		bDto = bService.freeBoardView(bno);
+		model.addAttribute("one", bDto);
+		log.info(">>>>>>>>>>>>>>>>>bDto입니다" + bDto);
+		
+		return "/board/write";
+	}
 	
+	@PostMapping("/update")
+	public String updateBoard(@RequestParam int bno, BoardDTO bDto) {
+		log.info(">>>>>>>>POST: Board upate action!!!!!");
+		bService.updateBoard(bno, bDto);
+		String page = "redirect:/board/view?bno="+bno;
+		return page;
+	}
 }

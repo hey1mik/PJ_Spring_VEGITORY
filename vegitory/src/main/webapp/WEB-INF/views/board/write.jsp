@@ -119,20 +119,20 @@
 				</div>
 				
 				<div class="posting_contents">
-				<form:form  id="frm_posting" modelAttribute="boardDTO" autocomplete="on">
+				<form:form  id="frm_posting">
 					<div class="posting_info">
 						<select id="sel_type" name="type">
-							<option value="free" selected="selected">자유게시판</option>
-							<option value="news">비건뉴스</option>
-							<option value="qna">QnA 게시판</option>
-							<option value="review">리뷰게시판</option>
+							<option id="free" value="free" selected>자유게시판</option>
+							<option id="news" value="news">비건뉴스</option>
+							<option id="qna" value="qna">QnA 게시판</option>
+							<option id="review" value="review">리뷰게시판</option>
 						</select>
-						<input class="posting_title" name="title" placeholder="제목을 입력하세요"></input>
+						<input class="posting_title" name="title" placeholder="제목을 입력하세요" value="${one.title}"></input>
 						<input type="hidden" id="posting_writer" name="writer" value="${name}"></input>
 					</div>	
 					<div class="posting_postarea">
 						<script type="text/javascript" src="${path}/resources/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
-						<textarea id="board_post_content" name="content" class="posting"></textarea>
+						<textarea id="board_post_content" name="content" class="posting">${one.content}</textarea>
 						<div class="attachment"> 첨부하고 싶은 파일을 드래그 하세요 </div>
 					</div>	
 				<div class="posting_buttons">
@@ -147,6 +147,16 @@
 	</body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript">
+	$(function(){
+		// write ==> 게시글 등록과 게시글 수정
+		// 버튼을 등록에서 수정으로 바꿔야해서 써야함.
+		if('${one}' != ''){
+			$('.insert_btn').text('수정');
+		//selectbox 값으로 selected
+		$('#sel_type').val('${one.type}').attr('selected','selected');
+		}
+		
+	});
 	$(document).on('click','.cancel_btn',function(){
 			var referer = '${header.referer}';
 			console.log(referer);
