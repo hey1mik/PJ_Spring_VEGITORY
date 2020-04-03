@@ -232,14 +232,14 @@
 						    	 <fmt:formatDate value="${view.updatedate}" pattern="HH:mm:ss"/>
 						    	</c:when>
 						    	<c:otherwise>
-						    		<fmt:formatDate value="${view.updatedate}" pattern="yyyy-MM-dd"/>
+						    		<fmt:formatDate value="${view.updatedate}" pattern="yyyy-MM-dd-HH:mm:ss"/>
 						    	</c:otherwise>
 						   		 </c:choose>
 							</span>
 							<c:choose>
 							
 							<c:when test="${view.updatedate != view.regdate}">
-							<span><span class="info_div">수정일</span> 
+							<span><span class="info_div">수정됨</span> 
 						    	 <fmt:formatDate value="${view.updatedate}" pattern="yyyy-MM-dd-HH:mm:ss"/>
 							</span>
 							</c:when>

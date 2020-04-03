@@ -611,6 +611,18 @@
 			$('#login_id').focus();
 			$('.warning_notice').css('visibility','visible')
 								.text('로그인이 필요한 기능입니다.');
+			$('.login_close').click(function(){
+				uri = '';
+				$('.header_modal_wrap').css('display','none');
+				//$('.frm_login')[0].reset();
+				$('.login_input').val('');
+		
+				$(this).prev().attr('type','password');
+					$('.pw_eye').html('<i class="fas fa-eye-slash"></i>')
+						   .css('color','#aaa');
+				$('.warning_notice').css('visibility','hidden');	
+			});
+			
 		}
 	});
 		//jQuery 문법
@@ -653,7 +665,7 @@
 			$('.header_modal_wrap').css('display','none');
 			//$('.frm_login')[0].reset();
 			$('.login_input').val('');
-			uri == '';
+	
 			$(this).prev().attr('type','password');
 				$('.pw_eye').html('<i class="fas fa-eye-slash"></i>')
 					   .css('color','#aaa');

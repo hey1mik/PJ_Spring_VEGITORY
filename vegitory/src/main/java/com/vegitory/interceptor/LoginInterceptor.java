@@ -37,22 +37,17 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		String prevUrl = "";
 		String finalUrl = "http://localhost:8081/vegitory/";
 		
-		//url을 direct로 치고 들어간 경우
+		//1.url을 direct로 치고 들어간 경우
 		if(referer == null) {
 			log.info("WARNING>>>>>>> 비정상적인 접근 :( ");
 			response.sendRedirect(finalUrl);
 			return false;
 		} else {
-			//게시판 내에서 클릭해서 들어간 경우
-			//정상적인 접근이지만 아이디값이 없는 경우 
+		//1.게시판 내에서 클릭해서 들어간 경우
+			// 1)세션값에 아이디가 없는 상태로 뭔가를 하려는 경우
 			if(session.getAttribute("userid") == null) {
-				//1) 아이디값이 없으면서 referer과 목적지가 똑같은 경우 
-				if(prevUrl.equals(nextUrl)) {
-					log.info(">>>>>>>>>>>>>>>>>>>>>>WARNING >> PrevUrl == nextUrl :/");
-					response.sendRedirect(finalUrl);
-					return false;
-				}
-				//2) 수정을 끝내지 않은 채로 로그인하는 등 로그백이 일어나는 경우
+				
+				//1)-1 수정을 끝내지 않은 채로 로그아웃하는 등 로그백이 일어나는 경우 (수정, 삭제)
 				int indexQuery = referer.indexOf("?");
 				if(indexQuery == -1) {
 					prevUrl = referer.substring(finalUrl.length()-1);
@@ -62,7 +57,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				log.info("PREV URL >>>>>" + prevUrl);
 				log.info("NEXT URL >>>>>" + nextUrl);
 				
-				if(nextUrl.equals("/board/update") || nextUrl.equals("/board/delete") || nextUrl.equals("/board/write")) {
+				if(nextUrl.equals("/board/update") || nextUrl.equals("/board/delete")) {
 					log.info(">>>>>>>>>>>>>>>>>>: "+prevUrl.indexOf("board/view"));
 					if(prevUrl.indexOf("board/view") == -1) {
 						log.info("WARNING >> 비정상적인 접근 :( ");
@@ -70,7 +65,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 						return false;
 					}
 				}
-		  //2) 로그인 하지 않은 채로 글쓰기나 마이페이지 등을 누르는 경우	
+				
+				//1)-2 수정을 끝내지 않은 채로 로그아웃하는 등 로그백이 일어나는 경우 (글작성)
+				if(prevUrl.equals(nextUrl)) {
+					log.info(">>>>>>>>>>>>>>>>>>>>>>WARNING >> PrevUrl == nextUrl :/");
+					response.sendRedirect(finalUrl);
+					return false;
+				}
+				
+		  //1)-3 로그인 하지 않은 채로 글쓰기나 마이페이지 등을 누르는 경우	
 					FlashMap fMap = RequestContextUtils.getOutputFlashMap(request);
 					fMap.put("message", "nologin");
 					fMap.put("uri", uri);
@@ -79,7 +82,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 					return false; 
 			} 
 		
-			else { //정상적인 접근을 했고 아이디값도 있는 경우
+			else { //2)정상적인 접근을 했고 아이디값도 있는 경우
 			log.info(">>>>>>>>>>>>>>>>>>>>>>>>>LOG IN ^^!");
 			return true;// 원래 가려던 곳 이동
 			}
