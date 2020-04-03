@@ -28,52 +28,64 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		// Session 객체 생성
 		HttpSession session = request.getSession();
-		
+		//이동하기 전에 있던 페이지 url
 		String referer = request.getHeader("referer");
-		log.info(">>>>>>>이전 url: "+referer);
+		// 이동하려고 했던 page url
+		String uri = request.getRequestURI();
+		String ctx = request.getContextPath();
+		String nextUrl = uri.substring(ctx.length());
+		String prevUrl = "";
+		String finalUrl = "http://localhost:8081/vegitory/";
 		
-		if(session.getAttribute("userid") == null) {
-			log.info(">>>>>>>>>>>>>>>>>>>>>>>>>NO LOGIN!!!!!!");
-			//이전 페이지 url을 GET
-				if(referer == null) {
-					//외부에서 접속했을 때
-					referer = "http://localhost:8081/vegitory/";
-					
+		//url을 direct로 치고 들어간 경우
+		if(referer == null) {
+			log.info("WARNING>>>>>>> 비정상적인 접근 :( ");
+			response.sendRedirect(finalUrl);
+			return false;
+		} else {
+			//게시판 내에서 클릭해서 들어간 경우
+			//정상적인 접근이지만 아이디값이 없는 경우 
+			if(session.getAttribute("userid") == null) {
+				//1) 아이디값이 없으면서 referer과 목적지가 똑같은 경우 
+				if(prevUrl.equals(nextUrl)) {
+					log.info(">>>>>>>>>>>>>>>>>>>>>>WARNING >> PrevUrl == nextUrl :/");
+					response.sendRedirect(finalUrl);
+					return false;
+				}
+				//2) 수정을 끝내지 않은 채로 로그인하는 등 로그백이 일어나는 경우
+				int indexQuery = referer.indexOf("?");
+				if(indexQuery == -1) {
+					prevUrl = referer.substring(finalUrl.length()-1);
 				} else {
+					prevUrl = referer.substring(finalUrl.length()-1, indexQuery);
+				}
+				log.info("PREV URL >>>>>" + prevUrl);
+				log.info("NEXT URL >>>>>" + nextUrl);
 				
-					// 글쓰기 창에서 로그아웃 할 때
-					int index = referer.lastIndexOf("/");
-					int len = referer.length();
-					log.info(">>>>> 인덱스: " + index);
-					log.info(">>>>> 길이: " + len);
-					String mapWord = referer.substring(index, len);
-					log.info("수정된 url: " + mapWord);
-					log.info(">>>>이전 url :"+referer);
-					
-					if(mapWord.equals("/write")) {
-						response.sendRedirect(request.getContextPath() + "/board/freelist");
+				if(nextUrl.equals("/board/update") || nextUrl.equals("/board/delete") || nextUrl.equals("/board/write")) {
+					log.info(">>>>>>>>>>>>>>>>>>: "+prevUrl.indexOf("board/view"));
+					if(prevUrl.indexOf("board/view") == -1) {
+						log.info("WARNING >> 비정상적인 접근 :( ");
+						response.sendRedirect(finalUrl);
 						return false;
 					}
-					
-			
-			// 글쓰기 창에서 로그아웃하는 경우 이외에, 게시판 내부에서 로그인이 필요한 기능에 접속했는데 아이디가 없을 때
-			String uri = request.getRequestURI();	
-			log.info(">>>>>>목적지 : "+uri);
-			FlashMap fMap = RequestContextUtils.getOutputFlashMap(request);
-			fMap.put("message", "nologin");
-			fMap.put("uri", uri);
-
-			
-			RequestContextUtils.saveOutputFlashMap(referer, request, response);
-			response.sendRedirect(referer);
-				// 이동 x
 				}
-				return false; 
-		} else { //login ok
+		  //2) 로그인 하지 않은 채로 글쓰기나 마이페이지 등을 누르는 경우	
+					FlashMap fMap = RequestContextUtils.getOutputFlashMap(request);
+					fMap.put("message", "nologin");
+					fMap.put("uri", uri);
+					RequestContextUtils.saveOutputFlashMap(referer, request, response);
+					response.sendRedirect(referer);
+					return false; 
+			} 
+		
+			else { //정상적인 접근을 했고 아이디값도 있는 경우
 			log.info(">>>>>>>>>>>>>>>>>>>>>>>>>LOG IN ^^!");
 			return true;// 원래 가려던 곳 이동
-		}
+			}
+		}	
 	}
+
 	
 	//URL 후
 	@Override
