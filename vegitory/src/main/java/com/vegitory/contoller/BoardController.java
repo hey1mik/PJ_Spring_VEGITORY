@@ -44,7 +44,11 @@ public class BoardController {
 		log.info(">>>>>>>>>>POST:BOARD WRITE ACTION");
 		log.info(bDto.toString());
 		bService.write(bDto);
-		return "redirect:/board/freelist";
+		
+		log.info("currval:" + bDto.getBno());
+		String view = "redirect:/board/view?bno=" + bDto.getBno();
+		
+		return view;
 		//데이터 작업한 건 반드시 redirect로 보내기!		
 	}
 	
