@@ -17,7 +17,8 @@ public class BoardDTO {
     private int bno; //게시글 번호
     private String type; // 게시판 타입
     private String title; // 게시글 제목
-    private String content; // 게시글 내용
+    private String view_content; // 게시글 내용
+    private String search_content; // 게시글 검색용 내용
     private String writer; // 게시글 작성자
     private int viewcnt; //조회수
     private int replycnt; //댓글수

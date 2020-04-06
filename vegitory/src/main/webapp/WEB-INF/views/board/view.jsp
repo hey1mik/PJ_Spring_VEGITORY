@@ -248,7 +248,7 @@
 						</div>
 					</div>	
 					<div class="view_content">
-						<div class="orginal_view_content"> ${view.content} </div>
+						<div class="orginal_view_content"> ${view.view_content} </div>
 						<input type="text" class="view_content_input" name="content">
 						<div class="view_content_buttons">
 							<div class="listNanswer">
@@ -353,6 +353,7 @@
 			
 		});
 		
+		//댓글 삭제 AJAX
 		$(document).on('click','#delete_comment', function(){
 			var rno = $(this).attr('data_num');
 			var bno = ${view.bno};

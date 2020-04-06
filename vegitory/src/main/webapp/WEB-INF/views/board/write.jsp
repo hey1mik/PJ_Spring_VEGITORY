@@ -108,7 +108,9 @@
 		visibility: hidden;
 		text-align: center;
 	}
-
+	#board_search_content {
+		visibility: hidden;
+	}
 	</style>
 	</head>
 	<body>
@@ -132,7 +134,7 @@
 					</div>	
 					<div class="posting_postarea">
 						<script type="text/javascript" src="${path}/resources/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
-						<textarea id="board_post_content" name="content" class="posting">${one.content}</textarea>
+						<textarea id="board_post_content" name="view_content" class="posting">${one.view_content}</textarea>
 						<div class="attachment"> 첨부하고 싶은 파일을 드래그 하세요 </div>
 					</div>	
 				<div class="posting_buttons">
@@ -179,7 +181,17 @@
                 					 .text('제목을 입력해주세요');
 				return false;
 			} else {
+				//스마트 에디터의 값을 #board_content에 입력
 				oEditors.getById["board_post_content"].exec("UPDATE_CONTENTS_FIELD", []);// 클래스도 아니고 아이디로 해야됨
+				
+				var view_content = $('#board_post_content').val();
+				console.log('view_content: ' + view_content);
+				
+				var search_content = view_content.replace(/(<([^>]+)>)/ig,"").replace("&nbsp","");
+				 console.log('search_content: ' + search_content);
+				$('#frm_posting').append('<textarea id="board_search_content" name="search_content"></textarea>');
+				$('#board_search_content').val(search_content);
+				
 				$('#frm_posting').submit();
 			}
 	});

@@ -42,10 +42,10 @@ public class BoardController {
 	@PostMapping("/write")
 	public String RegisterwWrite(BoardDTO bDto){
 		log.info(">>>>>>>>>>POST:BOARD WRITE ACTION");
-		log.info(bDto.toString());
 		bService.write(bDto);
+		log.info(bDto.toString());
 		
-		log.info("currval:" + bDto.getBno());
+		//log.info("currval:" + bDto.getBno());
 		String view = "redirect:/board/view?bno=" + bDto.getBno();
 		
 		return view;
