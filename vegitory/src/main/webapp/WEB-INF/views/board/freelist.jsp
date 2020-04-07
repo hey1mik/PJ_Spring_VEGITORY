@@ -261,6 +261,12 @@
 			  <tr>
 			    <td>${list.bno}</td>
 			    <td>
+			    <c:if test="${list.re_level !=0}">
+			     <c:forEach begin="1" end="${list.re_level}">
+			     	<span>&nbsp</span>
+			     </c:forEach>
+			     RE:
+			    </c:if>
 			    <a href="${path}/board/view?bno=${list.bno}" class="free_board_title">${list.title}</a>
 			    <c:if test="${today == regdate}"><span class="new_color twincle_eff">N</span></c:if>
 			    </td>
@@ -317,6 +323,16 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
+			
+
+			var blank = '';
+			var i = 0;
+			
+			for (i = 0; i<= re_level; i++){
+				blank = blank + '&nbsp';
+			}
+			
+			
 			var sort_option = '${map.sort_option}';
 			var free_search_result = '${map.keyword}';
 			var count = '${map.count}';

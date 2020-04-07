@@ -85,6 +85,7 @@ public class BoardController {
 		map.put("keyword", keyword);
 		
 		model.addAttribute("map", map);
+	
 		
 		return "board/freelist";
 	}
@@ -144,6 +145,7 @@ public class BoardController {
 		return "board/view";
 	}
 	
+	
 	@GetMapping("/delete")
 	public String delete(@RequestParam int bno) {
 		log.info(">>>>>>>>>>GET: Board delete Action");
@@ -160,6 +162,7 @@ public class BoardController {
 		//수정을 원하는 게시글의 정보(1줄)를 원함
 		bDto = bService.freeBoardView(bno);
 		model.addAttribute("one", bDto);
+		model.addAttribute("flag", "update");
 		log.info(">>>>>>>>>>>>>>>>>bDto입니다" + bDto);
 		
 		return "/board/write";
@@ -172,4 +175,47 @@ public class BoardController {
 		String page = "redirect:/board/view?bno="+bno;
 		return page;
 	}
+	
+	//컨트롤러단에 한해서 매개변수에 BoardDTO bDto 써놓으면 알아서 객체 생성됨.
+	// BoardDTO bDto = new BoardDTO 를 안써도 됨.
+	
+	@GetMapping("/answer")
+	public String AnswerBoard(BoardDTO bDto, Model model) {
+		log.info(">>>>>>>>>GET: Board answer view page");
+		bDto = bService.freeBoardView(bDto.getBno());
+		
+		String newContent = "<p style='font-size:11pt'>이전 게시글 내용: </p>" +
+							bDto.getView_content() +
+							"<br> =================================================================================";
+		bDto.setView_content(newContent);
+		
+		model.addAttribute("one", bDto);
+		model.addAttribute("flag", "answer");
+		return "board/write";
+	}
+	
+	@PostMapping("/answer")
+	public String AnswerWrite(BoardDTO bDto, Model model) {
+		log.info(">>>>>>>>>>POST:ANSWER WRITE ACTION");
+		// 현재 답글 (bno(메인게시글), 타입, 제목, 내용, 작성자)
+		log.info("답글DTO: "+bDto.toString());
+		
+		BoardDTO prevDto = bService.freeBoardView(bDto.getBno());
+		
+		log.info("메인 게시글: "+ prevDto.toString());
+		bDto.setRef(prevDto.getRef());
+		bDto.setRe_level(prevDto.getRe_level());
+		bDto.setRe_step(prevDto.getRe_step());
+		/*
+		 * ref, re_step, re_level
+		 * ref = 메인 게시글 번호
+		 * re_level = 메인게시글 re_level + 1
+		 * re_step =  메인게시글 re_step + 1
+		 */
+		bService.answer(bDto);
+		
+		String page = "redirect:/board/view?bno="+bDto.getBno();
+		return page;
+	}
+	
 }

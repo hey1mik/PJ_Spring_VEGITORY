@@ -58,7 +58,7 @@
 			<mapping path="/board/write"></mapping>
 			<mapping path="/board/update"></mapping>
 			<mapping path="/board/delete"></mapping>
-			
+			<mapping path="/board/answer"></mapping>
 			<beans:ref bean="loginInterceptor"></beans:ref>
 		</interceptor>
 	</interceptors>

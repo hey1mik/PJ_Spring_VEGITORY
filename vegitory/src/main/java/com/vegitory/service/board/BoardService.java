@@ -26,4 +26,7 @@ public interface BoardService {
 	public void write(BoardDTO bDto);
 	
 	public void updateBoard(int bno, BoardDTO bDto);
+	
+	public void answer(BoardDTO bDto);
+	
 }

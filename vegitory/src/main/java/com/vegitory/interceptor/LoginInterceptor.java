@@ -30,6 +30,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		//이동하기 전에 있던 페이지 url
 		String referer = request.getHeader("referer");
+		//Referer 페이지의 쿼리스트링 구하는 법
+		String qString = request.getQueryString();
 		// 이동하려고 했던 page url
 		String uri = request.getRequestURI();
 		String ctx = request.getContextPath();
@@ -76,6 +78,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		  //1)-3 로그인 하지 않은 채로 글쓰기나 마이페이지 등을 누르는 경우	
 					FlashMap fMap = RequestContextUtils.getOutputFlashMap(request);
 					fMap.put("message", "nologin");
+					if(qString != null) {
+						uri = uri + "?" + qString;
+					}
 					fMap.put("uri", uri);
 					RequestContextUtils.saveOutputFlashMap(referer, request, response);
 					response.sendRedirect(referer);

@@ -123,7 +123,7 @@
 				<div class="posting_contents">
 				<form:form  id="frm_posting">
 					<div class="posting_info">
-						<select id="sel_type" name="type">
+						<select id="sel_type" name="type" required>
 							<option id="free" value="free" selected>자유게시판</option>
 							<option id="news" value="news">비건뉴스</option>
 							<option id="qna" value="qna">QnA 게시판</option>
@@ -149,13 +149,26 @@
 	</body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript">
+	var flag = '${flag}';
+	console.log('flag: ' + flag);
+	
 	$(function(){
 		// write ==> 게시글 등록과 게시글 수정
 		// 버튼을 등록에서 수정으로 바꿔야해서 써야함.
-		if('${one}' != ''){
+		if(flag == 'update'){
+			$('.posting_board_sub_name').text('게시글을 수정합니다.');
 			$('.insert_btn').text('수정');
 		//selectbox 값으로 selected
 		$('#sel_type').val('${one.type}').attr('selected','selected');
+		} else if(flag == 'answer') {
+			$('.posting_board_sub_name').text('답글을 작성합니다.');
+			$('.insert_btn').text('등록');
+			$('#sel_type').val('${one.type}')
+						  .attr('selected','selected')
+						  .attr('onFocus','this.initialSelect = this.selectedIndex')
+						  .attr('onChange','this.selectedIndex = this.initialSelect');
+			$('.posting_title').val('${one.title}')
+							   .attr('readonly','readonly');
 		}
 		
 	});

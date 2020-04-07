@@ -254,7 +254,7 @@
 							<div class="listNanswer">
 								<button id="good_view" class="borad_btn"> <i class="far fa-heart"></i> ${view.goodcnt} </button>
 								<button id="list_view" class="borad_btn"> 목록 </button>
-								<button id="reply_view" class="borad_btn"> 답변 </button>
+								<a href="${path}/board/answer?bno=${view.bno}" id="reply_view" class="borad_btn"> 답글 </a>
 							</div>
 							<div class="alterNdelete">
 								<c:if test="${name == view.writer}">
@@ -291,9 +291,13 @@
 				location.href='${path}/board/delete?bno=${view.bno}';
 			});
 			
+			
+			// 목록 출력
 			$('#list_view').click(function(){
 				var url = '${path}/board/freelist';
 				if('${header.referer}' == ''){
+					location.href = '${path}/board/freelist';
+				} else if('${header.referer}' != '${path}/board/freelist') {
 					location.href = '${path}/board/freelist';
 				} else {
 					location.href = '${header.referer}';
