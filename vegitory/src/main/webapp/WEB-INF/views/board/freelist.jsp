@@ -247,7 +247,7 @@
 			
 			<table>
 			  <tr>
-			    <th>글번호</th>
+			  	<th>no.</th>
 			    <th>제목</th>
 			    <th>조회수</th>
 			    <th>댓글수</th>
@@ -256,10 +256,11 @@
 			    <th>등록일자</th>
 			  </tr>
 			 
+
 			<c:forEach items="${map.list}" var="list" >
 				<fmt:formatDate value="${list.updatedate}" pattern="yyyy-MM-dd" var="regdate"/>
 			  <tr>
-			    <td>${list.bno}</td>
+			  	<td>${list.bno}</td>
 			    <td>
 			    <c:if test="${list.re_level !=0}">
 			     <c:forEach begin="1" end="${list.re_level}">
@@ -322,17 +323,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript">
-		$(function(){
-			
-
-			var blank = '';
-			var i = 0;
-			
-			for (i = 0; i<= re_level; i++){
-				blank = blank + '&nbsp';
-			}
-			
-			
+		$(document).ready(function(){
+			 
 			var sort_option = '${map.sort_option}';
 			var free_search_result = '${map.keyword}';
 			var count = '${map.count}';

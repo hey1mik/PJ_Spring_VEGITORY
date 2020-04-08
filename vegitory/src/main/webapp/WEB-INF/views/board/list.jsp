@@ -239,6 +239,10 @@
 			padding: 0px 10px;
 			float: left;
 		}
+		
+		#check_color {
+			color: tomato;
+		}
 	</style>
 </head>
 <body>
