@@ -49,7 +49,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			// 1)세션값에 아이디가 없는 상태로 뭔가를 하려는 경우
 			if(session.getAttribute("userid") == null) {
 				
-				//1)-1 수정을 끝내지 않은 채로 로그아웃하는 등 로그백이 일어나는 경우 (수정, 삭제)
+				//1)-1 작업을 끝내지 않은 채로 로그아웃하는 등 로그백이 일어나는 경우 (수정, 삭제)
 				int indexQuery = referer.indexOf("?");
 				if(indexQuery == -1) {
 					prevUrl = referer.substring(finalUrl.length()-1);
@@ -68,7 +68,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 					}
 				}
 				
-				//1)-2 수정을 끝내지 않은 채로 로그아웃하는 등 로그백이 일어나는 경우 (글작성)
+				//1)-2 작업을 끝내지 않은 채로 로그아웃하는 등 로그백이 일어나는 경우 (글작성)
 				if(prevUrl.equals(nextUrl)) {
 					log.info(">>>>>>>>>>>>>>>>>>>>>>WARNING >> PrevUrl == nextUrl :/");
 					response.sendRedirect(finalUrl);

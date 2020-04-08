@@ -76,7 +76,7 @@
 		height: 600px;
 	}
 
-	.attachment {
+	.fileDrop {
 		text-align: center;
 		line-height: 190px;
 		margin-top: 10px;
@@ -135,7 +135,12 @@
 					<div class="posting_postarea">
 						<script type="text/javascript" src="${path}/resources/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 						<textarea id="board_post_content" name="view_content" class="posting">${one.view_content}</textarea>
-						<div class="attachment"> 첨부하고 싶은 파일을 드래그 하세요 </div>
+						<div class="form-group">
+							<div class="fileDrop"> 
+								<i class="fas fa-paperclip"></i>첨부하고 싶은 파일을 드래그 하세요 
+							</div>
+							<ul class="mailbox-attachments clearfix uploadedList"></ul>
+						</div>
 					</div>	
 				<div class="posting_buttons">
 					<button type="button" class="cancel_btn post_btn">취소</button>
@@ -171,7 +176,46 @@
 							   .attr('readonly','readonly');
 		}
 		
+		//1. 웹브라우저에 drag & drop시 파일이 열리는 문제
+		// 기본효과를 막음!
+		$('.fileDrop').on('dragenter dragover', function(e){
+			e.preventDefault();
+		});
+		//2. 사용자가 파일을 drop했을 때
+		$('.fileDrop').on('drop',function(e){
+			e.preventDefault();
+			
+			// 드래그 한번에 파일 첨부는 딱 하나만 하게 만들 것임.
+			var files = e.originalEvent.dataTransfer.files; // 드래그에 전달된 파일들. 
+			var file = files[0]; // 그 중 하나만 꺼내옴
+			
+			var formData = new FormData(); // 폼 객체 생성
+			formData.append('file',file); // 폼에 파일 1개 추가!
+			
+			//서버에 파일 업로드
+			$.ajax({
+				url: '${path}/upload/uploadAjax',
+				data: formData,
+				datatype: "text", // 서버에서 ajax로 받는 데이터 정보. 어떤종류의 파일인지 알려줌.
+				processData: false, // ajax는 기본적으로 쿼리스트링으로 데이터를 보내는데, 이걸 쓰면 데이터를 쿼리스트링으로 안만듦.
+				contentType: false, // 서버단으로 전송하는 데이터타입 multipart로 만듦.
+				//'텍스트 말고도 다방면의 미디어를 받겠다.' form태그는 기본적으로 txt밖에 못보내는데, 이것을 사용하면 다른 것도 받을 수 있음.
+				type: 'POST',
+				success: function(data) {
+					console.log(data);
+					//data: 업로드한 파일 정보와 http 상태코드
+					printFiles(data);
+				}
+			});
+			
+			
+		});	
+		
+		
+		
+		
 	});
+	
 	$(document).on('click','.cancel_btn',function(){
 			var referer = '${header.referer}';
 			console.log(referer);
