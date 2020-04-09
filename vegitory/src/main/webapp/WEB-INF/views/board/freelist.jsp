@@ -92,7 +92,7 @@
 			justify-content: space-between;
 			align-items: flex-end;
 			padding: 10px 10px 7px 10px;
-			border-bottom: 3px solid rgba(73, 130, 104, 0.5);
+			border-bottom: 1px solid rgba(73, 130, 104, 0.5);
 		}
 		.SearchNWrite{
 			display: flex;
@@ -138,7 +138,7 @@
 			height: 100%;
 			padding: 10px 0;
 			padding-left: 80px;
-			border-bottom: 3px solid rgba(73, 130, 104, 0.5);	
+			border-bottom: 1px solid rgba(73, 130, 104, 0.5);	
 		}
 		.free_search_result {
 			display: none;
@@ -196,7 +196,7 @@
 		}
 		
 		#check_color {
-		color:tomato;
+		color: #498268;
 		
 		}
 		
@@ -347,13 +347,13 @@
 			}
 	
 			if(sort_option == 'new') {
-				$('#sort_new').css('color','tomato');
+				$('#sort_new').css('color',' #498268');
 			} else if(sort_option == 'cnt') {
-				$('#sort_cnt').css('color','tomato');
+				$('#sort_cnt').css('color',' #498268');
 			}  else if(sort_option == 'reply') {
-				$('#sort_reply').css('color','tomato');
+				$('#sort_reply').css('color',' #498268');
 			}  else if(sort_option == 'good') {
-				$('#sort_good').css('color','tomato');
+				$('#sort_good').css('color',' #498268');
 			}
 			
 				

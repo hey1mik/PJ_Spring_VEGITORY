@@ -145,7 +145,7 @@
 			justify-content: space-between;
 			align-items: center;
 			padding: 10px 10px 15px 10px;
-			border-bottom: 3px solid rgba(73, 130, 104, 0.5);
+			border-bottom: 1px solid rgba(73, 130, 104, 0.5);
 		}
 			.SearchNWrite{
 			display: flex;
@@ -190,7 +190,7 @@
 			width: 100%;
 			height: 100%;
 			padding: 20px 0;
-			border-bottom: 3px solid rgba(73, 130, 104, 0.5);
+			border-bottom: 1px solid rgba(73, 130, 104, 0.5);
 		}
 		.board_list > li {
 			float:left;

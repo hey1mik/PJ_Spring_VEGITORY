@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UploadFileUtils {
 	public static String uploadFile(String uploadPath, String originalName, byte[] fileData) throws Exception {
+		//byte[] 뒤에 []는 배열. byte길이의 배열이라고 보면 된다.
 		//uuid 발급. 중복된 이름을 방지하기 위해서. random값을 만들어줌. 
 		//asdfkjd_abc.text dslkfjdslk_abc.text 이렇게 같은 abc.text여도 중복되지않음.
 		UUID uid = UUID.randomUUID();
@@ -31,6 +32,7 @@ public class UploadFileUtils {
 		// 임시 디렉토리에 업로드된 파일을 지정된 디렉토리로 복사
 		//target : 어디에 어떤 이름으로
 		//fileData : 이 데이터를 넣어주세요
+		// 스프링 프레임워크에서 쓰는애
 		FileCopyUtils.copy(fileData, target);
 		
 		//파일의 확장자 검사
@@ -51,11 +53,11 @@ public class UploadFileUtils {
 	
 	private static String calcPath(String uploadPath) {
 		Calendar cal = Calendar.getInstance(); // 오늘치 달력을 달라는 뜻.
-		String yearPath = File.separator + cal.get(Calendar.YEAR); // 슬러쉬로 나누라는 뜻. yearPath에는 /2020이 들어감.
-		//monthPath는 yearpath에다가 슬러시를 박고, 4월이면 04이런식으로 포매팅해서 넣으라는 뜻. 근데 1을 붙이는 이유는 1월이아니라 0월부터 시작해서.
+		String yearPath = File.separator + cal.get(Calendar.YEAR); // 역슬러쉬로 나누라는 뜻(윈도우 기본 슬러쉬). yearPath에는 \2020이 들어감.
+		//monthPath는 yearpath에다가 역슬러시를 박고, 4월이면 04이런식으로 포매팅해서 넣으라는 뜻. 근데 1을 붙이는 이유는 1월이아니라 0월부터 시작해서.
 		String monthPath = yearPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
-		//datePath는 monthpath에다가 슬러시를 박고, 8일이면 08이런식으로 포매팅.
-		//최종으로 datepath에는 /2020/04/08 가 들어가있음.
+		//datePath는 monthpath에다가 역슬러시를 박고, 8일이면 08이런식으로 포매팅.
+		//최종으로 datepath에는 \2020\04\08 가 들어가있음.
 		String datePath = monthPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.DATE));
 		makeDir(uploadPath, yearPath, monthPath, datePath);
 		log.info(datePath);
@@ -84,6 +86,10 @@ public class UploadFileUtils {
 			File dirPath = new File(uploadPath + path);
 			if(!dirPath.exists()) {
 				dirPath.mkdir(); // 디렉토리 생성
+				//mkdir 은 2020/04/08을 만들때 앞애 2020폴더나 04폴더가 없으면 에러를 띄움
+				//그래서 앞에부터 FOR문 돌려서 차근차근 폴더를 만들어주는 것
+				//한방에 만들고싶으면 dirPath.mkdirs 해주면 됨
+				
 			}
 		}
 	}

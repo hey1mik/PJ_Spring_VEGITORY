@@ -7,6 +7,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>VEGITORY :: 새 글 작성 </title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="${path}/resources/css/common.css">
 	<style type="text/css">	
 	
@@ -111,6 +112,7 @@
 	#board_search_content {
 		visibility: hidden;
 	}
+
 	</style>
 	</head>
 	<body>
@@ -142,20 +144,37 @@
 							<ul class="mailbox-attachments clearfix uploadedList"></ul>
 						</div>
 					</div>	
-				<div class="posting_buttons">
+					</form:form>
+					<div class="posting_buttons">
 					<button type="button" class="cancel_btn post_btn">취소</button>
 					<button type="button" class="insert_btn post_btn">등록</button>
 				</div>	
 				<div class="posting_warning"> 값을 입력해주세요 </div>
-					</form:form>
 			</div>
-		
 		</div>		
 	</body>
+		<script id="fileTemplate" type="text/x-handlebars-template">
+			<li style="padding:15px;float:left">
+				<div class="mailbox-attachment-icon has-img">
+					<img src="{{imgSrc}}" alt="Attachment" class="s_img">
+					<div class="mailbox-attachment-info">
+					<a href="{{originalFileUrl}}" class="mailbox-attachment-name">
+						<i class="fas fa-paperclip"></i> {{originalFileName}}
+					</a>
+				 	<span class="btn-default btn-xs pull-right delBtn" data-src="{{basicFileName}}">
+				 		<i class="fas fa-times"></i>
+				 	</span>
+				</div>
+				</div>
+				
+			</li>
+		</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript">
 	var flag = '${flag}';
 	console.log('flag: ' + flag);
+	
+	var fileTemplate = Handlebars.compile($('#fileTemplate').html());
 	
 	$(function(){
 		// write ==> 게시글 등록과 게시글 수정
@@ -206,15 +225,10 @@
 					//data: 업로드한 파일 정보와 http 상태코드
 					printFiles(data);
 				}
-			});
-			
-			
+			});	
 		});	
-		
-		
-		
-		
 	});
+	
 	
 	$(document).on('click','.cancel_btn',function(){
 			var referer = '${header.referer}';
@@ -260,6 +274,102 @@
 	 sSkinURI: "${path}/resources/smarteditor/SmartEditor2Skin.html",
 	 fCreator: "createSEditor2"
 	});
+	
+	function getFileInfo(fullName){
+		var originalFileName;
+		var imgSrc;
+		var originalFileUrl;
+		var uuidFileName;
+		var basicFileName = fullName; // 삭제시 값을 전달하기 위한 파일
+		
+		//이미지 파일이면
+		if(checkImageType(fullName)) {
+			imgSrc = "${path}/upload/displayFile?fileName=" + fullName;
+			uuidFileName = fullName.substr(14);
+			var originalImg = fullName.substr(0,12) + fullName.substr(14);
+			originalFileUrl = "${path}/upload/displayFile?fileName=" + originalImg;
+		} else {
+			imgSrc = "${path}/resources/img/file-icon.png";
+			uuidFileName = fullName.substr(12);
+			originalFileUrl = "${path}/upload/displayFile?fileName=" + fullName;
+		}
+		originalFileName = uuidFileName.substr(uuidFileName.indexOf("_") + 1);
+		
+		//14보다 크면 실행
+		if(originalFileName.length > 14) {
+			//앞에서부터 11글자 자름
+			var shortName = originalFileName.substr(0,10);
+			var formatVal = originalFileName.split(".");
+			
+			var arrNum = formatVal.length - 1;
+			originalFileName = shortName + "..." + formatVal[arrNum];
+		}
+		return {originalFileName:originalFileName, imgSrc:imgSrc, originalFileUrl:originalFileUrl, fullName:fullName, basicFileName:basicFileName};
+	}
+	
+	
+	function printFiles(data) {
+		//파일 정보처리
+		var fileInfo = getFileInfo(data);
+		console.log(fileInfo)
+		//Handlebars 파일 템플릿에 파일 정보들을 바인딩하고 HTML 생성
+		var html = fileTemplate(fileInfo);
+		html += "<input type='hidden' class='file' value='"+fileInfo.fullName+"'>";
+		//Handlebars 파일 템플릿 컴파일을 통해 생성된 HTML을 DOM에 주입
+		$(".uploadedList").append(html);
+		//이미지파일인 경우 aaaaaaaaaaa파일 템플릿에 lightbox 속성 추가
+		if(fileInfo.fullName.substr(12,2) === "s_"){
+			//마지막에 추가된 첨부파일 템플릿 선택자
+			var that = $(".uploadedList li").last();
+			// lightbox 속성 추가
+			that.find(".mailbox-attachment-name").attr("data-lightbox","uploadImages");
+			//파일 아이콘에서 이미지 아이콘으로 변경
+			that.find(".fa-paperclip").attr("class","fa fa-camera");
+		}
+	}
+	
+	function getOriginalName(fileName){
+		if(checkImageType(fileName)) { //이미지 파일이면 skip
+			return;
+		}
+		var idx=fileName.indexOf("_")+1; //uuid를 제외한 파일이름
+		return fileName.substr(idx);
+	}
+	
+	function getImageLink(fileName) {
+		if(!checkImageType(fileName)) { //이미지 파일이 아니면 skip
+			return;
+		}
+		var front = fileName.substr(0,12); // 연월일 경로
+		var end = fileName.substr(14); // s_ 제거
+		return front + end;
+	}
+	
+	function checkImageType(fileName) {
+		var pattern=/jpg|gif|png|jpeg|/i; // 정규표현식(대소문자 무시)
+		return fileName.match(pattern); // 규칙에 맞으면 true
+	}
+	
+	//첨부파일 리스트를 출력하는 함수
+	function listAttach() {
+		var listCnt = 0;
+		$.ajax({
+			type: "POST",
+			url: "${path}/board/getAttach/${one.bno}",
+			async: false,
+			success: function(list) {
+				// list: json
+				// console.log(list);
+				listCnt = list.length;
+				$(list).each(function(i,e){
+					printFiles(e);
+				});
+			}
+		});
+	}
+	
+	
+	
 	
 	</script>		
 	</html>
