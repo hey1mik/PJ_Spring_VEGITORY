@@ -162,7 +162,7 @@
 						<i class="fas fa-paperclip"></i> {{originalFileName}}
 					</a>
 				 	<span class="btn-default btn-xs pull-right delBtn" data-src="{{basicFileName}}">
-				 		<i class="fas fa-times"></i>
+				 		<i class="fas fa-times" style="cursor:pointer"></i>
 				 	</span>
 				</div>
 				</div>
@@ -227,6 +227,34 @@
 				}
 			});	
 		});	
+		
+		$('.uploadedList').on('click','.delBtn',function(event){
+			var bno = '${one.bno}';
+			var that = $(this);
+			
+			alert(bno);
+			if(bno == '') { // 게시글 등록
+				$.ajax({
+					url: '${path}/upload/deleteFile',
+					type: 'POST',
+					//data : 'deleted' , 'http 상태코드 200'
+					data: {fileName: $(this).attr('data-src')},
+					success: function(data) {
+						if(data == 'deleted') {
+							that.parents('li').remove();
+						}
+					}, error: function() {
+						alert('System ERROR!!');
+					}
+					
+				});
+				
+				
+			} else {
+				 //게시글 수정
+			}
+		});
+		
 	});
 	
 	
@@ -284,13 +312,14 @@
 		
 		//이미지 파일이면
 		if(checkImageType(fullName)) {
-			imgSrc = "${path}/upload/displayFile?fileName=" + fullName;
+			imgSrc = "${path}/upload/displayFile?fileName="+fullName;
 			uuidFileName = fullName.substr(14);
 			var originalImg = fullName.substr(0,12) + fullName.substr(14);
 			originalFileUrl = "${path}/upload/displayFile?fileName=" + originalImg;
 		} else {
-			imgSrc = "${path}/resources/img/file-icon.png";
+			imgSrc = "${path}/resources/img/file-icon.png"; //파일 아이콘 이미지 링크
 			uuidFileName = fullName.substr(12);
+			//파일 다운로드 요청링크
 			originalFileUrl = "${path}/upload/displayFile?fileName=" + fullName;
 		}
 		originalFileName = uuidFileName.substr(uuidFileName.indexOf("_") + 1);
@@ -311,7 +340,9 @@
 	function printFiles(data) {
 		//파일 정보처리
 		var fileInfo = getFileInfo(data);
-		console.log(fileInfo)
+		var ImageTrue = checkImageType(data);
+		console.log(fileInfo);
+		console.log(ImageTrue);
 		//Handlebars 파일 템플릿에 파일 정보들을 바인딩하고 HTML 생성
 		var html = fileTemplate(fileInfo);
 		html += "<input type='hidden' class='file' value='"+fileInfo.fullName+"'>";
@@ -331,9 +362,10 @@
 	function getOriginalName(fileName){
 		if(checkImageType(fileName)) { //이미지 파일이면 skip
 			return;
-		}
-		var idx=fileName.indexOf("_")+1; //uuid를 제외한 파일이름
+		} else {
+		var idx=fileName.indexOf("_"+1); //uuid를 제외한 파일이름
 		return fileName.substr(idx);
+		}
 	}
 	
 	function getImageLink(fileName) {
@@ -346,8 +378,8 @@
 	}
 	
 	function checkImageType(fileName) {
-		var pattern=/jpg|gif|png|jpeg|/i; // 정규표현식(대소문자 무시)
-		return fileName.match(pattern); // 규칙에 맞으면 true
+		var pattern =/jpg|gif|png|jpeg/i; // 정규표현식(대소문자 무시)
+		return fileName.match(pattern); // 규칙에 맞으면 true			
 	}
 	
 	//첨부파일 리스트를 출력하는 함수

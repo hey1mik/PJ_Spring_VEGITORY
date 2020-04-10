@@ -1,4 +1,5 @@
 package com.vegitory.contoller;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -79,5 +81,33 @@ public class AjaxUploadController {
 		return entity;
 	}
 	
+	@ResponseBody
+	@PostMapping("/upload/deleteFile")
+	public ResponseEntity<String> deleteFile(String fileName) {
+		log.info("fileName: " + fileName);
+		// fileName = /2020/04/10/98e664ce-1210-43f3-b1a9-d5a5b80e82d8_zz.txt
+		String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
+		//txt
+		MediaType mType = MediaUtils.getMediaType(formatName);
+		if(mType != null) { // 이미지 파일이면 원본이미지 삭제
+			String front = fileName.substring(0,12);
+			//front : /2020/04/10/
+			//end : 98e664ce-1210-43f3-b1a9-d5a5b80e82d8_zz.txt
+			String end = fileName.substring(14);
+			//File.separatorChar : 유닉스 / 윈도우즈 \
+			new File(uploadPath+(front+end).replace('/', File.separatorChar)).delete();
+			//replace : c:\\upload\2020\04\10\98e664ce-1210-43f3-b1a9-d5a5b80e82d8_zz.txt
+			//원본 이미지만 삭제
+			
+		} else {
+			//원본파일삭제(이미지면 썸네일 삭제)
+			new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
+			//delete >> c:\\developer\ upload\2020\04\10\s_98e664ce-1210-43f3-b1a9-d5a5b80e82d8_zz.txt
+			// 썸네일 이미지 삭제 or 이미지가 아닌 첨부파일 삭제
+			
+		}
+		
+		return new ResponseEntity<String>("deleted",HttpStatus.OK);
+	}
 	
 }
