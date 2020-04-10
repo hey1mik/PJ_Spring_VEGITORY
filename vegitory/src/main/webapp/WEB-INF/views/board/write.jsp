@@ -57,9 +57,7 @@
 
 	.posting_info {
 		display: flex;
-		border-top: 3px solid rgba(73, 130, 104, 0.5);	
 		width: 100%; 
-		padding-top: 20px;
 		padding-bottom: 10px;
 	}
 
@@ -231,8 +229,7 @@
 		$('.uploadedList').on('click','.delBtn',function(event){
 			var bno = '${one.bno}';
 			var that = $(this);
-			
-			alert(bno);
+
 			if(bno == '') { // 게시글 등록
 				$.ajax({
 					url: '${path}/upload/deleteFile',
@@ -272,6 +269,9 @@
 			}
 	
 	});
+	
+	
+	//게시글 등록버튼 클릭
 	$(document).on('click','.insert_btn',function(){
 			var title = $('.posting_title').val();
 			if(title.length == 0 || title == ''){
@@ -291,6 +291,21 @@
 				$('#frm_posting').append('<textarea id="board_search_content" name="search_content"></textarea>');
 				$('#board_search_content').val(search_content);
 				
+				// 첨부파일 목록[배열]도 추가
+				var str = '';
+				//uploadedList 내부의 .file 태그 각각 반복
+				$(".uploadedList .file").each(function(i){ //each : 앞의 선택자 갯수만큼 반복하라는 뜻.
+					console.log(i);
+					str += "<input type='hidden' name='files["+i+"]' value='" + $(this).val()+"'>";
+				});
+				
+				//if(deleteFileList.length > 0) {
+					//$.post('${path}/upload/deleteAllFile', {files:deleteFileList}, function(){});
+				//}
+				// 폼에 hidden 태그들을 붙임
+				alert(str);
+				$("#frm_posting").append(str);
+				//서버로 전송
 				$('#frm_posting').submit();
 			}
 	});

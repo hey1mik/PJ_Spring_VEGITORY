@@ -90,7 +90,7 @@
 	}
 
 	.free_view_info {
-		border-top: 3px solid rgba(73, 130, 104, 0.5);	
+		border-top: 1px solid rgba(73, 130, 104, 0.5);	
 		width: 95%; 
 		padding-top: 30px;
 		padding-bottom: 10px;

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.vegitory.domain.BoardDTO;
 import com.vegitory.domain.RecipeDTO;
@@ -104,10 +105,22 @@ public class BoardServiceImpl implements BoardService {
 	public int delBoard(int bno) {
 		return bDao.delBoard(bno);
 	}
-
+	
+	@Transactional
 	@Override
 	public void write(BoardDTO bDto) {
+		//tbl_board에 게시글 등록(type, title, content, writer) 만 등록중. 즉, 첨부파일은 등록하지 않고 있다!!	
 		bDao.write(bDto);
+		//tbl_attach에 해당 게시글 첨부파일 등록
+		String[] files = bDto.getFiles();
+		if(files == null) {
+			return;// 첨부파일 없음, 종료
+		} else {
+			for(String name : files) {
+				// tbl_attach 테이블의 첨부파일 1건씩 등록
+				bDao.addAttach(name);
+			}
+		}
 	}
 
 	@Override
