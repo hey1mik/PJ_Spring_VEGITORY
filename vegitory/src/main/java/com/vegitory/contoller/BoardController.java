@@ -42,12 +42,19 @@ public class BoardController {
 	@PostMapping("/write")
 	public String RegisterwWrite(BoardDTO bDto){
 		log.info(">>>>>>>>>>POST:BOARD WRITE ACTION");
+	
+		
+		
+		if(bDto.getFiles() == null) {
+			bDto.setFilecnt(0);
+		} else {
+			bDto.setFilecnt(bDto.getFiles().length);
+		}
+		log.info("첨부파일 수: "+bDto.getFilecnt());
 		bService.write(bDto);
 		log.info(bDto.toString());
-		
 		//log.info("currval:" + bDto.getBno());
 		String view = "redirect:/board/view?bno=" + bDto.getBno();
-		
 		return view;
 		//데이터 작업한 건 반드시 redirect로 보내기!		
 	}

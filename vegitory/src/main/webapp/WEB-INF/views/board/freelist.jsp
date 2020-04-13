@@ -203,6 +203,9 @@
 		#color {
 		 background-color: rgba(73, 130, 104, 0.3);
 		}
+		td.space {
+		 padding-left: 10px;
+		}
 	</style>
 </head>
 <body>
@@ -251,6 +254,7 @@
 			    <th>제목</th>
 			    <th>조회수</th>
 			    <th>댓글수</th>
+			    <th>첨부파일</th>
 			    <th>좋아요</th>
 			    <th>글쓴이</th>
 			    <th>등록일자</th>
@@ -271,9 +275,19 @@
 			    <a href="${path}/board/view?bno=${list.bno}" class="free_board_title">${list.title}</a>
 			    <c:if test="${today == regdate}"><span class="new_color twincle_eff">N</span></c:if>
 			    </td>
-			    <td>${list.viewcnt}</td>
-			    <td>${list.replycnt}</td>
-			    <td>${list.goodcnt}</td>
+			    <td class="space">${list.viewcnt}</td>
+			    <td class="space">${list.replycnt}</td>
+			    <td class="space">
+			     <c:choose>
+			     	<c:when test="${list.filecnt == 0}">
+			    	${list.filecnt}
+			    	</c:when>
+			    	<c:otherwise>
+			    	 <i class="fas fa-paperclip"></i>${list.filecnt}
+			    	</c:otherwise>
+			     </c:choose>
+			    </td>
+			    <td class="space">${list.goodcnt}</td>
 			    <td>${list.writer}</td>
 			    <td>
 			     <c:choose>
