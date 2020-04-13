@@ -218,4 +218,12 @@ public class BoardController {
 		return page;
 	}
 	
+	@PostMapping("/getAttach")
+	@ResponseBody
+	public List<String> getAttach(@RequestParam int bno) {
+		log.info("POST >>>>>>>>>>>>>>>>>>>>>> BoARD getAttach ACTION");
+		log.info("bno >>>>>>>>>>>>>>> " + bno);
+		return bService.getAttach(bno);
+	}
+	
 }

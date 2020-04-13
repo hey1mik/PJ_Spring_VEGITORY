@@ -7,6 +7,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>VEGITORY :: 상세 게시글 </title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="${path}/resources/css/common.css">
 	<style type="text/css">	
 	
@@ -92,7 +93,7 @@
 	.free_view_info {
 		border-top: 1px solid rgba(73, 130, 104, 0.5);	
 		width: 95%; 
-		padding-top: 30px;
+		padding-top: 20px;
 		padding-bottom: 10px;
 	}
 
@@ -134,6 +135,9 @@
 	.view_content_buttons {
 		display: flex;
 		justify-content: space-between;
+		padding-bottom: 10px;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+		margin-bottom: 20px;
 	}
 	
 	.free_board_comments {
@@ -200,6 +204,10 @@
 		color: white;
 		color: rgba(0, 0, 0, 0.7)
 	}
+	
+	.uploadedList {
+		display: flex;
+	}
 
 	</style>
 	</head>
@@ -248,8 +256,10 @@
 						</div>
 					</div>	
 					<div class="view_content">
-						<div class="orginal_view_content"> ${view.view_content} </div>
+						<div class="orginal_view_content"> ${view.view_content} 
+						</div>
 						<input type="text" class="view_content_input" name="content">
+						
 						<div class="view_content_buttons">
 							<div class="listNanswer">
 								<button id="good_view" class="borad_btn"> <i class="far fa-heart"></i> ${view.goodcnt} </button>
@@ -263,6 +273,11 @@
 								</c:if>
 							</div>
 						</div> 
+						<div class="Attached_file_view">
+							<span> <i class="fas fa-paperclip"></i> Attached Files </span>
+							<ul class="mailbox-attachments clearfix uploadedList"></ul>
+						</div>
+					
 					</div>	
 					
 					
@@ -271,9 +286,38 @@
 			</div>
 		</div>		
 	</body>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script id="fileTemplate" type="text/x-handlebars-template">
+			<li style="padding:10px">
+				<div class="mailbox-attachment-icon has-img">
+					<img src="{{imgSrc}}" alt="Attachment" class="s_img">
+					<div class="mailbox-attachment-info">
+					<a href="{{originalFileUrl}}" class="mailbox-attachment-name">
+						<i class="fas fa-paperclip"></i> {{originalFileName}}
+					</a>
+				</div>
+				</div>
+				
+			</li>
+	</script>
+	<script src="${path}/resources/js/fileAttach.js"></script>
 	<script type="text/javascript">
+		
+		//Handlebars 파일템플릿 컴파일
+		var fileTemplate = Handlebars.compile($('#fileTemplate').html());
+		var listCnt = listAttach('${path}', '${view.bno}');
+		console.log('File Count: ' + listCnt);
+		
+		
 		$(function(){
+			//첨부파일 목록 불러오기
+		
+			
+			// 첨부파일 0건일 때 '첨부파일 없음' 출력
+			if(listCnt == 0){
+				var text = '<span class="no_attach">첨부파일이 없습니다.</span>'
+				$('.uploadedList').html(text);
+			}
+			
 			//5분에 한번씩 refreshReply라는 애를 새로고침 해줘라
 			setInterval(listReply, 180000);
 			

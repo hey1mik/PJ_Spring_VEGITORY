@@ -28,5 +28,7 @@ public interface BoardService {
 	public void updateBoard(int bno, BoardDTO bDto);
 	
 	public void answer(BoardDTO bDto);
+
+	public List<String> getAttach(int bno);
 	
 }

@@ -147,4 +147,10 @@ public class BoardServiceImpl implements BoardService {
 		bDao.answer(bDto);
 	}
 	
+	// 해당 게시글 첨부파일 목록 출력
+	@Override
+	public List<String> getAttach(int bno) {
+		return bDao.getAttach(bno);
+	}
+	
 }
