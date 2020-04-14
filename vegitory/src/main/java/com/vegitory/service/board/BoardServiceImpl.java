@@ -100,10 +100,21 @@ public class BoardServiceImpl implements BoardService {
 		}
 		
 	}
-
+	
+	
+	@Transactional
 	@Override
-	public int delBoard(int bno) {
-		return bDao.delBoard(bno);
+	public void delBoard(int bno) {
+		//첨부파일도 삭제해주어야함!
+		bDao.deleteAttach(bno);
+		bDao.delBoard(bno); //게시글 삭제
+		
+		// 기타방법
+		// 예) 90일 이후에 삭제
+		// tbl_board와 tbl_attach를 relation을 맺고
+		// cascade작업을 통해 tbl_board에서 해당 게시글 삭제하면
+		// 자동으로 tbl_attach에 해당 게시글 첨부파일 일괄삭제
+		// 즉 첨부파일 db에서 삭제하는 코드는 작성 안해도됨!	
 	}
 	
 	@Transactional

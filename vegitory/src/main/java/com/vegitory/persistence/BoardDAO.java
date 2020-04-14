@@ -25,7 +25,7 @@ public interface BoardDAO {
 	
 	public int increaseViewCnt(@Param("bno") int bno);
 	
-	public int delBoard(@Param("bno") int bno);
+	public void delBoard(@Param("bno") int bno);
 	
 	public void replyCntUpdate(@Param("map") Map<String, Object> map);
 	
@@ -42,5 +42,7 @@ public interface BoardDAO {
 	public void addAttach(@Param("fullName")String fullName);
 	
 	public List<String> getAttach(int bno);
+	
+	public void deleteAttach(int bno);
 	
 }

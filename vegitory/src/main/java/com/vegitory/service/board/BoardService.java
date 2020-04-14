@@ -21,7 +21,7 @@ public interface BoardService {
 	
 	public void increaseViewCnt(HttpSession session, int bno);
 	
-	public int delBoard(int bno);
+	public void delBoard(int bno);
 	
 	public void write(BoardDTO bDto);
 	

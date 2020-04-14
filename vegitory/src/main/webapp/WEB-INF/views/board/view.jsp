@@ -306,12 +306,11 @@
 		var fileTemplate = Handlebars.compile($('#fileTemplate').html());
 		var listCnt = listAttach('${path}', '${view.bno}');
 		console.log('File Count: ' + listCnt);
-		
+		var deleteFileList = new Array();
 		
 		$(function(){
 			//첨부파일 목록 불러오기
 		
-			
 			// 첨부파일 0건일 때 '첨부파일 없음' 출력
 			if(listCnt == 0){
 				var text = '<span class="no_attach">첨부파일이 없습니다.</span>'
@@ -332,6 +331,22 @@
 				$('.modal_wrap').css('display','flex');
 			});
 			$('#modal_yes_btn').click(function(){
+				//1. ajax로 해당게시글의 첨부파일을 local에서 삭제!
+				//uploadedList 내부의 .file 태그 각각 반복
+				$('.uploadedList .file').each(function(i){
+					console.log(i + "," + $(this).val());
+					deleteFileList[i] = $(this).val();
+				});
+				//console.log(deleteFileList);
+				if(deleteFileList.length > 0) {
+					$.post('${path}/upload/deleteAllFile',
+							{files:deleteFileList},
+							function(){
+								
+					});
+				}
+				//2. 서버단으로 가서 첨부파일 db에서 삭제!
+				//3. 서버단으로 가서 게시글 삭제!
 				location.href='${path}/board/delete?bno=${view.bno}';
 			});
 			
