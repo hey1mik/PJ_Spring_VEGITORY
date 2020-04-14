@@ -175,6 +175,9 @@
 	
 	var fileTemplate = Handlebars.compile($('#fileTemplate').html());
 	
+	//수정시 로컬에서 삭제할 기존 첨부파일 목록
+	var deleteFileList = new Array();
+	
 	$(function(){
 		// write ==> 게시글 등록과 게시글 수정
 		// 버튼을 등록에서 수정으로 바꿔야해서 써야함.
@@ -183,6 +186,8 @@
 			$('.insert_btn').text('수정');
 		//selectbox 값으로 selected
 		$('#sel_type').val('${one.type}').attr('selected','selected');
+		
+		listAttach('${path}', '${one.bno}');
 		} else if(flag == 'answer') {
 			$('.posting_board_sub_name').text('답글을 작성합니다.');
 			$('.insert_btn').text('등록');
@@ -250,6 +255,14 @@
 				
 			} else {
 				 //게시글 수정
+				 var arr_size = deleteFileList.length;
+				 deleteFileList[arr_size] = $(this).attr('data-src');
+				 $(this).parents('li').next('input').remove();
+				 $(this).parents('li').remove();
+				 
+				 for(var i = 0; i < deleteFileList.length; i++){
+					 console.log(i + ',' +deleteFileList[i]);
+				 }
 			}
 		});
 		
@@ -300,9 +313,10 @@
 					str += "<input type='hidden' name='files["+i+"]' value='" + $(this).val()+"'>";
 				});
 				
-				//if(deleteFileList.length > 0) {
-					//$.post('${path}/upload/deleteAllFile', {files:deleteFileList}, function(){});
-				//}
+				// 삭제한 첨부파일 목록에 있는 첨부파일들을 local에서 삭제;
+				if(deleteFileList.length > 0) {
+					$.post('${path}/upload/deleteAllFile', {files:deleteFileList}, function(){});
+				}
 				// 폼에 hidden 태그들을 붙임
 				alert(str);
 				$("#frm_posting").append(str);

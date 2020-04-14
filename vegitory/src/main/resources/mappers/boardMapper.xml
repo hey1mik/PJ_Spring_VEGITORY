@@ -114,6 +114,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE tbl_board
 		SET type = #{board.type},
 			title = #{board.title},
+			filecnt = #{board.filecnt},
 			view_content = #{board.view_content},
 			updatedate = SYSDATE
 		WHERE bno = #{board.bno} 
@@ -143,5 +144,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE bno = #{bno}
 		ORDER BY regdate DESC
 	</select>
-	
+	<!-- 첨부파일 수정(등록) -->
+	 <insert id="updateAttach">
+	 	INSERT INTO tbl_attach(fullName, bno)
+		VALUES(#{fullName}, #{bno})
+	</insert>
 </mapper>

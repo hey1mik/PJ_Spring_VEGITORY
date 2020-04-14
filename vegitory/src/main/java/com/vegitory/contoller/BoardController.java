@@ -178,6 +178,13 @@ public class BoardController {
 	@PostMapping("/update")
 	public String updateBoard(@RequestParam int bno, BoardDTO bDto) {
 		log.info(">>>>>>>>POST: Board upate action!!!!!");
+		
+		if(bDto.getFiles() == null) { //첨부파일 NO
+			bDto.setFilecnt(0);
+		} else { //첨부파일 YES
+			bDto.setFilecnt(bDto.getFiles().length);
+		}
+		
 		bService.updateBoard(bno, bDto);
 		String page = "redirect:/board/view?bno="+bno;
 		return page;
