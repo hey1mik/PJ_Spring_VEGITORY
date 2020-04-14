@@ -219,6 +219,15 @@ public class BoardController {
 		 * re_level = 메인게시글 re_level + 1
 		 * re_step =  메인게시글 re_step + 1
 		 */
+		
+		if(bDto.getFiles() == null) {
+			bDto.setFilecnt(0);
+		} else {
+			bDto.setFilecnt(bDto.getFiles().length);
+		}
+		log.info("첨부파일 수: "+bDto.getFilecnt());
+		
+		
 		bService.answer(bDto);
 		
 		String page = "redirect:/board/view?bno="+bDto.getBno();
