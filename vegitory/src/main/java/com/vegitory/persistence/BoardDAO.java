@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.vegitory.domain.AttachDTO;
 import com.vegitory.domain.BoardDTO;
 import com.vegitory.domain.RecipeDTO;
 import com.vegitory.domain.ReplyDTO;
@@ -46,5 +47,8 @@ public interface BoardDAO {
 	public void deleteAttach(int bno);
 	
 	public void updateAttach(@Param("fullName") String fullName, @Param("bno") int bno);
+	
+	//하루전 첨부파일 목록 조회
+	public List<AttachDTO> getOldFiles(@Param("ydate") String ydate);
 	
 }
